@@ -252,7 +252,7 @@ function Index() {
 
     <div className="split" style={{ marginTop: 70 }} id="pod">
       <div className="split-media reveal">
-        <div className="photo wide">
+        <div className="photo plain">
           <img className="photo-img" src={img03.url} alt="A director of nursing smiling as her weekend pod of credentialed nurses arrives at the facility" />
         </div>
       </div>
