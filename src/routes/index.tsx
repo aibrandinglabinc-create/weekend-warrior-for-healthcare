@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import img01 from "@/assets/img-01.jpg.asset.json";
 import img02 from "@/assets/img-02.png.asset.json";
+import img03 from "@/assets/img-03.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -252,7 +253,7 @@ function Index() {
     <div className="split" style={{ marginTop: 70 }} id="pod">
       <div className="split-media reveal">
         <div className="photo wide">
-          <div className="slot"><div className="tag">Section image</div><div className="fn">22_pod_clocking_in_together.png</div></div>
+          <img className="photo-img" src={img03.url} alt="A director of nursing smiling as her weekend pod of credentialed nurses arrives at the facility" />
         </div>
       </div>
       <div className="reveal d1">
