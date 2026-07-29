@@ -375,7 +375,7 @@ function Index() {
       </div>
       <div className="faq-item">
         <button className="faq-q" onClick={toggleFaq}>What does it cost, and how is it billed?</button>
-        <div className="faq-a"><p>One monthly subscription, priced to your facility, billed on a recurring schedule. No hourly bill rates, no overtime premiums, no agency markup. Your exact rate is built on the demo call from your facility profile.</p></div>
+        <div className="faq-a"><p>One subscription price built to your facility's needs, billed on a recurring monthly schedule. No hourly bill rates, no overtime premiums, no agency markup. Your exact rate is set on the demo call from your facility profile.</p></div>
       </div>
     </div>
   </div>
