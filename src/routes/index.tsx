@@ -283,7 +283,7 @@ function Index() {
     <div className="section-label reveal">
       <span className="n">04</span><span className="rule"></span><span className="cat">Why Consistency Wins</span>
     </div>
-    <h2 className="big reveal">The same team is not just comfort. <span className="ital-teal">It is clinical strategy.</span></h2>
+    <h2 className="big reveal">The same team is not just comfort.<br /><span className="ital-teal">It is clinical strategy.</span></h2>
     <p className="sub reveal d1">When the weekend team knows your patients, your protocols, and each other, the floor runs differently. Fewer handoff gaps. Fewer callouts to cover. A weekend that holds its own shape instead of being rebuilt from scratch every seven days. Continuity of care is one of the most studied levers in patient safety, and the weekend is exactly where most facilities lose it.</p>
     <div className="why-points reveal d2">
       <div className="why-point"><div className="wp-k">Same team, same protocols</div><div className="wp-v">A pod that returns every weekend learns your unit. No re-orientation, no guesswork, no relearning your charting at Friday handoff.</div></div>
