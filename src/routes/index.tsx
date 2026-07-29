@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import img01 from "@/assets/img-01.jpg.asset.json";
 import img02 from "@/assets/img-02.png.asset.json";
+import img03 from "@/assets/img-03.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
