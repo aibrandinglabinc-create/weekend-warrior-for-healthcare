@@ -371,7 +371,7 @@ function Index() {
       </div>
       <div className="faq-item">
         <button className="faq-q" onClick={toggleFaq}>How is the pod matched to us?</button>
-        <div className="faq-a"><p>On the demo call we read six factors: facility type, bed count, weekend shift volume, current staffing gap, decision authority, and desired start date. That profile sizes and shapes your pod so the match fits your floor from the first weekend.</p></div>
+        <div className="faq-a"><p>We use proprietary technology to diagnose your facility's coverage needs and match you with the recommended pod. On the demo call we capture your facility profile, and our matching engine reads it against clinician mix, credentials, and weekend shift volume to recommend the pod built for your floor from the first weekend.</p></div>
       </div>
       <div className="faq-item">
         <button className="faq-q" onClick={toggleFaq}>What does it cost, and how is it billed?</button>
