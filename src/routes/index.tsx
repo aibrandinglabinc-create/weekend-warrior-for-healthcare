@@ -245,7 +245,7 @@ function Index() {
       </div>
       <div className="step reveal d3">
         <div className="sn">03</div>
-        <h3>Run it on subscription</h3>
+        <h3>Ran on subscription</h3>
         <p>Coverage is locked in weeks ahead on one monthly subscription. You watch it from a single dashboard. No re-booking, no scramble, no surprise invoices.</p>
       </div>
     </div>
