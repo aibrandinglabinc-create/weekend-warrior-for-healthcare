@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import img01 from "@/assets/img-01.jpg.asset.json";
-import img02 from "@/assets/img-02.png.asset.json";
 import img03 from "@/assets/img-03.png.asset.json";
+import PulseCareDashboard from "@/components/PulseCareDashboard";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -314,7 +314,12 @@ function Index() {
         <p className="sub reveal d2" style={{ marginTop: 26, fontSize: "12.5px", color: "var(--ink-45)" }}>Dashboard shown for illustration. Live facility data populates on activation.</p>
       </div>
       <div className="app-phone reveal d2">
-        <img src={img02.url} alt="Weekend Warrior command center app showing a 100 percent fill rate, 52 filled shifts, zero open shifts, and upcoming confirmed weekend shifts" />
+        <PulseCareDashboard
+          shifts={[
+            { day: "Today, May 24", time: "7:00 AM – 3:00 PM", status: "Filled", avatar: "a" },
+            { day: "Tomorrow, May 25", time: "3:00 PM – 11:00 PM", status: "Filled", avatar: "b" },
+          ]}
+        />
       </div>
     </div>
   </div>
