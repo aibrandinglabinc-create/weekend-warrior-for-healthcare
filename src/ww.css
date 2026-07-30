@@ -48,6 +48,7 @@
         radial-gradient(1100px 700px at 85% 0%, rgba(45,212,215,0.34), transparent 62%),
         radial-gradient(900px 750px at 8% 100%, rgba(0,181,184,0.3), transparent 65%),
         linear-gradient(160deg,#0D1117 0%,#123240 50%,#0D1117 100%);}
+  #faq::before{display:none;}
   .band-dark-2{background:var(--dark-2);color:var(--white);}
   .band-white{background:var(--white);color:var(--ink);}
   .band-white h2, .band-white h3{color:var(--ink);}
