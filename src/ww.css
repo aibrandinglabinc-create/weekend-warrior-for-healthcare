@@ -182,7 +182,7 @@
 
   /* ---------- Compare table ---------- */
   .compare{width:100%;border-collapse:collapse;margin-top:44px;font-size:13.5px;}
-  .compare th{background:var(--dark-3);padding:16px 18px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;
+  .compare th{background:#000;padding:16px 18px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;
       color:var(--teal);text-transform:uppercase;text-align:left;border-bottom:1px solid rgba(0,181,184,0.25);}
   .compare th.old{color:var(--white-50);}
   .compare td{padding:15px 18px;border-bottom:1px solid var(--white-20);color:var(--white-80);vertical-align:top;}
