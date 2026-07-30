@@ -383,8 +383,8 @@ function Index() {
 
 {/* ============ FINAL CTA ============ */}
 <section className="final" id="book">
-  <svg className="pulse-bg" viewBox="0 0 1440 900" preserveAspectRatio="none">
-    <polyline className="ekg-anim" pathLength={1} points="0,450 200,450 260,180 320,720 380,450 720,450 780,120 840,780 900,450 1240,450 1300,220 1360,680 1440,450" fill="none" stroke="#FFFFFF" strokeWidth="2"/>
+  <svg className="pulse-bg" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+    <polyline className="ekg-anim" pathLength={1} points="0,112 250,112 302,72 354,154 406,112 690,112 742,54 794,170 846,112 1128,112 1180,78 1232,146 1284,112 1440,112" fill="none" stroke="#FFFFFF" strokeWidth="2"/>
   </svg>
   <div className="wrap">
     <div className="tag reveal">Strategy. Not Staffing.</div>
