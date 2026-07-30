@@ -383,7 +383,7 @@ function Index() {
 
 {/* ============ FINAL CTA ============ */}
 <section className="final" id="book">
-  <svg className="pulse-bg" viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ opacity: 0.1 }}>
+  <svg className="pulse-bg" viewBox="0 0 1440 900" preserveAspectRatio="none">
     <polyline className="ekg-anim" pathLength={1} points="0,450 200,450 260,180 320,720 380,450 720,450 780,120 840,780 900,450 1240,450 1300,220 1360,680 1440,450" fill="none" stroke="#FFFFFF" strokeWidth="2"/>
   </svg>
   <div className="wrap">
