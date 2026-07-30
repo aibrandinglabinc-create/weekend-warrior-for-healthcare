@@ -388,7 +388,7 @@ function Index() {
   </svg>
   <div className="wrap">
     <div className="tag reveal">Strategy. Not Staffing.</div>
-    <h2 className="reveal d1">The Friday healthcare scramble ends here.</h2>
+    <h2 className="reveal d1">Your weekend shouldn't cost you your best nurses.</h2>
     <p className="sub reveal d2">Fifteen minutes. We read your weekend, size your pod, and show you the number against what coverage costs you today. No obligation, no pressure.</p>
     <div className="reveal d3"><a href="#book" className="btn btn-white btn-lg">Book a 15-Minute Demo</a></div>
   </div>
