@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import img01 from "@/assets/img-01.jpg.asset.json";
-import img03 from "@/assets/img-03.png.asset.json";
+import heroImg from "@/assets/hero-pod-corridor.jpg";
+import podImg from "@/assets/pod-don-arrival.jpg";
+import avatarNurseA from "@/assets/avatar-nurse-a.jpg";
+import avatarNurseB from "@/assets/avatar-nurse-b.jpg";
 import PulseCareDashboard from "@/components/PulseCareDashboard";
 
 export const Route = createFileRoute("/")({
@@ -146,7 +148,7 @@ function Index() {
 {/* ============ HERO ============ */}
 <section className="hero band-dark" id="top">
   <div className="hero-fallback"></div>
-  <img className="hero-bg" src={img01.url} alt="A dedicated pod of credentialed nurses walking together into a facility at the start of a weekend shift" />
+  <img className="hero-bg" src={heroImg} alt="A dedicated pod of credentialed nurses walking together into a facility at the start of a weekend shift" />
   <div className="hero-overlay"></div>
   <div className="hero-glow"></div>
   <div className="wrap">
@@ -253,7 +255,7 @@ function Index() {
     <div className="split" style={{ marginTop: 70 }} id="pod">
       <div className="split-media reveal">
         <div className="photo plain">
-          <img className="photo-img" src={img03.url} alt="A director of nursing smiling as her weekend pod of credentialed nurses arrives at the facility" />
+          <img className="photo-img" src={podImg} alt="A director of nursing smiling as her weekend pod of credentialed nurses arrives at the facility" />
         </div>
       </div>
       <div className="reveal d1">
@@ -316,8 +318,8 @@ function Index() {
       <div className="app-phone reveal d2">
         <PulseCareDashboard
           shifts={[
-            { day: "Today, May 24", time: "7:00 AM – 3:00 PM", status: "Filled", avatar: "a" },
-            { day: "Tomorrow, May 25", time: "3:00 PM – 11:00 PM", status: "Filled", avatar: "b" },
+            { day: "Today, May 24", time: "7:00 AM – 3:00 PM", status: "Filled", avatar: "a", photo: avatarNurseA },
+            { day: "Tomorrow, May 25", time: "3:00 PM – 11:00 PM", status: "Filled", avatar: "b", photo: avatarNurseB },
           ]}
         />
       </div>
