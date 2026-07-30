@@ -45,9 +45,9 @@
       mask-image:radial-gradient(ellipse 80% 60% at 50% 32%, #000 20%, transparent 80%);
       -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 32%, #000 20%, transparent 80%);}
   #faq{background:
-        radial-gradient(900px 520px at 88% 8%, rgba(45,212,215,0.16), transparent 65%),
-        radial-gradient(760px 620px at 8% 85%, rgba(0,181,184,0.14), transparent 68%),
-        linear-gradient(160deg,#0D1117 0%,#10202A 45%,#0D1117 100%);}
+        radial-gradient(1100px 700px at 85% 0%, rgba(45,212,215,0.34), transparent 62%),
+        radial-gradient(900px 750px at 8% 100%, rgba(0,181,184,0.3), transparent 65%),
+        linear-gradient(160deg,#0D1117 0%,#123240 50%,#0D1117 100%);}
   .band-dark-2{background:var(--dark-2);color:var(--white);}
   .band-white{background:var(--white);color:var(--ink);}
   .band-white h2, .band-white h3{color:var(--ink);}
@@ -181,10 +181,10 @@
   .band-white .sub{color:var(--ink-70);}
 
   /* Stethoscope resting near the left edge */
-  .stethoscope-edge{position:absolute;left:-40px;bottom:110px;width:500px;max-width:46vw;z-index:1;
+  .stethoscope-edge{position:absolute;left:-60px;bottom:-24px;width:320px;max-width:30vw;z-index:1;
       transform:rotate(-8deg);pointer-events:none;
       filter:drop-shadow(18px 24px 34px rgba(13,17,23,0.28));}
-  @media(max-width:760px){.stethoscope-edge{width:260px;left:-20px;bottom:80px;opacity:.85;}}
+  @media(max-width:900px){.stethoscope-edge{display:none;}}
 
   /* ---------- Stat pills ---------- */
   .pill-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:44px;}
