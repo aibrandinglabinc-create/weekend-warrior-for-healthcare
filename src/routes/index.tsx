@@ -2,9 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import heroImg from "@/assets/hero-pod-corridor.jpg";
 import podImg from "@/assets/pod-don-arrival.jpg";
-import avatarNurseA from "@/assets/avatar-nurse-a.jpg";
-import avatarNurseB from "@/assets/avatar-nurse-b.jpg";
-import PulseCareDashboard from "@/components/PulseCareDashboard";
+import dashboardImg from "@/assets/dashboard-mockup-phone.webp";
+import stethoscopeImg from "@/assets/stethoscope-cutout.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -189,9 +188,7 @@ function Index() {
 
 {/* ============ THE WEEKEND PROBLEM ============ */}
 <section className="band-white" id="problem">
-  <svg className="pulse-bg light" viewBox="0 0 1440 900" preserveAspectRatio="none">
-    <polyline points="0,450 120,450 180,300 240,600 300,450 480,450 540,220 600,680 660,450 900,450 960,320 1020,580 1080,450 1440,450" fill="none" stroke="#007A7C" strokeWidth="2"/>
-  </svg>
+  <img className="stethoscope-edge" src={stethoscopeImg} alt="" aria-hidden="true" />
   <div className="wrap">
     <div className="section-label reveal">
       <span className="n">01</span><span className="rule"></span><span className="cat">The Weekend Problem</span>
@@ -225,9 +222,6 @@ function Index() {
 
 {/* ============ HOW IT WORKS / THE POD ============ */}
 <section className="band-dark" id="how">
-  <svg className="pulse-bg" viewBox="0 0 1440 900" preserveAspectRatio="none">
-    <polyline points="0,450 200,450 260,220 320,680 380,450 700,450 760,160 820,740 880,450 1200,450 1260,280 1320,620 1440,450" fill="none" stroke="#00B5B8" strokeWidth="2"/>
-  </svg>
   <div className="wrap">
     <div className="section-label reveal">
       <span className="n">02</span><span className="rule"></span><span className="cat">How It Works</span>
@@ -261,20 +255,25 @@ function Index() {
       <div className="reveal d1">
         <div className="section-label"><span className="n">03</span><span className="rule"></span><span className="cat">The Pod Model</span></div>
         <h2 className="big" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}>The old way, and <span className="ital-teal">the Warrior way.</span></h2>
-        <table className="compare">
-          <thead>
-            <tr><th className="old">Agency Staffing</th><th>Weekend Warrior</th></tr>
-          </thead>
-          <tbody>
-            <tr><td className="old">A different traveler every weekend</td><td className="good">The same pod, week after week</td></tr>
-            <tr><td className="old">Re-orient a stranger every Friday night</td><td className="good">Credentialed to your floor once</td></tr>
-            <tr><td className="old">Friday call-off roulette</td><td className="good">Coverage locked weeks ahead</td></tr>
-            <tr><td className="old">Hourly bill rates that spike</td><td className="good">One predictable monthly subscription</td></tr>
-            <tr><td className="old">Burn out your core nurses to fill weekend gaps</td><td className="good">Your weekday team keeps their weekends</td></tr>
-            <tr><td className="old">Your charge nurse manages the gap</td><td className="good">You watch coverage from one dashboard</td></tr>
-          </tbody>
-        </table>
+        <div className="compare-wrap">
+          <table className="compare">
+            <thead>
+              <tr><th className="old">Agency Staffing</th><th>Weekend Warrior</th></tr>
+            </thead>
+            <tbody>
+              <tr><td className="old">A different traveler every weekend</td><td className="good">The same pod, week after week</td></tr>
+              <tr><td className="old">Re-orient a stranger every Friday night</td><td className="good">Credentialed to your floor once</td></tr>
+              <tr><td className="old">Friday call-off roulette</td><td className="good">Coverage locked weeks ahead</td></tr>
+              <tr><td className="old">Hourly bill rates that spike</td><td className="good">One predictable monthly subscription</td></tr>
+              <tr><td className="old">Burn out your core nurses to fill weekend gaps</td><td className="good">Your weekday team keeps their weekends</td></tr>
+              <tr><td className="old">Your charge nurse manages the gap</td><td className="good">You watch coverage from one dashboard</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+    </div>
+    <div className="mid-cta reveal">
+      <a href="#book" className="btn btn-solid btn-lg">Book a Demo</a>
     </div>
   </div>
 </section>
@@ -288,12 +287,33 @@ function Index() {
     <h2 className="big reveal">The same team is not just comfort.<br /><span className="ital-teal">It is clinical strategy.</span></h2>
     <p className="sub reveal d1">When the weekend team knows your patients, your protocols, and each other, the floor runs differently. Fewer handoff gaps. Fewer callouts to cover. A weekend that holds its own shape instead of being rebuilt from scratch every seven days. Continuity of care is one of the most studied levers in patient safety, and the weekend is exactly where most facilities lose it.</p>
     <div className="why-points reveal d2">
-      <div className="why-point"><div className="wp-k">Same team, same protocols</div><div className="wp-v">A pod that returns every weekend learns your unit. No re-orientation, no guesswork, no relearning your charting at Friday handoff.</div></div>
-      <div className="why-point"><div className="wp-k">Your core staff stops burning out</div><div className="wp-v">Weekend gaps stop landing on your weekday nurses. No more mandated Saturdays, no more guilt texts, no more charge nurses covering the floor on their day off.</div></div>
-      <div className="why-point"><div className="wp-k">Retention is the real return</div><div className="wp-v">Every point of RN turnover costs a hospital roughly $289,000 a year. Protecting your core team's weekends is a retention strategy, not a scheduling patch.</div></div>
-      <div className="why-point"><div className="wp-k">Coverage locked weeks ahead</div><div className="wp-v">Your weekend is confirmed before the week even starts, so your DON is not building a schedule from open shifts every Friday afternoon.</div></div>
-      <div className="why-point"><div className="wp-k">Say yes to weekend admissions</div><div className="wp-v">Referrals stop being a staffing question. Take the Friday afternoon admission knowing Saturday is already covered.</div></div>
-      <div className="why-point"><div className="wp-k">One accountable partner</div><div className="wp-v">One subscription, one point of contact, one team that owns your weekend coverage instead of a rotating cast of agency names.</div></div>
+      <div className="why-point">
+        <span className="wp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17.5 6.5a3 3 0 1 1-5.6 1.5M6.5 6.5a3 3 0 1 0 5.6 1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/><path d="M3.5 18.5c0-2.8 2.6-4.6 5.9-4.6s5.9 1.8 5.9 4.6M12.6 14.2c1.9.4 3.4 1.8 3.9 4.3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg></span>
+        <div className="wp-k">Same team, same protocols</div><div className="wp-v">A pod that returns every weekend learns your unit. No re-orientation, no guesswork, no relearning your charting at Friday handoff.</div>
+      </div>
+      <div className="why-point">
+        <span className="wp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.4c0 4.3-2.9 7.7-7 8.6-4.1-.9-7-4.3-7-8.6V6l7-2.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M9.3 12.2l1.9 1.9 3.5-3.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+        <div className="wp-k">Your core staff stops burning out</div><div className="wp-v">Weekend gaps stop landing on your weekday nurses. No more mandated Saturdays, no more guilt texts, no more charge nurses covering the floor on their day off.</div>
+      </div>
+      <div className="why-point">
+        <span className="wp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18.5 9.5 13l3.2 3.2L20 8.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><path d="M14.8 8.5H20v5.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+        <div className="wp-k">Retention is the real return</div><div className="wp-v">Every point of RN turnover costs a hospital roughly $289,000 a year. Protecting your core team's weekends is a retention strategy, not a scheduling patch.</div>
+      </div>
+      <div className="why-point">
+        <span className="wp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="1.6"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg></span>
+        <div className="wp-k">Coverage locked weeks ahead</div><div className="wp-v">Your weekend is confirmed before the week even starts, so your DON is not building a schedule from open shifts every Friday afternoon.</div>
+      </div>
+      <div className="why-point">
+        <span className="wp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.6" stroke="currentColor" strokeWidth="1.6"/><path d="M8.3 12.3l2.5 2.5 5-5.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+        <div className="wp-k">Say yes to weekend admissions</div><div className="wp-v">Referrals stop being a staffing question. Take the Friday afternoon admission knowing Saturday is already covered.</div>
+      </div>
+      <div className="why-point">
+        <span className="wp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.4c0 4.3-2.9 7.7-7 8.6-4.1-.9-7-4.3-7-8.6V6l7-2.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M12 8v4.2l2.6 2.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+        <div className="wp-k">One accountable partner</div><div className="wp-v">One subscription, one point of contact, one team that owns your weekend coverage instead of a rotating cast of agency names.</div>
+      </div>
+    </div>
+    <div className="mid-cta reveal">
+      <a href="#book" className="btn btn-solid btn-lg">Book a Demo</a>
     </div>
   </div>
 </section>
@@ -316,16 +336,13 @@ function Index() {
         <p className="sub reveal d2" style={{ marginTop: 26, fontSize: "12.5px", color: "var(--ink-45)" }}>Dashboard shown for illustration. Live facility data populates on activation.</p>
       </div>
       <div className="app-phone reveal d2">
-        <PulseCareDashboard
-          shifts={[
-            { day: "Today, May 24", time: "7:00 AM – 3:00 PM", status: "Filled", avatar: "a", photo: avatarNurseA },
-            { day: "Tomorrow, May 25", time: "3:00 PM – 11:00 PM", status: "Filled", avatar: "b", photo: avatarNurseB },
-          ]}
-        />
+        <img src={dashboardImg} alt="Weekend Warrior nurse app dashboard showing 100 percent fill rate and upcoming shifts" />
       </div>
     </div>
   </div>
 </section>
+
+<div className="section-divider" aria-hidden="true"></div>
 
 {/* ============ PRICING ============ */}
 <section className="band-white" id="pricing">
@@ -378,7 +395,7 @@ function Index() {
       </div>
       <div className="faq-item">
         <button className="faq-q" onClick={toggleFaq}>How is the pod matched to us?</button>
-        <div className="faq-a"><p>We use proprietary technology to diagnose your facility's coverage needs and match you with the recommended pod. On the demo call we capture your facility profile, and our matching engine reads it against clinician mix, credentials, and weekend shift volume to recommend the pod built for your floor from the first weekend.</p></div>
+        <div className="faq-a"><p>We use proprietary technology to diagnose your facility's coverage needs and match you with the recommended pod. Your facility profile is captured in the portal, and our matching engine reads it against clinician mix, credentials, and weekend shift volume to recommend the pod built for your floor from the first weekend.</p></div>
       </div>
       <div className="faq-item">
         <button className="faq-q" onClick={toggleFaq}>What does it cost, and how is it billed?</button>
@@ -403,9 +420,6 @@ function Index() {
 
 {/* ============ FOOTER ============ */}
 <footer>
-  <svg className="pulse-bg" viewBox="0 0 1440 200" preserveAspectRatio="none" style={{ height: "100%", opacity: 0.06 }}>
-    <polyline points="0,100 300,100 360,40 420,160 480,100 900,100 960,30 1020,170 1080,100 1440,100" fill="none" stroke="#00B5B8" strokeWidth="2"/>
-  </svg>
   <div className="foot-grid">
     <div className="foot-brand">
       <div className="bname">WEEKEND WARRIOR</div>
