@@ -73,7 +73,7 @@
   /* ---------- Pulse backgrounds ---------- */
   .pulse-bg{display:none;}
   .pulse-bg.light{opacity:0.06;}
-  .final .pulse-bg{display:block;opacity:.28 !important;}
+  .final .pulse-bg{display:block;opacity:.28 !important;z-index:0;}
 
   /* ---------- Hero (full-bleed cinematic glass) ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 32px 54px;overflow:hidden;}
@@ -293,7 +293,8 @@
 
   /* ---------- Final CTA ---------- */
   .final{background:linear-gradient(135deg,#007A7C 0%,#00B5B8 46%,#2A3444 100%);text-align:center;overflow:hidden;}
-  .final::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,0.14),transparent 60%);}
+  .final::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,0.14),transparent 60%);}
+  .final .wrap{position:relative;z-index:2;}
   .final h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(34px,5.2vw,64px);line-height:1.02;letter-spacing:-1px;text-transform:uppercase;margin-bottom:18px;color:var(--white);}
   .final .tag{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.85);margin-bottom:30px;}
   .final .sub{color:rgba(255,255,255,0.9);margin:0 auto 38px;}
