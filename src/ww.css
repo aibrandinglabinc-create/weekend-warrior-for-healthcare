@@ -71,7 +71,7 @@
   @media(max-width:860px){.nav-links{display:none;}}
 
   /* ---------- Pulse backgrounds ---------- */
-  .pulse-bg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.05;}
+  .pulse-bg{display:none;}
   .pulse-bg.light{opacity:0.06;}
 
   /* ---------- Hero (full-bleed cinematic glass) ---------- */
