@@ -383,12 +383,12 @@ function Index() {
 
 {/* ============ FINAL CTA ============ */}
 <section className="final" id="book">
-  <svg className="pulse-bg" viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ opacity: 0.1 }}>
+  <svg className="pulse-bg" viewBox="0 0 1440 900" preserveAspectRatio="none">
     <polyline className="ekg-anim" pathLength={1} points="0,450 200,450 260,180 320,720 380,450 720,450 780,120 840,780 900,450 1240,450 1300,220 1360,680 1440,450" fill="none" stroke="#FFFFFF" strokeWidth="2"/>
   </svg>
   <div className="wrap">
     <div className="tag reveal">Strategy. Not Staffing.</div>
-    <h2 className="reveal d1">Give your weekend a team it can keep.</h2>
+    <h2 className="reveal d1">Your weekend shouldn't cost you your best nurses.</h2>
     <p className="sub reveal d2">Fifteen minutes. We read your weekend, size your pod, and show you the number against what coverage costs you today. No obligation, no pressure.</p>
     <div className="reveal d3"><a href="#book" className="btn btn-white btn-lg">Book a 15-Minute Demo</a></div>
   </div>
