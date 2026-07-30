@@ -152,7 +152,7 @@ function Index() {
   <div className="wrap">
     <div className="hero-inner">
       <div className="glow-tag reveal">Introducing Weekend Warrior</div>
-      <h1 className="display reveal d1">The Friday scramble<br /><span className="ital-teal">ends here.</span></h1>
+      <h1 className="display reveal d1">The weekend healthcare scramble<br /><span className="ital-teal">ends here.</span></h1>
       <p className="lead reveal d2">The same credentialed nursing pod in your facility every weekend, on one subscription. Your weekday team keeps their weekends. You keep your Friday nights.</p>
       <p className="tagline-mono reveal d2">Strategy. Not Staffing.</p>
       <div className="hero-cta reveal d3">
