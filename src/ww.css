@@ -27,10 +27,10 @@
         radial-gradient(70% 55% at 50% 32%, rgba(0,181,184,0.12) 0%, transparent 70%),
         linear-gradient(to right, rgba(214,240,242,0.11) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(214,240,242,0.11) 1px, transparent 1px);
-      background-size:100% 100%, 36px 36px, 36px 36px;
+      background-size:100% 100%, 54px 54px, 54px 54px;
       -webkit-mask-image:radial-gradient(120% 90% at 50% 40%, #000 35%, transparent 90%);
       mask-image:radial-gradient(120% 90% at 50% 40%, #000 35%, transparent 90%);}
-  .hero::before{z-index:3;}
+  .hero::before{display:none;}
   .band-dark .pulse-bg,.band-dark-2 .pulse-bg{display:none;}
   #how{position:relative;
       background:
