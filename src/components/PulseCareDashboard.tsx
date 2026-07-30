@@ -5,7 +5,9 @@ const css = `
 .pc-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--pc-teal-dark);text-align:center;}
 .pc-phone{position:relative;width:392px;max-width:100%;padding:11px;border-radius:58px;
   background:linear-gradient(150deg,#E8ECEE 0%,#B9C2C8 18%,#8E999F 40%,#D5DBDF 62%,#9AA5AB 84%,#E4E8EA 100%);
-  box-shadow:0 2px 3px rgba(255,255,255,.9) inset,0 40px 90px -30px rgba(10,31,60,.45),0 12px 34px -12px rgba(10,31,60,.28);}
+  box-shadow:0 2px 3px rgba(255,255,255,.9) inset,0 40px 90px -30px rgba(10,31,60,.45),0 12px 34px -12px rgba(10,31,60,.28);
+  animation:pcFloat 6.5s ease-in-out infinite;}
+@keyframes pcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
 .pc-phone::before{content:'';position:absolute;inset:6px;border-radius:53px;border:1px solid rgba(255,255,255,.35);pointer-events:none;z-index:5;}
 .pc-btn{position:absolute;background:linear-gradient(180deg,#AAB4BA,#7F8A91);border-radius:2px;}
 .pc-btn.silent{left:-2px;top:132px;width:3px;height:30px;}
