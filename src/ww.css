@@ -73,7 +73,7 @@
   /* ---------- Pulse backgrounds ---------- */
   .pulse-bg{display:none;}
   .pulse-bg.light{opacity:0.06;}
-  .final .pulse-bg{display:block;position:absolute;inset:0;width:100%;height:100%;opacity:.16 !important;z-index:0;pointer-events:none;transform:translateY(34%) scaleY(.34);transform-origin:center center;}
+  .final .pulse-bg{display:block;position:absolute;left:0;right:0;top:64%;width:100%;height:46%;opacity:.18 !important;z-index:0;pointer-events:none;transform:scaleY(.42);transform-origin:center center;}
 
   /* ---------- Hero (full-bleed cinematic glass) ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 32px 54px;overflow:hidden;}
