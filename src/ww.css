@@ -27,11 +27,11 @@
         radial-gradient(70% 55% at 50% 32%, rgba(0,181,184,0.12) 0%, transparent 70%),
         linear-gradient(to right, rgba(214,240,242,0.11) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(214,240,242,0.11) 1px, transparent 1px);
-      background-size:100% 100%, 72px 72px, 72px 72px;
+      background-size:100% 100%, 36px 36px, 36px 36px;
       -webkit-mask-image:radial-gradient(120% 90% at 50% 40%, #000 35%, transparent 90%);
       mask-image:radial-gradient(120% 90% at 50% 40%, #000 35%, transparent 90%);}
   .hero::before{z-index:3;}
-  .band-dark .pulse-bg,.band-dark-2 .pulse-bg{opacity:0.015;}
+  .band-dark .pulse-bg,.band-dark-2 .pulse-bg{display:none;}
   #how{position:relative;
       background:
         radial-gradient(900px 520px at 12% 6%, rgba(45,212,215,0.16), transparent 65%),
@@ -71,7 +71,7 @@
   @media(max-width:860px){.nav-links{display:none;}}
 
   /* ---------- Pulse backgrounds ---------- */
-  .pulse-bg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.05;}
+  .pulse-bg{display:none;}
   .pulse-bg.light{opacity:0.06;}
 
   /* ---------- Hero (full-bleed cinematic glass) ---------- */
