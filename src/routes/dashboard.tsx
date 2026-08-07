@@ -595,6 +595,7 @@ function Dashboard() {
                 Your facility has a dedicated Pulse Staffing partner. Coverage questions, pod changes, and billing all go to one person, not a queue.
               </p>
               <div className="dash-info-row"><span>Phone</span><b>(346) 251-0261</b></div>
+              <div className="dash-info-row"><span>Address</span><b>15915 Katy Fwy #150, Houston, TX 77094</b></div>
               <div className="dash-info-row"><span>Email</span><b>support@pulsestaffing.com</b></div>
               <div className="dash-info-row"><span>Hours</span><b>7 days a week, 6:00 AM to 10:00 PM CT</b></div>
               <a href="mailto:support@pulsestaffing.com" className="btn btn-solid" style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>Email Support</a>
