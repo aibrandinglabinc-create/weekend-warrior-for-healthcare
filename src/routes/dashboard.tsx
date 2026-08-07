@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import avatarNurseA from "@/assets/avatar-nurse-a.jpg";
 import avatarNurseB from "@/assets/avatar-nurse-b.jpg";
 
@@ -28,25 +29,69 @@ const IconCal = () => (
     <path d="M3.6 10.1h16.8M8.4 3.4v3.6M15.6 3.4v3.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
   </svg>
 );
+const IconMsg = () => (
+  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M20.4 11.4c0 4.1-3.8 7.4-8.4 7.4-1 0-2-.2-2.9-.5l-4.6 1.6 1.4-3.9a7 7 0 0 1-2.3-5c0-4.1 3.8-7.4 8.4-7.4s8.4 3.3 8.4 7.4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+  </svg>
+);
+const IconMore = () => (
+  <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="5.4" cy="12" r="1.9" /><circle cx="12" cy="12" r="1.9" /><circle cx="18.6" cy="12" r="1.9" />
+  </svg>
+);
+const IconChevron = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
-const SHIFTS = [
-  { day: "Today, May 24", time: "7:00 AM – 3:00 PM", status: "Filled", photo: avatarNurseA },
-  { day: "Tomorrow, May 25", time: "3:00 PM – 11:00 PM", status: "Filled", photo: avatarNurseB },
+const UPCOMING = [
+  { day: "Friday, May 24", time: "6:00 AM – 6:00 PM", status: "Filled", photo: avatarNurseA },
+  { day: "Friday, May 24", time: "6:00 PM – 6:00 AM", status: "Filled", photo: avatarNurseB },
 ];
 
 const ROSTER = [
-  { name: "Maria Alvarez", role: "RN", on: true },
-  { name: "James Okafor", role: "RN", on: true },
-  { name: "Priya Nair", role: "LPN", on: true },
-  { name: "Dana Wicklund", role: "CNA", on: true },
-  { name: "Trevor Boone", role: "CNA", on: true },
-  { name: "Sofia Reyes", role: "Phlebotomist", on: false },
+  { name: "Maria Alvarez", role: "RN", on: true, photo: avatarNurseA, initials: "MA" },
+  { name: "James Okafor", role: "RN", on: true, photo: avatarNurseB, initials: "JO" },
+  { name: "Priya Nair", role: "LPN", on: true, initials: "PN" },
+  { name: "Dana Wicklund", role: "CNA", on: true, initials: "DW" },
+  { name: "Trevor Boone", role: "CNA", on: true, initials: "TB" },
+  { name: "Sofia Reyes", role: "Phlebotomist", on: false, initials: "SR" },
 ];
+
+const SCHEDULE = [
+  { day: "Friday", shifts: [
+    { time: "6:00 AM – 6:00 PM", name: "Maria Alvarez", role: "RN" },
+    { time: "6:00 PM – 6:00 AM", name: "James Okafor", role: "RN" },
+  ]},
+  { day: "Saturday", shifts: [
+    { time: "6:00 AM – 6:00 PM", name: "Priya Nair", role: "LPN" },
+    { time: "6:00 PM – 6:00 AM", name: "Dana Wicklund", role: "CNA" },
+  ]},
+  { day: "Sunday", shifts: [
+    { time: "6:00 AM – 6:00 PM", name: "Trevor Boone", role: "CNA" },
+    { time: "6:00 PM – 6:00 AM", name: "Sofia Reyes", role: "Phlebotomist" },
+  ]},
+];
+
+const MESSAGES = [
+  { from: "Pulse Staffing", time: "9:14 AM", preview: "Your weekend pod is fully confirmed for May 24 through 26. No action needed." },
+  { from: "Weekend Warrior System", time: "Yesterday", preview: "Priya Nair's LPN license renewal was verified and is on file." },
+  { from: "Pulse Staffing", time: "Monday", preview: "Trevor Boone has been added to your pod starting this weekend." },
+  { from: "Weekend Warrior System", time: "Last week", preview: "Your 90 day retention report is ready to view." },
+];
+
+function initialsAvatar(initials: string) {
+  return (
+    <span className="dash-av dash-av-fallback" aria-hidden="true">{initials}</span>
+  );
+}
 
 function Dashboard() {
   const ARC = 307.9;
   const pct = 100;
   const offset = ARC - (ARC * pct) / 100;
+  const [tab, setTab] = useState<"dashboard" | "shifts" | "team" | "messages" | "more">("dashboard");
 
   return (
     <>
@@ -163,76 +208,158 @@ function Dashboard() {
         </div>
 
         <div className="dash-body">
-          <div className="dash-fill">
-            <div className="dash-fill-top">
-              <span className="dash-fill-lbl">Fill Rate</span>
-              <span className="dash-chip">
-                This Week
-                <svg width="11" height="7" viewBox="0 0 11 7" fill="none" aria-hidden="true">
-                  <path d="M1 1.2 5.5 5.6 10 1.2" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </div>
-            <div className="dash-gauge">
-              <svg viewBox="0 0 240 128" role="img" aria-label={`Fill rate ${pct} percent`}>
-                <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="rgba(255,255,255,.20)" strokeWidth="17" strokeLinecap="round" />
-                <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="#4FE3E5" strokeWidth="17" strokeLinecap="round" strokeDasharray={ARC} strokeDashoffset={offset} />
-              </svg>
-              <div className="dash-gauge-val"><b>{pct}</b><i>%</i></div>
-              <div className="dash-gauge-sub">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" stroke="#BFF3F4" strokeWidth="1.9" />
-                  <path d="M8.2 12.3l2.5 2.5 5-5.2" stroke="#BFF3F4" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                Excellent
+          {tab === "dashboard" && (
+            <>
+              <div className="dash-fill">
+                <div className="dash-fill-top">
+                  <span className="dash-fill-lbl">Fill Rate</span>
+                  <span className="dash-chip">
+                    This Week
+                    <svg width="11" height="7" viewBox="0 0 11 7" fill="none" aria-hidden="true">
+                      <path d="M1 1.2 5.5 5.6 10 1.2" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+                <div className="dash-gauge">
+                  <svg viewBox="0 0 240 128" role="img" aria-label={`Fill rate ${pct} percent`}>
+                    <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="rgba(255,255,255,.20)" strokeWidth="17" strokeLinecap="round" />
+                    <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="#4FE3E5" strokeWidth="17" strokeLinecap="round" strokeDasharray={ARC} strokeDashoffset={offset} />
+                  </svg>
+                  <div className="dash-gauge-val"><b>{pct}</b><i>%</i></div>
+                  <div className="dash-gauge-sub">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="9" stroke="#BFF3F4" strokeWidth="1.9" />
+                      <path d="M8.2 12.3l2.5 2.5 5-5.2" stroke="#BFF3F4" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Excellent
+                  </div>
+                </div>
+                <div className="dash-ends"><span>0%</span><span>100%</span></div>
+                <p className="dash-fill-note">Every shift is covered for this weekend.</p>
               </div>
-            </div>
-            <div className="dash-ends"><span>0%</span><span>100%</span></div>
-            <p className="dash-fill-note">All shifts are filled. Great work.</p>
-          </div>
 
-          <div className="dash-panel">
-            <div className="dash-rowh">
-              <h4>Overview</h4>
-              <span>View All</span>
-            </div>
-            <div className="dash-tiles">
-              <div className="dash-tile">
-                <span className="dash-tile-ic"><IconTeam /></span>
-                <div className="dash-tile-n">52</div>
-                <div className="dash-tile-l">Total Shifts</div>
-              </div>
-              <div className="dash-tile">
-                <span className="dash-tile-ic"><IconCheck /></span>
-                <div className="dash-tile-n">52</div>
-                <div className="dash-tile-l">Filled Shifts</div>
-              </div>
-              <div className="dash-tile">
-                <span className="dash-tile-ic"><IconCal /></span>
-                <div className="dash-tile-n">0</div>
-                <div className="dash-tile-l">Open Shifts</div>
-              </div>
-            </div>
+              <div className="dash-panel">
+                <div className="dash-rowh">
+                  <h4>Overview</h4>
+                  <span onClick={() => setTab("shifts")} style={{ cursor: "pointer" }}>View All</span>
+                </div>
+                <div className="dash-tiles">
+                  <div className="dash-tile">
+                    <span className="dash-tile-ic"><IconTeam /></span>
+                    <div className="dash-tile-n">52</div>
+                    <div className="dash-tile-l">Total Shifts</div>
+                  </div>
+                  <div className="dash-tile">
+                    <span className="dash-tile-ic"><IconCheck /></span>
+                    <div className="dash-tile-n">52</div>
+                    <div className="dash-tile-l">Filled Shifts</div>
+                  </div>
+                  <div className="dash-tile">
+                    <span className="dash-tile-ic"><IconCal /></span>
+                    <div className="dash-tile-n">0</div>
+                    <div className="dash-tile-l">Open Shifts</div>
+                  </div>
+                </div>
 
-            <div className="dash-rowh">
-              <h4>Upcoming Shifts</h4>
-              <span>View Schedule</span>
-            </div>
-            {SHIFTS.map((s) => (
-              <div className="dash-shift" key={s.day}>
-                <span className="dash-av"><img src={s.photo} alt="" /></span>
-                <span className="dash-meta">
-                  <span className="dash-d">{s.day}</span>
-                  <span className="dash-t">{s.time}</span>
-                </span>
-                <span className="dash-pill">{s.status}</span>
+                <div className="dash-rowh">
+                  <h4>Upcoming Shifts</h4>
+                  <span onClick={() => setTab("shifts")} style={{ cursor: "pointer" }}>View Schedule</span>
+                </div>
+                {UPCOMING.map((s) => (
+                  <div className="dash-shift" key={`${s.day}-${s.time}`}>
+                    <span className="dash-av"><img src={s.photo} alt="" /></span>
+                    <span className="dash-meta">
+                      <span className="dash-d">{s.day}</span>
+                      <span className="dash-t">{s.time}</span>
+                    </span>
+                    <span className="dash-pill">{s.status}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
+
+          {tab === "shifts" && (
+            <div className="dash-panel" style={{ paddingBottom: 20 }}>
+              <div className="dash-rowh">
+                <h4>This Weekend's Schedule</h4>
+                <span>Fri &ndash; Sun</span>
+              </div>
+              {SCHEDULE.map((d) => (
+                <div key={d.day}>
+                  <div className="dash-day-label">{d.day}</div>
+                  {d.shifts.map((s) => (
+                    <div className="dash-shift" key={s.time}>
+                      {initialsAvatar(s.name.split(" ").map((p) => p[0]).join(""))}
+                      <span className="dash-meta">
+                        <span className="dash-d">{s.name}</span>
+                        <span className="dash-t">{s.time} &middot; {s.role}</span>
+                      </span>
+                      <span className="dash-pill">Filled</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "team" && (
+            <div className="dash-panel" style={{ paddingBottom: 20 }}>
+              <div className="dash-rowh">
+                <h4>Your Pod</h4>
+                <span>6 Members</span>
+              </div>
+              {ROSTER.map((r) => (
+                <div className="dash-shift" key={r.name}>
+                  {r.photo ? <span className="dash-av"><img src={r.photo} alt="" /></span> : initialsAvatar(r.initials)}
+                  <span className="dash-meta">
+                    <span className="dash-d">{r.name}</span>
+                    <span className="dash-t">{r.role}</span>
+                  </span>
+                  <span className="dash-pill" style={!r.on ? { background: "#E4EDEF", color: "#6A7A8C" } : undefined}>
+                    {r.on ? "This Weekend" : "Off"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "messages" && (
+            <div className="dash-panel" style={{ paddingBottom: 8 }}>
+              <div className="dash-rowh">
+                <h4>Messages</h4>
+                <span>Mark All Read</span>
+              </div>
+              {MESSAGES.map((m, i) => (
+                <div className="dash-msg" key={i}>
+                  <span className="dash-msg-dot" />
+                  <div className="dash-msg-body">
+                    <span className="dash-msg-time">{m.time}</span>
+                    <div className="dash-msg-from">{m.from}</div>
+                    <p className="dash-msg-preview">{m.preview}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "more" && (
+            <div className="dash-panel" style={{ paddingBottom: 8 }}>
+              <div className="dash-rowh">
+                <h4>More</h4>
+              </div>
+              <div className="dash-menu-row"><span>Facility Profile</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row"><span>Billing &amp; Invoices</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row"><span>Reports</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row"><span>Notification Settings</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row"><span>Support</span><span className="chev"><IconChevron /></span></div>
+              <Link to="/" className="dash-menu-row" style={{ color: "#C0392B" }}><span>Log Out</span><span className="chev"><IconChevron /></span></Link>
+            </div>
+          )}
         </div>
 
         <div className="dash-tabs">
-          <span className="dash-tab on">
+          <span className={`dash-tab${tab === "dashboard" ? " on" : ""}`} onClick={() => setTab("dashboard")}>
             <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <rect x="3.2" y="3.2" width="7.6" height="7.6" rx="2" />
               <rect x="13.2" y="3.2" width="7.6" height="7.6" rx="2" />
@@ -241,20 +368,10 @@ function Dashboard() {
             </svg>
             <span>Dashboard</span>
           </span>
-          <span className="dash-tab"><IconCal /><span>Shifts</span></span>
-          <span className="dash-tab"><IconTeam /><span>Team</span></span>
-          <span className="dash-tab">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M20.4 11.4c0 4.1-3.8 7.4-8.4 7.4-1 0-2-.2-2.9-.5l-4.6 1.6 1.4-3.9a7 7 0 0 1-2.3-5c0-4.1 3.8-7.4 8.4-7.4s8.4 3.3 8.4 7.4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-            </svg>
-            <span>Messages</span>
-          </span>
-          <span className="dash-tab">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <circle cx="5.4" cy="12" r="1.9" /><circle cx="12" cy="12" r="1.9" /><circle cx="18.6" cy="12" r="1.9" />
-            </svg>
-            <span>More</span>
-          </span>
+          <span className={`dash-tab${tab === "shifts" ? " on" : ""}`} onClick={() => setTab("shifts")}><IconCal /><span>Shifts</span></span>
+          <span className={`dash-tab${tab === "team" ? " on" : ""}`} onClick={() => setTab("team")}><IconTeam /><span>Team</span></span>
+          <span className={`dash-tab${tab === "messages" ? " on" : ""}`} onClick={() => setTab("messages")}><IconMsg /><span>Messages</span></span>
+          <span className={`dash-tab${tab === "more" ? " on" : ""}`} onClick={() => setTab("more")}><IconMore /><span>More</span></span>
         </div>
       </div>
     </>
