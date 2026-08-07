@@ -76,7 +76,7 @@ const SCHEDULE = [
   ]},
   { day: "Sunday", shifts: [
     { time: "6:00 AM – 6:00 PM", name: "Trevor Boone", role: "CNA" },
-    { time: "6:00 PM – 6:00 AM", name: "Sofia Reyes", role: "Phlebotomist" },
+    { time: "6:00 PM – 6:00 AM", name: "Weekend Warrior Float", role: "Phlebotomist", float: true },
   ]},
 ];
 
@@ -119,6 +119,19 @@ const RETENTION_ROWS = [
   { name: "Sofia Reyes", role: "Phlebotomist", tenure: "4 months", weekends: 17 },
 ];
 
+const WEEKS = [
+  { label: "This Week", pct: 100, note: "Every shift is covered for this weekend." },
+  { label: "Next Week", pct: 100, note: "Every shift is covered for next weekend." },
+  { label: "In 2 Weeks", pct: 92, note: "Weekend Warrior is filling 1 open seat. No action needed on your end." },
+];
+
+const WEEKENDS = [
+  { range: "May 24 to 26", detail: "6 Warriors, 12 shifts", status: "Filled", filling: false },
+  { range: "May 31 to June 2", detail: "6 Warriors, 12 shifts", status: "Filled", filling: false },
+  { range: "June 7 to 9", detail: "5 Warriors confirmed, 1 seat in progress", status: "Filling", filling: true },
+  { range: "June 14 to 16", detail: "6 Warriors, 12 shifts", status: "Filled", filling: false },
+];
+
 const HISTORY_ROWS = [
   { date: "May 17", name: "Maria Alvarez", role: "RN", shift: "6:00 AM – 6:00 PM", status: "Completed" },
   { date: "May 17", name: "James Okafor", role: "RN", shift: "6:00 PM – 6:00 AM", status: "Completed" },
@@ -152,6 +165,11 @@ function Dashboard() {
     weekly: false,
   });
 
+  const [weekIdx, setWeekIdx] = useState(0);
+  const [weekMenuOpen, setWeekMenuOpen] = useState(false);
+  const week = WEEKS[weekIdx];
+  const weekOffset = ARC - (ARC * week.pct) / 100;
+
   return (
     <>
       <div className="dash-utility">
@@ -162,7 +180,7 @@ function Dashboard() {
       <div className="dash-page">
         <div className="dash-appbar">
           <span className="dash-hamb"><span /><span /><span /></span>
-          <span className="dash-bell">
+          <span className="dash-bell" onClick={() => setTab("messages")} role="button" aria-label="Notifications" style={{ cursor: "pointer" }}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 4a5.4 5.4 0 0 0-5.4 5.4v3.1L5.2 15.4h13.6l-1.4-2.9V9.4A5.4 5.4 0 0 0 12 4Z" stroke="#fff" strokeWidth="1.7" strokeLinejoin="round" />
               <path d="M10.1 18.1a2 2 0 0 0 3.8 0" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" />
@@ -183,29 +201,44 @@ function Dashboard() {
               <div className="dash-fill">
                 <div className="dash-fill-top">
                   <span className="dash-fill-lbl">Fill Rate</span>
-                  <span className="dash-chip">
-                    This Week
-                    <svg width="11" height="7" viewBox="0 0 11 7" fill="none" aria-hidden="true">
-                      <path d="M1 1.2 5.5 5.6 10 1.2" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                  <span style={{ position: "relative" }}>
+                    <span className="dash-chip" onClick={() => setWeekMenuOpen(!weekMenuOpen)} role="button" aria-expanded={weekMenuOpen} style={{ cursor: "pointer" }}>
+                      {week.label}
+                      <svg width="11" height="7" viewBox="0 0 11 7" fill="none" aria-hidden="true">
+                        <path d="M1 1.2 5.5 5.6 10 1.2" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    {weekMenuOpen && (
+                      <span className="dash-week-menu">
+                        {WEEKS.map((w, i) => (
+                          <span
+                            key={w.label}
+                            className={`dash-week-opt${i === weekIdx ? " on" : ""}`}
+                            onClick={() => { setWeekIdx(i); setWeekMenuOpen(false); }}
+                          >
+                            {w.label}
+                          </span>
+                        ))}
+                      </span>
+                    )}
                   </span>
                 </div>
                 <div className="dash-gauge">
-                  <svg viewBox="0 0 240 128" role="img" aria-label={`Fill rate ${pct} percent`}>
+                  <svg viewBox="0 0 240 128" role="img" aria-label={`Fill rate ${week.pct} percent`}>
                     <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="rgba(255,255,255,.20)" strokeWidth="17" strokeLinecap="round" />
-                    <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="#4FE3E5" strokeWidth="17" strokeLinecap="round" strokeDasharray={ARC} strokeDashoffset={offset} />
+                    <path d="M22 116 A 98 98 0 0 1 218 116" fill="none" stroke="#4FE3E5" strokeWidth="17" strokeLinecap="round" strokeDasharray={ARC} strokeDashoffset={weekOffset} />
                   </svg>
-                  <div className="dash-gauge-val"><b>{pct}</b><i>%</i></div>
+                  <div className="dash-gauge-val"><b>{week.pct}</b><i>%</i></div>
                   <div className="dash-gauge-sub">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <circle cx="12" cy="12" r="9" stroke="#BFF3F4" strokeWidth="1.9" />
                       <path d="M8.2 12.3l2.5 2.5 5-5.2" stroke="#BFF3F4" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    Excellent
+                    {week.pct >= 95 ? "Excellent" : "Filling"}
                   </div>
                 </div>
                 <div className="dash-ends"><span>0%</span><span>100%</span></div>
-                <p className="dash-fill-note">Every shift is covered for this weekend.</p>
+                <p className="dash-fill-note">{week.note}</p>
               </div>
 
               <div className="dash-panel">
@@ -250,6 +283,27 @@ function Dashboard() {
           )}
 
           {tab === "shifts" && (
+            <>
+            <div className="dash-panel" style={{ paddingBottom: 20 }}>
+              <div className="dash-rowh">
+                <h4>Upcoming Weekends</h4>
+                <span>Next 4</span>
+              </div>
+              {WEEKENDS.map((w) => (
+                <div className="dash-shift" key={w.range}>
+                  <span className="dash-meta">
+                    <span className="dash-d">{w.range}</span>
+                    <span className="dash-t">{w.detail}</span>
+                  </span>
+                  <span className="dash-pill" style={w.filling ? { background: "rgba(0,181,184,0.14)", color: "var(--teal-dark)", border: "1.5px solid rgba(0,181,184,0.4)" } : undefined}>
+                    {w.status}
+                  </span>
+                </div>
+              ))}
+              <p style={{ fontSize: 12, color: "#8A97A6", lineHeight: 1.6, marginTop: 4 }}>
+                Seats marked Filling are being covered by Weekend Warrior. Nothing is required from your facility.
+              </p>
+            </div>
             <div className="dash-panel" style={{ paddingBottom: 20 }}>
               <div className="dash-rowh">
                 <h4>This Weekend's Schedule</h4>
@@ -261,7 +315,11 @@ function Dashboard() {
                     <div className="dash-day-label">{d.day}</div>
                     {d.shifts.map((s) => (
                       <div className="dash-shift" key={s.time}>
-                        <span className="dash-av"><img src={PHOTO_BY_NAME[s.name]} alt="" /></span>
+                        {"float" in s && s.float ? (
+                          <span className="dash-av dash-av-fallback" aria-hidden="true">WW</span>
+                        ) : (
+                          <span className="dash-av"><img src={PHOTO_BY_NAME[s.name]} alt="" /></span>
+                        )}
                         <span className="dash-meta">
                           <span className="dash-d">{s.name}</span>
                           <span className="dash-t">{s.time} &middot; {s.role}</span>
@@ -273,6 +331,7 @@ function Dashboard() {
                 ))}
               </div>
             </div>
+            </>
           )}
 
           {tab === "team" && (
@@ -287,10 +346,10 @@ function Dashboard() {
                     <span className="dash-av"><img src={r.photo} alt="" /></span>
                     <span className="dash-meta">
                       <span className="dash-d">{r.name}</span>
-                      <span className="dash-t">{r.role}</span>
+                      <span className="dash-t">{r.on ? r.role : `${r.role} · Weekend Warrior is filling this seat`}</span>
                     </span>
-                    <span className="dash-pill" style={!r.on ? { background: "#E4EDEF", color: "#6A7A8C" } : undefined}>
-                      {r.on ? "This Weekend" : "Off"}
+                    <span className="dash-pill" style={!r.on ? { background: "rgba(0,181,184,0.14)", color: "var(--teal-dark)", border: "1.5px solid rgba(0,181,184,0.4)" } : undefined}>
+                      {r.on ? "This Weekend" : "Covered"}
                     </span>
                   </div>
                 ))}

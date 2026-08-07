@@ -605,6 +605,14 @@
   .dash-report-track{height:7px;border-radius:4px;background:#E4EDEF;overflow:hidden;}
   .dash-report-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--teal-light),var(--teal-dark));}
 
+  .dash-week-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:20;min-width:150px;
+      background:#fff;border-radius:14px;padding:6px;display:flex;flex-direction:column;
+      box-shadow:0 16px 40px -12px rgba(13,17,23,0.4);border:1.5px solid rgba(0,181,184,0.28);}
+  .dash-week-opt{display:block;padding:10px 14px;border-radius:9px;font-size:13.5px;font-weight:500;
+      color:#0D2340;cursor:pointer;white-space:nowrap;}
+  .dash-week-opt:hover{background:rgba(0,181,184,0.1);}
+  .dash-week-opt.on{color:var(--teal-dark);font-weight:700;background:rgba(0,181,184,0.08);}
+
   /* Desktop widening: must come after the base dash rules so it wins the cascade */
   @media(min-width:761px){
     .dash-appbar,.dash-greet,.dash-body,.dash-tabs{max-width:760px;}
