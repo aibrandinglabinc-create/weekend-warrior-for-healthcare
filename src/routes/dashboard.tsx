@@ -1,7 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import avatarNurseA from "@/assets/avatar-nurse-a.jpg";
-import avatarNurseB from "@/assets/avatar-nurse-b.jpg";
+import avatarMaria from "@/assets/avatar-maria.jpg";
+import avatarJames from "@/assets/avatar-james.jpg";
+import avatarPriya from "@/assets/avatar-priya.jpg";
+import avatarDana from "@/assets/avatar-dana.jpg";
+import avatarTrevor from "@/assets/avatar-trevor.jpg";
+import avatarSofia from "@/assets/avatar-sofia.jpg";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
@@ -46,18 +50,20 @@ const IconChevron = () => (
 );
 
 const UPCOMING = [
-  { day: "Friday, May 24", time: "6:00 AM – 6:00 PM", status: "Filled", photo: avatarNurseA },
-  { day: "Friday, May 24", time: "6:00 PM – 6:00 AM", status: "Filled", photo: avatarNurseB },
+  { day: "Friday, May 24", time: "6:00 AM – 6:00 PM", status: "Filled", photo: avatarMaria },
+  { day: "Friday, May 24", time: "6:00 PM – 6:00 AM", status: "Filled", photo: avatarJames },
 ];
 
 const ROSTER = [
-  { name: "Maria Alvarez", role: "RN", on: true, photo: avatarNurseA, initials: "MA" },
-  { name: "James Okafor", role: "RN", on: true, photo: avatarNurseB, initials: "JO" },
-  { name: "Priya Nair", role: "LPN", on: true, initials: "PN" },
-  { name: "Dana Wicklund", role: "CNA", on: true, initials: "DW" },
-  { name: "Trevor Boone", role: "CNA", on: true, initials: "TB" },
-  { name: "Sofia Reyes", role: "Phlebotomist", on: false, initials: "SR" },
+  { name: "Maria Alvarez", role: "RN", on: true, photo: avatarMaria },
+  { name: "James Okafor", role: "RN", on: true, photo: avatarJames },
+  { name: "Priya Nair", role: "LPN", on: true, photo: avatarPriya },
+  { name: "Dana Wicklund", role: "CNA", on: true, photo: avatarDana },
+  { name: "Trevor Boone", role: "CNA", on: true, photo: avatarTrevor },
+  { name: "Sofia Reyes", role: "Phlebotomist", on: false, photo: avatarSofia },
 ];
+
+const PHOTO_BY_NAME: Record<string, string> = Object.fromEntries(ROSTER.map((r) => [r.name, r.photo]));
 
 const SCHEDULE = [
   { day: "Friday", shifts: [
@@ -80,12 +86,6 @@ const MESSAGES = [
   { from: "Pulse Staffing", time: "Monday", preview: "Trevor Boone has been added to your pod starting this weekend." },
   { from: "Weekend Warrior System", time: "Last week", preview: "Your 90 day retention report is ready to view." },
 ];
-
-function initialsAvatar(initials: string) {
-  return (
-    <span className="dash-av dash-av-fallback" aria-hidden="true">{initials}</span>
-  );
-}
 
 function Dashboard() {
   const ARC = 307.9;
@@ -290,7 +290,7 @@ function Dashboard() {
                   <div className="dash-day-label">{d.day}</div>
                   {d.shifts.map((s) => (
                     <div className="dash-shift" key={s.time}>
-                      {initialsAvatar(s.name.split(" ").map((p) => p[0]).join(""))}
+                      <span className="dash-av"><img src={PHOTO_BY_NAME[s.name]} alt="" /></span>
                       <span className="dash-meta">
                         <span className="dash-d">{s.name}</span>
                         <span className="dash-t">{s.time} &middot; {s.role}</span>
@@ -311,7 +311,7 @@ function Dashboard() {
               </div>
               {ROSTER.map((r) => (
                 <div className="dash-shift" key={r.name}>
-                  {r.photo ? <span className="dash-av"><img src={r.photo} alt="" /></span> : initialsAvatar(r.initials)}
+                  <span className="dash-av"><img src={r.photo} alt="" /></span>
                   <span className="dash-meta">
                     <span className="dash-d">{r.name}</span>
                     <span className="dash-t">{r.role}</span>

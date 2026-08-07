@@ -484,10 +484,10 @@
 
   /* ---------- Facility dashboard: desktop panel vs mobile app page ---------- */
   .dash-desktop-view{display:block;}
-  .dash-mobile-view{display:none;}
+  .dash-page.dash-mobile-view{display:none;}
   @media(max-width:760px){
     .dash-desktop-view{display:none;}
-    .dash-mobile-view{display:block;}
+    .dash-page.dash-mobile-view{display:flex;}
   }
 
   /* ---------- Facility dashboard (real app shell, no device mockup) ---------- */
