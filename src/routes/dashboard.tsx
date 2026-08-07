@@ -6,6 +6,7 @@ import avatarPriya from "@/assets/avatar-priya.jpg";
 import avatarDana from "@/assets/avatar-dana.jpg";
 import avatarTrevor from "@/assets/avatar-trevor.jpg";
 import avatarSofia from "@/assets/avatar-sofia.jpg";
+import shieldLogo from "@/assets/ww-logo-shield.png";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
@@ -204,6 +205,7 @@ function Dashboard() {
       <div className="dash-page">
         <div className="dash-appbar">
           <span className="dash-hamb"><span /><span /><span /></span>
+          <img className="dash-logo" src={shieldLogo} alt="Weekend Warrior" />
           <span className="dash-bell" onClick={() => setTab("messages")} role="button" aria-label="Notifications" style={{ cursor: "pointer" }}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 4a5.4 5.4 0 0 0-5.4 5.4v3.1L5.2 15.4h13.6l-1.4-2.9V9.4A5.4 5.4 0 0 0 12 4Z" stroke="#fff" strokeWidth="1.7" strokeLinejoin="round" />

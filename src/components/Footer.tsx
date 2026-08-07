@@ -1,3 +1,5 @@
+import shieldLogo from "@/assets/ww-logo-shield.png";
+
 type FootLink = { label: string; href: string };
 type FootColumn = { heading: string; links: FootLink[] };
 
@@ -12,6 +14,7 @@ export default function Footer({
     <footer>
       <div className="foot-grid">
         <div className="foot-brand">
+          <img className="foot-mark" src={shieldLogo} alt="" aria-hidden="true" />
           <div className="bname">WEEKEND WARRIOR</div>
           <div className="tag">STRATEGY. NOT STAFFING.</div>
           <div className="co">A Pulse Staffing weekend pod program.</div>

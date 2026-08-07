@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import fullLogo from "@/assets/ww-logo-full.png";
 
 const DEMO_EMAIL = "demo@pulsestaffing.com";
 const DEMO_PASSWORD = "weekendwarrior";
@@ -44,6 +45,7 @@ function LoginPage() {
       <section className="band-dark" style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}>
         <div className="wrap" style={{ maxWidth: 440 }}>
           <div className="reg-card">
+            <img className="login-logo" src={fullLogo} alt="Weekend Warrior" />
             <span className="card-eyebrow">Account Access</span>
             <h2 className="card-h">Log In.</h2>
             <p className="card-sub">Facility command center or Weekend Warrior portal.</p>

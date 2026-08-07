@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
+import shieldLogo from "@/assets/ww-logo-shield.png";
 
 type NavLink = { label: string; href: string };
 
@@ -32,8 +33,11 @@ export default function Nav({ variant }: { variant: "facility" | "worker" }) {
   return (
     <nav id="nav">
       <Link to="/" className="brand">
-        <span className="bname">WEEKEND WARRIOR</span>
-        <span className="bsub">BY PULSE STAFFING</span>
+        <img className="brand-mark" src={shieldLogo} alt="" aria-hidden="true" />
+        <span className="brand-text">
+          <span className="bname">WEEKEND WARRIOR</span>
+          <span className="bsub">BY PULSE STAFFING</span>
+        </span>
       </Link>
       <div className="nav-links">
         {links.map((l) => (
