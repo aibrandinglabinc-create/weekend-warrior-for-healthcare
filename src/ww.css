@@ -565,10 +565,13 @@
   .dash-msg-time{font-size:11px;color:#8A97A6;float:right;}
   .dash-msg-preview{font-size:13px;color:#6A7A8C;margin-top:4px;line-height:1.55;}
 
-  .dash-menu-row{display:flex;align-items:center;justify-content:space-between;padding:16px 2px;
-      border-bottom:1px solid #EDF2F3;font-size:14.5px;font-weight:500;color:#0D2340;}
+  .dash-menu-row{display:flex;align-items:center;justify-content:space-between;padding:16px 10px;margin:0 -8px;
+      border-bottom:1px solid #EDF2F3;font-size:14.5px;font-weight:500;color:#0D2340;cursor:pointer;
+      border-radius:12px;transition:background .2s;}
+  .dash-menu-row:hover{background:rgba(0,181,184,0.08);}
+  .dash-menu-row:hover .chev{color:var(--teal);}
   .dash-menu-row:last-child{border-bottom:none;}
-  .dash-menu-row .chev{color:#B8C4CC;display:flex;}
+  .dash-menu-row .chev{color:#B8C4CC;display:flex;transition:color .2s;}
 
   /* More tab sub-views */
   .dash-back{background:none;border:none;color:var(--teal-dark);font-family:'Space Mono',monospace;font-size:11px;
