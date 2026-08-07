@@ -81,6 +81,12 @@
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal-light);background:rgba(0,181,184,0.08);}
   .btn-lg{padding:16px 34px;font-size:12px;}
   @media(max-width:860px){.nav-links{display:none;}}
+  @media(max-width:480px){
+    .brand .bsub{display:none;}
+    .brand .bname{font-size:13px;letter-spacing:1.6px;}
+    .nav-cta{gap:6px;}
+    .nav-cta .btn{padding:8px 9px;font-size:8.5px;letter-spacing:0.8px;}
+  }
 
   /* ---------- Pulse backgrounds ---------- */
   .pulse-bg{display:none;}
@@ -368,7 +374,8 @@
   .foot-col .h{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--white-50);margin-bottom:14px;}
   .foot-col a{display:block;font-size:13px;color:var(--white-80);margin-bottom:10px;transition:color .2s;}
   .foot-col a:hover{color:var(--teal);}
-  @media(max-width:560px){.foot-links{grid-template-columns:repeat(2,minmax(120px,auto));}}
+  @media(max-width:860px){.foot-links{grid-template-columns:repeat(2,minmax(120px,auto))!important;}}
+  @media(max-width:560px){.foot-links{grid-template-columns:repeat(2,minmax(120px,auto))!important;}}
   .foot-bottom{max-width:1120px;margin:44px auto 0;padding-top:24px;border-top:1px solid var(--white-20);
       display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--white-50);}
 
@@ -393,3 +400,79 @@
   @media(prefers-reduced-motion:reduce){
     .pulse-bg polyline.ekg-anim{animation:none;stroke-dasharray:none;stroke-dashoffset:0;}
   }
+
+  /* ---------- Become a Weekend Warrior band ---------- */
+  .warrior-band{background:var(--dark-2);border-top:1px solid var(--white-20);border-bottom:1px solid var(--white-20);
+      padding:78px 32px;overflow:hidden;}
+  .warrior-band .pulse-bg{display:block;opacity:.05;z-index:0;}
+  .warrior-band .wb-row{display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap;position:relative;z-index:2;}
+  .warrior-band .wb-copy{max-width:640px;}
+  .warrior-band h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,40px);line-height:1.08;
+      letter-spacing:-0.6px;text-transform:uppercase;margin:14px 0 16px;color:var(--white);}
+  .warrior-band p{font-size:14.5px;color:var(--white-80);max-width:560px;}
+  .warrior-band .btn{flex-shrink:0;}
+  @media(max-width:760px){.warrior-band .wb-row{flex-direction:column;align-items:flex-start;}}
+
+  /* ---------- Role strip ---------- */
+  .role-strip{font-family:'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--teal-light);
+      display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:11px;}
+  .role-strip .rdot{color:var(--teal);opacity:.55;}
+  .role-strip.lg{font-size:clamp(13px,1.5vw,15px);letter-spacing:3px;gap:13px;color:var(--white);margin:18px 0 14px;}
+  .role-strip.lg .rdot{color:var(--teal-light);opacity:.75;}
+  .role-rule{height:1px;width:100%;max-width:340px;background:linear-gradient(90deg,var(--teal),transparent);margin-bottom:24px;}
+
+  /* ---------- Join hero (two column: copy+pills / form) ---------- */
+  .hero.join{padding-bottom:90px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;
+      grid-template-areas:"intro form" "pills form";align-items:start;}
+  .hg-intro{grid-area:intro;}
+  .hg-form{grid-area:form;}
+  .hg-pills{grid-area:pills;margin-top:8px;}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"intro" "form" "pills";}}
+
+  /* ---------- Registration card ---------- */
+  .reg-card{position:relative;background:linear-gradient(150deg,rgba(28,37,49,0.94),rgba(28,37,49,0.82));
+      backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+      border:1px solid rgba(255,255,255,0.14);border-top:3px solid var(--teal);
+      padding:32px 28px;box-shadow:0 28px 64px rgba(0,0,0,0.45);}
+  .reg-card .card-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);}
+  .reg-card .card-h{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(21px,2.2vw,26px);letter-spacing:-0.3px;
+      text-transform:uppercase;color:var(--white);margin:10px 0 6px;}
+  .reg-card .card-sub{font-size:12.5px;color:var(--white-50);margin-bottom:24px;}
+
+  .field{margin-bottom:16px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+  .field-label{display:block;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;
+      color:var(--white-50);margin-bottom:8px;}
+  .field input,.field-row input{width:100%;background:rgba(255,255,255,0.045);border:1px solid var(--white-20);
+      color:var(--white);padding:12px 13px;font-family:'DM Sans',sans-serif;font-size:14px;border-radius:2px;
+      transition:border-color .2s;}
+  .field input:focus,.field-row input:focus{outline:none;border-color:var(--teal);}
+  .field input::placeholder,.field-row input::placeholder{color:var(--white-50);}
+
+  .chip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  @media(max-width:420px){.chip-grid{grid-template-columns:1fr 1fr;}}
+  .chip-row{display:flex;gap:9px;flex-wrap:wrap;}
+  .chip{display:flex;align-items:center;justify-content:center;text-align:center;
+      font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;
+      color:var(--white-80);background:rgba(255,255,255,0.045);border:1px solid var(--white-20);
+      padding:13px 8px;cursor:pointer;transition:all .2s;user-select:none;}
+  .chip:hover{border-color:rgba(0,181,184,0.5);}
+  .chip.selected{background:rgba(0,181,184,0.16);border-color:var(--teal);color:var(--teal-light);font-weight:700;}
+  .chip.wide{grid-column:1 / -1;}
+  .chip-row .chip{flex:1;min-width:78px;}
+
+  .reg-submit{width:100%;margin-top:6px;justify-content:center;}
+  .field-fine{font-size:10.5px;color:var(--white-50);line-height:1.65;margin-top:16px;}
+
+  .reg-error{background:rgba(220,70,70,0.12);border:1px solid rgba(220,70,70,0.4);color:#ffb8b8;
+      font-size:12.5px;padding:12px 14px;margin-top:14px;border-radius:2px;}
+  .reg-confirm{text-align:center;padding:14px 0 6px;}
+  .reg-confirm h3{font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.3px;
+      text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+  .reg-confirm p{font-size:13.5px;color:var(--white-80);line-height:1.7;}
+
+  /* ---------- Four-up steps ---------- */
+  .steps.four{grid-template-columns:repeat(4,1fr);}
+  @media(max-width:960px){.steps.four{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.steps.four{grid-template-columns:1fr;}}

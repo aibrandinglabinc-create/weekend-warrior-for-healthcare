@@ -4,6 +4,8 @@ import heroImg from "@/assets/hero-pod-corridor.jpg";
 import podImg from "@/assets/pod-don-arrival.jpg";
 import dashboardImg from "@/assets/dashboard-mockup-phone.webp";
 import stethoscopeImg from "@/assets/stethoscope-cutout.png";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -46,11 +48,6 @@ function toggleFaq(e: React.MouseEvent<HTMLButtonElement>) {
 
 function Index() {
   useEffect(() => {
-    const nav = document.getElementById("nav");
-    const onScroll = () => nav?.classList.toggle("scrolled", window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -114,7 +111,6 @@ function Index() {
     document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => cObs.observe(el));
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("scroll", onParallax);
       io.disconnect();
       cObs.disconnect();
@@ -126,23 +122,7 @@ function Index() {
 
 
 {/* ============ NAV ============ */}
-<nav id="nav">
-  <div className="brand">
-    <span className="bname">WEEKEND WARRIOR</span>
-    <span className="bsub">BY PULSE STAFFING</span>
-  </div>
-  <div className="nav-links">
-    <a href="#how">How It Works</a>
-    <a href="#pod">The Pod</a>
-    <a href="#proof">Why It Works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-  </div>
-  <div className="nav-cta">
-    <a href="#login" className="btn btn-ghost">Login</a>
-    <a href="#book" className="btn btn-solid">Book a Demo</a>
-  </div>
-</nav>
+<Nav variant="facility" />
 
 {/* ============ HERO ============ */}
 <section className="hero band-dark" id="top">
@@ -405,6 +385,24 @@ function Index() {
   </div>
 </section>
 
+{/* ============ BECOME A WEEKEND WARRIOR ============ */}
+<section className="warrior-band">
+  <svg className="pulse-bg" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="0,100 300,100 360,40 420,160 480,100 900,100 960,30 1020,170 1080,100 1440,100" fill="none" stroke="#00B5B8" strokeWidth="2"/>
+  </svg>
+  <div className="wrap">
+    <div className="wb-row reveal">
+      <div className="wb-copy">
+        <span className="eyebrow">Looking For Weekend Work</span>
+        <h2>Become a Weekend Warrior.</h2>
+        <div className="role-strip"><span>RN</span><span className="rdot">&middot;</span><span>LPN</span><span className="rdot">&middot;</span><span>CNA</span><span className="rdot">&middot;</span><span>Phlebotomist</span></div>
+        <p style={{ marginTop: 16 }}>Same facility, same team, every weekend. Credential once instead of at every agency, and work beside people who already know how you work. Two minutes to register.</p>
+      </div>
+      <a href="/join" className="btn btn-solid btn-lg">Register</a>
+    </div>
+  </div>
+</section>
+
 {/* ============ FINAL CTA ============ */}
 <section className="final" id="book">
   <svg className="pulse-bg" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
@@ -419,38 +417,40 @@ function Index() {
 </section>
 
 {/* ============ FOOTER ============ */}
-<footer>
-  <div className="foot-grid">
-    <div className="foot-brand">
-      <div className="bname">WEEKEND WARRIOR</div>
-      <div className="tag">STRATEGY. NOT STAFFING.</div>
-      <div className="co">A Pulse Staffing weekend pod program.</div>
-    </div>
-    <div className="foot-links">
-      <div className="foot-col">
-        <div className="h">Explore</div>
-        <a href="#how">How It Works</a>
-        <a href="#pod">The Pod</a>
-        <a href="#proof">Why It Works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div className="foot-col">
-        <div className="h">Get Started</div>
-        <a href="#book">Book a Demo</a>
-        <a href="#login">Client Login</a>
-      </div>
-      <div className="foot-col">
-        <div className="h">Contact</div>
-        <a href="#book">Talk to Pulse Staffing</a>
-      </div>
-    </div>
-  </div>
-  <div className="foot-bottom">
-    <span>© 2026 Pulse Staffing. Weekend Warrior is a Pulse Staffing program.</span>
-    <span className="mono">STRATEGY. NOT STAFFING.</span>
-  </div>
-</footer>
+<Footer
+  bottomLine="© 2026 Pulse Staffing. Weekend Warrior is a Pulse Staffing program."
+  columns={[
+    {
+      heading: "Explore",
+      links: [
+        { label: "How It Works", href: "#how" },
+        { label: "The Pod", href: "#pod" },
+        { label: "Why It Works", href: "#proof" },
+        { label: "Pricing", href: "#pricing" },
+        { label: "FAQ", href: "#faq" },
+      ],
+    },
+    {
+      heading: "Get Started",
+      links: [
+        { label: "Book a Demo", href: "#book" },
+        { label: "Client Login", href: "/login" },
+      ],
+    },
+    {
+      heading: "Contact",
+      links: [{ label: "Talk to Pulse Staffing", href: "#book" }],
+    },
+    {
+      heading: "For Warriors",
+      links: [
+        { label: "Register", href: "/join" },
+        { label: "How It Works", href: "/join#how" },
+        { label: "Warrior Login", href: "/login" },
+      ],
+    },
+  ]}
+/>
     </>
   );
 }
