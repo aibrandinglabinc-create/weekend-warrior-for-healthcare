@@ -100,96 +100,7 @@ function Dashboard() {
         <Link to="/">Log Out</Link>
       </div>
 
-      {/* ============ DESKTOP: COMMAND CENTER PANEL ============ */}
-      <section className="band-dark dash-desktop-view" style={{ minHeight: "100vh", paddingTop: 70 }}>
-        <div className="wrap">
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 20, marginBottom: 36 }}>
-            <div>
-              <span className="eyebrow">Facility Demo &middot; Sunrise Manor Care Center</span>
-              <h2 className="big" style={{ marginTop: 10, fontSize: "clamp(26px,3.4vw,38px)" }}>Welcome back.</h2>
-            </div>
-          </div>
-
-          <div className="cc">
-            <div className="cc-bar">
-              <span className="cc-dot" style={{ background: "#E5484D" }} />
-              <span className="cc-dot" style={{ background: "#F5A524" }} />
-              <span className="cc-dot" style={{ background: "#00B5B8" }} />
-              <span className="cc-title">Weekend Coverage &middot; This Weekend</span>
-            </div>
-            <div className="cc-body">
-              <div className="cc-panel">
-                <div className="plabel">Fill Rate</div>
-                <div className="ring-wrap">
-                  <div className="ring" style={{ ["--pct" as string]: 100 }}>
-                    <span className="rv">100%</span>
-                  </div>
-                  <div className="ring-meta">
-                    <div className="rt">All shifts filled</div>
-                    <div className="rs">Friday through Sunday, this weekend</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cc-panel">
-                <div className="plabel">Weekend Calendar</div>
-                <div className="wk">
-                  <div className="wk-day">
-                    <div className="d">Fri</div>
-                    <div className="b"></div>
-                  </div>
-                  <div className="wk-day">
-                    <div className="d">Sat</div>
-                    <div className="b"></div>
-                  </div>
-                  <div className="wk-day partial">
-                    <div className="d">Sun</div>
-                    <div className="b"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cc-panel">
-                <div className="plabel">Pod Roster</div>
-                <div className="roster">
-                  {ROSTER.map((r) => (
-                    <div className="r-row" key={r.name}>
-                      <span className={`r-dot ${r.on ? "on" : "off"}`} />
-                      <span className="r-name">{r.name}</span>
-                      <span className="r-role">{r.role}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="cc-panel">
-                <div className="plabel">This Month</div>
-                <div className="cc-tiles">
-                  <div className="cc-tile">
-                    <div className="tn">6</div>
-                    <div className="tl">Pod Size</div>
-                  </div>
-                  <div className="cc-tile">
-                    <div className="tn">0</div>
-                    <div className="tl">Call-Outs</div>
-                  </div>
-                  <div className="cc-tile">
-                    <div className="tn">98%</div>
-                    <div className="tl">90-Day Retention</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p className="sub" style={{ marginTop: 30, fontSize: 12.5, color: "var(--white-50)" }}>
-            Demo data shown for illustration. Your live facility command center populates on activation.
-          </p>
-        </div>
-      </section>
-
-      {/* ============ MOBILE: APP-STYLE PAGE ============ */}
-      <div className="dash-page dash-mobile-view">
+      <div className="dash-page">
         <div className="dash-appbar">
           <span className="dash-hamb"><span /><span /><span /></span>
           <span className="dash-bell">
@@ -209,7 +120,7 @@ function Dashboard() {
 
         <div className="dash-body">
           {tab === "dashboard" && (
-            <>
+            <div className="dash-grid">
               <div className="dash-fill">
                 <div className="dash-fill-top">
                   <span className="dash-fill-lbl">Fill Rate</span>
@@ -276,7 +187,7 @@ function Dashboard() {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
 
           {tab === "shifts" && (
@@ -285,21 +196,23 @@ function Dashboard() {
                 <h4>This Weekend's Schedule</h4>
                 <span>Fri &ndash; Sun</span>
               </div>
-              {SCHEDULE.map((d) => (
-                <div key={d.day}>
-                  <div className="dash-day-label">{d.day}</div>
-                  {d.shifts.map((s) => (
-                    <div className="dash-shift" key={s.time}>
-                      <span className="dash-av"><img src={PHOTO_BY_NAME[s.name]} alt="" /></span>
-                      <span className="dash-meta">
-                        <span className="dash-d">{s.name}</span>
-                        <span className="dash-t">{s.time} &middot; {s.role}</span>
-                      </span>
-                      <span className="dash-pill">Filled</span>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              <div className="dash-grid-cols">
+                {SCHEDULE.map((d) => (
+                  <div key={d.day}>
+                    <div className="dash-day-label">{d.day}</div>
+                    {d.shifts.map((s) => (
+                      <div className="dash-shift" key={s.time}>
+                        <span className="dash-av"><img src={PHOTO_BY_NAME[s.name]} alt="" /></span>
+                        <span className="dash-meta">
+                          <span className="dash-d">{s.name}</span>
+                          <span className="dash-t">{s.time} &middot; {s.role}</span>
+                        </span>
+                        <span className="dash-pill">Filled</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -309,18 +222,20 @@ function Dashboard() {
                 <h4>Your Pod</h4>
                 <span>6 Members</span>
               </div>
-              {ROSTER.map((r) => (
-                <div className="dash-shift" key={r.name}>
-                  <span className="dash-av"><img src={r.photo} alt="" /></span>
-                  <span className="dash-meta">
-                    <span className="dash-d">{r.name}</span>
-                    <span className="dash-t">{r.role}</span>
-                  </span>
-                  <span className="dash-pill" style={!r.on ? { background: "#E4EDEF", color: "#6A7A8C" } : undefined}>
-                    {r.on ? "This Weekend" : "Off"}
-                  </span>
-                </div>
-              ))}
+              <div className="dash-grid-cols">
+                {ROSTER.map((r) => (
+                  <div className="dash-shift" key={r.name}>
+                    <span className="dash-av"><img src={r.photo} alt="" /></span>
+                    <span className="dash-meta">
+                      <span className="dash-d">{r.name}</span>
+                      <span className="dash-t">{r.role}</span>
+                    </span>
+                    <span className="dash-pill" style={!r.on ? { background: "#E4EDEF", color: "#6A7A8C" } : undefined}>
+                      {r.on ? "This Weekend" : "Off"}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

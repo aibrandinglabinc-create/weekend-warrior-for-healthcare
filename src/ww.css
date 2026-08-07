@@ -482,13 +482,9 @@
   .login-demo-hint p{font-size:12.5px;color:var(--white-80);line-height:1.7;}
   .login-demo-hint p b{color:var(--teal-light);font-family:'Space Mono',monospace;font-weight:700;}
 
-  /* ---------- Facility dashboard: desktop panel vs mobile app page ---------- */
-  .dash-desktop-view{display:block;}
-  .dash-page.dash-mobile-view{display:none;}
-  @media(max-width:760px){
-    .dash-desktop-view{display:none;}
-    .dash-page.dash-mobile-view{display:flex;}
-  }
+  /* ---------- Facility dashboard: single responsive app shell ---------- */
+  .dash-grid{display:flex;flex-direction:column;gap:18px;}
+  .dash-grid-cols{display:block;}
 
   /* ---------- Facility dashboard (real app shell, no device mockup) ---------- */
   .dash-utility{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 20px;
@@ -573,6 +569,13 @@
       border-bottom:1px solid #EDF2F3;font-size:14.5px;font-weight:500;color:#0D2340;}
   .dash-menu-row:last-child{border-bottom:none;}
   .dash-menu-row .chev{color:#B8C4CC;display:flex;}
+
+  /* Desktop widening: must come after the base dash rules so it wins the cascade */
+  @media(min-width:761px){
+    .dash-appbar,.dash-greet,.dash-body,.dash-tabs{max-width:1020px;}
+    .dash-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:start;}
+    .dash-grid-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;}
+  }
 
   .reg-error{background:rgba(220,70,70,0.12);border:1px solid rgba(220,70,70,0.4);color:#ffb8b8;
       font-size:12.5px;padding:12px 14px;margin-top:14px;border-radius:2px;}
