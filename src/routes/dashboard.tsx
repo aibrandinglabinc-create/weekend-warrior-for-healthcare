@@ -91,9 +91,9 @@ type MoreView = "menu" | "profile" | "billing" | "reports" | "notifications" | "
   | "report-coverage" | "report-retention" | "report-history";
 
 const INVOICES = [
-  { month: "May 2026", amount: "$18,400", status: "Paid" },
-  { month: "April 2026", amount: "$18,400", status: "Paid" },
-  { month: "March 2026", amount: "$18,400", status: "Paid" },
+  { month: "May 2026", amount: "$27,550", status: "Paid" },
+  { month: "April 2026", amount: "$27,550", status: "Paid" },
+  { month: "March 2026", amount: "$27,550", status: "Paid" },
 ];
 
 const REPORTS: { name: string; desc: string; view: MoreView }[] = [
