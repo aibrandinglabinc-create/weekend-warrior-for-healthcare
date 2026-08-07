@@ -219,7 +219,7 @@ function Dashboard() {
           {tab === "team" && (
             <div className="dash-panel" style={{ paddingBottom: 20 }}>
               <div className="dash-rowh">
-                <h4>Your Pod</h4>
+                <h4>Your Weekend Warriors</h4>
                 <span>6 Members</span>
               </div>
               <div className="dash-grid-cols">
