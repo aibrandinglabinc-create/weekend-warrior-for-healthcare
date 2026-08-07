@@ -81,10 +81,30 @@ const SCHEDULE = [
 ];
 
 const MESSAGES = [
-  { from: "Pulse Staffing", time: "9:14 AM", preview: "Your weekend pod is fully confirmed for May 24 through 26. No action needed." },
-  { from: "Weekend Warrior System", time: "Yesterday", preview: "Priya Nair's LPN license renewal was verified and is on file." },
-  { from: "Pulse Staffing", time: "Monday", preview: "Trevor Boone has been added to your pod starting this weekend." },
-  { from: "Weekend Warrior System", time: "Last week", preview: "Your 90 day retention report is ready to view." },
+  {
+    from: "Pulse Staffing",
+    time: "9:14 AM",
+    preview: "Your weekend pod is fully confirmed for May 24 through 26. No action needed.",
+    body: "Good morning Chrissy. Your full pod is confirmed for this weekend, May 24 through 26. All twelve shifts are covered, Friday through Sunday, days and nights. Sofia Reyes is off this weekend and her phlebotomist shifts are covered by a confirmed Weekend Warrior float. Nothing is needed from your team. Have a great weekend.",
+  },
+  {
+    from: "Weekend Warrior System",
+    time: "Yesterday",
+    preview: "Priya Nair's LPN license renewal was verified and is on file.",
+    body: "Priya Nair uploaded her renewed LPN license and it has been verified against the Texas Board of Nursing registry. The new expiration date is on file and her credential status is current. No action is needed from your facility.",
+  },
+  {
+    from: "Pulse Staffing",
+    time: "Monday",
+    preview: "Trevor Boone has been added to your pod starting this weekend.",
+    body: "Trevor Boone, CNA, has completed credentialing and orientation and joins your pod starting this weekend. He will work beside Dana Wicklund for his first two weekends. His profile and documents are available in your Team tab.",
+  },
+  {
+    from: "Weekend Warrior System",
+    time: "Last week",
+    preview: "Your 90 day retention report is ready to view.",
+    body: "Your 90 day retention report for the current quarter is ready. Pod retention is at 98 percent with an average tenure of five and a half months. You can view the full report under More, then Reports.",
+  },
 ];
 
 type MoreView = "menu" | "profile" | "billing" | "reports" | "notifications" | "support"
@@ -147,7 +167,7 @@ function Dashboard() {
   const offset = ARC - (ARC * pct) / 100;
   const [tab, setTabRaw] = useState<"dashboard" | "shifts" | "team" | "messages" | "more">("dashboard");
   const [moreView, setMoreView] = useState<MoreView>("menu");
-  const setTab = (t: typeof tab) => { setTabRaw(t); setMoreView("menu"); };
+  const setTab = (t: typeof tab) => { setTabRaw(t); setMoreView("menu"); setOpenMsg(null); };
 
   const [editingProfile, setEditingProfile] = useState(false);
   const [profile, setProfile] = useState({
@@ -169,6 +189,10 @@ function Dashboard() {
   const [weekMenuOpen, setWeekMenuOpen] = useState(false);
   const week = WEEKS[weekIdx];
   const weekOffset = ARC - (ARC * week.pct) / 100;
+
+  const [openMsg, setOpenMsg] = useState<number | null>(null);
+  const [replies, setReplies] = useState<Record<number, string[]>>({});
+  const [replyDraft, setReplyDraft] = useState("");
 
   return (
     <>
@@ -342,29 +366,41 @@ function Dashboard() {
               </div>
               <div className="dash-grid-cols">
                 {ROSTER.map((r) => (
-                  <div className="dash-shift" key={r.name}>
-                    <span className="dash-av"><img src={r.photo} alt="" /></span>
-                    <span className="dash-meta">
-                      <span className="dash-d">{r.name}</span>
-                      <span className="dash-t">{r.on ? r.role : `${r.role} · Weekend Warrior is filling this seat`}</span>
-                    </span>
-                    <span className="dash-pill" style={!r.on ? { background: "rgba(0,181,184,0.14)", color: "var(--teal-dark)", border: "1.5px solid rgba(0,181,184,0.4)" } : undefined}>
-                      {r.on ? "This Weekend" : "Covered"}
-                    </span>
+                  <div key={r.name}>
+                    <div className="dash-shift">
+                      <span className="dash-av"><img src={r.photo} alt="" /></span>
+                      <span className="dash-meta">
+                        <span className="dash-d">{r.name}</span>
+                        <span className="dash-t">{r.role}</span>
+                      </span>
+                      <span className="dash-pill" style={!r.on ? { background: "#E4EDEF", color: "#6A7A8C" } : undefined}>
+                        {r.on ? "This Weekend" : "Off"}
+                      </span>
+                    </div>
+                    {!r.on && (
+                      <div className="dash-shift" style={{ marginLeft: 26, borderStyle: "dashed" }}>
+                        <span className="dash-av dash-av-fallback" aria-hidden="true">WW</span>
+                        <span className="dash-meta">
+                          <span className="dash-d">Weekend Warrior Float</span>
+                          <span className="dash-t">{r.role} &middot; Covering {r.name.split(" ")[0]}'s shifts this weekend</span>
+                        </span>
+                        <span className="dash-pill">Confirmed</span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {tab === "messages" && (
+          {tab === "messages" && openMsg === null && (
             <div className="dash-panel" style={{ paddingBottom: 8 }}>
               <div className="dash-rowh">
                 <h4>Messages</h4>
                 <span>Mark All Read</span>
               </div>
               {MESSAGES.map((m, i) => (
-                <div className="dash-msg" key={i}>
+                <div className="dash-msg dash-msg-click" key={i} onClick={() => { setOpenMsg(i); setReplyDraft(""); }}>
                   <span className="dash-msg-dot" />
                   <div className="dash-msg-body">
                     <span className="dash-msg-time">{m.time}</span>
@@ -373,6 +409,51 @@ function Dashboard() {
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {tab === "messages" && openMsg !== null && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setOpenMsg(null)}>&larr; Messages</button>
+              <div className="dash-rowh" style={{ marginBottom: 4 }}>
+                <h4>{MESSAGES[openMsg].from}</h4>
+                <span style={{ color: "#8A97A6" }}>{MESSAGES[openMsg].time}</span>
+              </div>
+              <p style={{ fontSize: 13.5, color: "#3D4B5C", lineHeight: 1.75, padding: "10px 0 16px", borderBottom: "1px solid #EDF2F3" }}>
+                {MESSAGES[openMsg].body}
+              </p>
+
+              {(replies[openMsg] ?? []).map((r, i) => (
+                <div className="dash-reply" key={i}>
+                  <div className="dash-reply-meta">You &middot; Just now</div>
+                  <p>{r}</p>
+                </div>
+              ))}
+
+              <div style={{ marginTop: 16 }}>
+                <textarea
+                  className="dash-reply-input"
+                  rows={3}
+                  placeholder={`Reply to ${MESSAGES[openMsg].from}`}
+                  value={replyDraft}
+                  onChange={(e) => setReplyDraft(e.target.value)}
+                />
+                <button
+                  className="btn btn-solid"
+                  style={{ width: "100%", justifyContent: "center", marginTop: 10 }}
+                  disabled={replyDraft.trim() === ""}
+                  onClick={() => {
+                    if (replyDraft.trim() === "") return;
+                    setReplies({ ...replies, [openMsg]: [...(replies[openMsg] ?? []), replyDraft.trim()] });
+                    setReplyDraft("");
+                  }}
+                >
+                  Send Reply
+                </button>
+                <p style={{ fontSize: 11, color: "#8A97A6", marginTop: 10, textAlign: "center" }}>
+                  Replies go straight to your dedicated Pulse Staffing partner.
+                </p>
+              </div>
             </div>
           )}
 

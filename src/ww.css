@@ -613,6 +613,18 @@
   .dash-week-opt:hover{background:rgba(0,181,184,0.1);}
   .dash-week-opt.on{color:var(--teal-dark);font-weight:700;background:rgba(0,181,184,0.08);}
 
+  .dash-msg-click{cursor:pointer;border-radius:12px;margin:0 -8px;padding-left:8px;padding-right:8px;transition:background .2s;}
+  .dash-msg-click:hover{background:rgba(0,181,184,0.07);}
+  .dash-reply{margin-top:14px;padding:12px 14px;background:rgba(0,181,184,0.08);border:1.5px solid rgba(0,181,184,0.25);
+      border-radius:14px 14px 4px 14px;}
+  .dash-reply-meta{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;
+      color:var(--teal-dark);margin-bottom:5px;}
+  .dash-reply p{font-size:13.5px;color:#0D2340;line-height:1.6;}
+  .dash-reply-input{width:100%;background:#F5F9FA;border:1.5px solid rgba(0,181,184,0.28);border-radius:14px;
+      color:#0D2340;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;resize:vertical;min-height:70px;}
+  .dash-reply-input:focus{outline:none;border-color:var(--teal);}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+
   /* Desktop widening: must come after the base dash rules so it wins the cascade */
   @media(min-width:761px){
     .dash-appbar,.dash-greet,.dash-body,.dash-tabs{max-width:760px;}
