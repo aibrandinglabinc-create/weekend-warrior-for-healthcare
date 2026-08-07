@@ -77,11 +77,24 @@ function toggleFaq(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
+const TOTAL_STEPS = 7;
+const STEP_LABELS = [
+  "What's your role?",
+  "What's your name?",
+  "Best number to reach you?",
+  "What's your email?",
+  "Where are you licensed?",
+  "Which weekends can you work?",
+  "Which shifts work for you?",
+];
+
 function Join() {
   useReveal();
   const { role } = Route.useSearch();
   const initialRole = useMemo(() => roleParamToChip(role), [role]);
 
+  const [step, setStep] = useState(0);
+  const [touched, setTouched] = useState(false);
   const [clinicianType, setClinicianType] = useState<ClinicianType | null>(initialRole);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -93,10 +106,10 @@ function Join() {
   const [shift, setShift] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [roleTouched, setRoleTouched] = useState(false);
 
   useEffect(() => {
     if (initialRole) {
+      setStep(1);
       const el = document.getElementById("register");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -106,13 +119,38 @@ function Join() {
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!clinicianType) {
-      setRoleTouched(true);
-      document.getElementById("register")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  function stepValid(s: number) {
+    switch (s) {
+      case 0: return !!clinicianType;
+      case 1: return firstName.trim() !== "" && lastName.trim() !== "";
+      case 2: return phone.trim() !== "";
+      case 3: return email.trim() !== "";
+      case 4: return licenseState.trim().length === 2 && zip.trim() !== "";
+      default: return true;
+    }
+  }
+
+  function goNext() {
+    if (!stepValid(step)) {
+      setTouched(true);
       return;
     }
+    setTouched(false);
+    setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+  }
+
+  function goBack() {
+    setTouched(false);
+    setStep((s) => Math.max(s - 1, 0));
+  }
+
+  function selectRole(value: ClinicianType) {
+    setClinicianType(value);
+    setTouched(false);
+    setStep(1);
+  }
+
+  async function submitRegistration() {
     setStatus("submitting");
     setErrorMsg(null);
     try {
@@ -143,6 +181,15 @@ function Join() {
     }
   }
 
+  function handleFormSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (step < TOTAL_STEPS - 1) {
+      goNext();
+    } else {
+      submitRegistration();
+    }
+  }
+
   return (
     <>
       <Nav variant="worker" />
@@ -163,22 +210,6 @@ function Join() {
               </div>
               <div className="role-rule reveal d1"></div>
               <p className="lead reveal d2">Same facility. Same team. Every weekend. You are not a body filling a hole on an app. You are part of a pod that goes back to the same floor, works beside the same people, and gets to know the same residents. Credential once, not at every agency.</p>
-              <div className="hg-pills reveal d3">
-                <div className="pill-row" style={{ marginTop: 30 }}>
-                  <div className="stat-pill">
-                    <div className="num">1</div>
-                    <div className="lbl">Facility, not five</div>
-                  </div>
-                  <div className="stat-pill">
-                    <div className="num">1x</div>
-                    <div className="lbl">Credentialing, done once</div>
-                  </div>
-                  <div className="stat-pill">
-                    <div className="num">2 MIN</div>
-                    <div className="lbl">To register</div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="hg-form reveal d2" id="register">
@@ -190,126 +221,156 @@ function Join() {
                   </div>
                 </div>
               ) : (
-                <form className="reg-card" onSubmit={handleSubmit}>
+                <form className="reg-card" onSubmit={handleFormSubmit}>
                   <span className="card-eyebrow">Registration</span>
-                  <h2 className="card-h">Start With Your Role.</h2>
-                  <p className="card-sub">Two minutes. No resume required.</p>
+                  <div className="reg-progress">
+                    <span>Step {step + 1} of {TOTAL_STEPS}</span>
+                    <div className="reg-progress-track"><div className="reg-progress-fill" style={{ width: `${((step + 1) / TOTAL_STEPS) * 100}%` }} /></div>
+                  </div>
+                  <h2 className="card-h">{STEP_LABELS[step]}</h2>
+                  {step === 0 && <p className="card-sub">Two minutes. No resume required.</p>}
 
-                  <div className="field">
-                    <span className="field-label">I Am A</span>
-                    <div className="chip-grid">
-                      {ROLE_CHIPS.slice(0, 3).map((c) => (
+                  {step === 0 && (
+                    <div className="field">
+                      <div className="chip-grid">
+                        {ROLE_CHIPS.slice(0, 3).map((c) => (
+                          <div
+                            key={c.value}
+                            className={`chip${clinicianType === c.value ? " selected" : ""}`}
+                            role="radio"
+                            aria-checked={clinicianType === c.value}
+                            tabIndex={0}
+                            onClick={() => selectRole(c.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectRole(c.value); } }}
+                          >
+                            {c.label}
+                          </div>
+                        ))}
                         <div
-                          key={c.value}
-                          className={`chip${clinicianType === c.value ? " selected" : ""}`}
+                          className={`chip wide${clinicianType === "Phlebotomist" ? " selected" : ""}`}
                           role="radio"
-                          aria-checked={clinicianType === c.value}
+                          aria-checked={clinicianType === "Phlebotomist"}
                           tabIndex={0}
-                          onClick={() => { setClinicianType(c.value); setRoleTouched(true); }}
-                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setClinicianType(c.value); setRoleTouched(true); } }}
+                          onClick={() => selectRole("Phlebotomist")}
+                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectRole("Phlebotomist"); } }}
                         >
-                          {c.label}
+                          Phlebotomist
                         </div>
-                      ))}
-                      <div
-                        className={`chip wide${clinicianType === "Phlebotomist" ? " selected" : ""}`}
-                        role="radio"
-                        aria-checked={clinicianType === "Phlebotomist"}
-                        tabIndex={0}
-                        onClick={() => { setClinicianType("Phlebotomist"); setRoleTouched(true); }}
-                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setClinicianType("Phlebotomist"); setRoleTouched(true); } }}
-                      >
-                        Phlebotomist
                       </div>
-                    </div>
-                    {roleTouched && !clinicianType && (
-                      <p style={{ color: "#ffb8b8", fontSize: 11.5, marginTop: 8 }}>Please select your role.</p>
-                    )}
-                  </div>
-
-                  <div className="field-row">
-                    <div>
-                      <span className="field-label">First Name</span>
-                      <input required value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First name" />
-                    </div>
-                    <div>
-                      <span className="field-label">Last Name</span>
-                      <input required value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last name" />
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <span className="field-label">Mobile</span>
-                    <input required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 555-5555" />
-                  </div>
-
-                  <div className="field">
-                    <span className="field-label">Email</span>
-                    <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@email.com" />
-                  </div>
-
-                  <div className="field-row">
-                    <div>
-                      <span className="field-label">License State</span>
-                      <input required maxLength={2} value={licenseState} onChange={(e) => setLicenseState(e.target.value.toUpperCase())} placeholder="TX" style={{ textTransform: "uppercase" }} />
-                    </div>
-                    <div>
-                      <span className="field-label">Zip Code</span>
-                      <input required inputMode="numeric" maxLength={5} value={zip} onChange={(e) => setZip(e.target.value)} placeholder="75201" />
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <span className="field-label">Weekends I Can Work</span>
-                    <div className="chip-row">
-                      {DAY_CHIPS.map((c) => (
-                        <div
-                          key={c.value}
-                          className={`chip${days.includes(c.value) ? " selected" : ""}`}
-                          role="checkbox"
-                          aria-checked={days.includes(c.value)}
-                          tabIndex={0}
-                          onClick={() => toggleArrayValue(days, setDays, c.value)}
-                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(days, setDays, c.value); } }}
-                        >
-                          {c.label}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <span className="field-label">Shift</span>
-                    <div className="chip-row">
-                      {SHIFT_CHIPS.map((c) => (
-                        <div
-                          key={c.value}
-                          className={`chip${shift.includes(c.value) ? " selected" : ""}`}
-                          role="checkbox"
-                          aria-checked={shift.includes(c.value)}
-                          tabIndex={0}
-                          onClick={() => toggleArrayValue(shift, setShift, c.value)}
-                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(shift, setShift, c.value); } }}
-                        >
-                          {c.label}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button type="submit" className="btn btn-solid reg-submit" disabled={status === "submitting"}>
-                    {status === "submitting" ? "Registering…" : "Register"}
-                  </button>
-
-                  {status === "error" && (
-                    <div className="reg-error">
-                      {errorMsg} <a href="#register" onClick={(e) => { e.preventDefault(); handleSubmit(e as unknown as React.FormEvent); }} style={{ textDecoration: "underline" }}>Try again</a>
+                      {touched && !clinicianType && (
+                        <p className="reg-inline-error">Please select your role.</p>
+                      )}
                     </div>
                   )}
 
-                  <p className="field-fine">
-                    Registering does not create an account. We review every registration, and if you match an open pod we email you a link to set up your login and upload your documents. By registering you agree to receive email and text from Weekend Warrior. Reply STOP to opt out.
-                  </p>
+                  {step === 1 && (
+                    <div className="field-row">
+                      <div>
+                        <span className="field-label">First Name</span>
+                        <input required autoFocus value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First name" />
+                      </div>
+                      <div>
+                        <span className="field-label">Last Name</span>
+                        <input required value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last name" />
+                      </div>
+                    </div>
+                  )}
+                  {step === 1 && touched && !stepValid(1) && <p className="reg-inline-error">Please enter your first and last name.</p>}
+
+                  {step === 2 && (
+                    <div className="field">
+                      <span className="field-label">Mobile</span>
+                      <input required autoFocus type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 555-5555" />
+                      {touched && !stepValid(2) && <p className="reg-inline-error">Please enter your mobile number.</p>}
+                    </div>
+                  )}
+
+                  {step === 3 && (
+                    <div className="field">
+                      <span className="field-label">Email</span>
+                      <input required autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@email.com" />
+                      {touched && !stepValid(3) && <p className="reg-inline-error">Please enter your email.</p>}
+                    </div>
+                  )}
+
+                  {step === 4 && (
+                    <div className="field-row">
+                      <div>
+                        <span className="field-label">License State</span>
+                        <input required autoFocus maxLength={2} value={licenseState} onChange={(e) => setLicenseState(e.target.value.toUpperCase())} placeholder="TX" style={{ textTransform: "uppercase" }} />
+                      </div>
+                      <div>
+                        <span className="field-label">Zip Code</span>
+                        <input required inputMode="numeric" maxLength={5} value={zip} onChange={(e) => setZip(e.target.value)} placeholder="75201" />
+                      </div>
+                    </div>
+                  )}
+                  {step === 4 && touched && !stepValid(4) && <p className="reg-inline-error">Please enter a two-letter state and your zip code.</p>}
+
+                  {step === 5 && (
+                    <div className="field">
+                      <div className="chip-row">
+                        {DAY_CHIPS.map((c) => (
+                          <div
+                            key={c.value}
+                            className={`chip${days.includes(c.value) ? " selected" : ""}`}
+                            role="checkbox"
+                            aria-checked={days.includes(c.value)}
+                            tabIndex={0}
+                            onClick={() => toggleArrayValue(days, setDays, c.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(days, setDays, c.value); } }}
+                          >
+                            {c.label}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {step === 6 && (
+                    <div className="field">
+                      <div className="chip-row">
+                        {SHIFT_CHIPS.map((c) => (
+                          <div
+                            key={c.value}
+                            className={`chip${shift.includes(c.value) ? " selected" : ""}`}
+                            role="checkbox"
+                            aria-checked={shift.includes(c.value)}
+                            tabIndex={0}
+                            onClick={() => toggleArrayValue(shift, setShift, c.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(shift, setShift, c.value); } }}
+                          >
+                            {c.label}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {step > 0 && (
+                    <div className="reg-nav">
+                      <button type="button" className="reg-back" onClick={goBack}>&larr; Back</button>
+                      {step < TOTAL_STEPS - 1 ? (
+                        <button type="submit" className="btn btn-solid reg-submit">Continue</button>
+                      ) : (
+                        <button type="submit" className="btn btn-solid reg-submit" disabled={status === "submitting"}>
+                          {status === "submitting" ? "Registering…" : "Register"}
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  {status === "error" && (
+                    <div className="reg-error">
+                      {errorMsg} <a href="#register" onClick={(e) => { e.preventDefault(); submitRegistration(); }} style={{ textDecoration: "underline" }}>Try again</a>
+                    </div>
+                  )}
+
+                  {step === TOTAL_STEPS - 1 && (
+                    <p className="field-fine">
+                      Registering does not create an account. We review every registration, and if you match an open pod we email you a link to set up your login and upload your documents. By registering you agree to receive email and text from Weekend Warrior. Reply STOP to opt out.
+                    </p>
+                  )}
                 </form>
               )}
             </div>
@@ -346,7 +407,7 @@ function Join() {
       </section>
 
       {/* ============ 02 HOW IT WORKS ============ */}
-      <section className="band-white" id="how">
+      <section className="band-white" id="steps">
         <div className="wrap">
           <div className="section-label reveal">
             <span className="n">02</span><span className="rule"></span><span className="cat">How It Works</span>
@@ -404,7 +465,7 @@ function Join() {
       </section>
 
       {/* ============ 04 FAQ ============ */}
-      <section className="band-dark-2" id="faq">
+      <section className="band-dark-2" id="join-faq">
         <div className="wrap">
           <div className="section-label reveal">
             <span className="n">04</span><span className="rule"></span><span className="cat">Questions</span>
@@ -413,7 +474,7 @@ function Join() {
           <div className="faq">
             <div className="faq-item">
               <button className="faq-q" onClick={toggleFaq}>Do I have to be an RN?</button>
-              <div className="faq-a"><p>No. Pods are built from RNs, LPNs, CNAs, and phlebotomists together, because a weekend floor needs all four. Pick your role at the top of the form and you are in the right place.</p></div>
+              <div className="faq-a"><p>No. Pods are built around what each facility actually needs. Some floors call for more RNs, others need CNAs or a phlebotomist in the mix, and the combination changes from one facility to the next. Pick your role at the top of the form and we match you to a pod that needs it.</p></div>
             </div>
             <div className="faq-item">
               <button className="faq-q" onClick={toggleFaq}>Is this full time?</button>
@@ -460,7 +521,7 @@ function Join() {
             heading: "For Warriors",
             links: [
               { label: "Register", href: "/join" },
-              { label: "How It Works", href: "/join#how" },
+              { label: "How It Works", href: "/join#steps" },
               { label: "Login", href: "/login" },
             ],
           },

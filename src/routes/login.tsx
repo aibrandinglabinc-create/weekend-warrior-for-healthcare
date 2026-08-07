@@ -1,7 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+
+const DEMO_EMAIL = "demo@pulsestaffing.com";
+const DEMO_PASSWORD = "weekendwarrior";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
@@ -15,7 +18,25 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [checking, setChecking] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setChecking(true);
+    setError(null);
+    window.setTimeout(() => {
+      if (email.trim().toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD) {
+        navigate({ to: "/dashboard" });
+        return;
+      }
+      setChecking(false);
+      setError("That email and password combination is not on file. Use the demo credentials below, or contact your Pulse Staffing rep for account access.");
+    }, 400);
+  }
 
   return (
     <>
@@ -27,30 +48,27 @@ function LoginPage() {
             <h2 className="card-h">Log In.</h2>
             <p className="card-sub">Facility command center or Weekend Warrior portal.</p>
 
-            {submitted ? (
-              <p style={{ fontSize: 13.5, color: "var(--white-80)", lineHeight: 1.7 }}>
-                Login is not active for this account yet. If you are a Weekend Warrior awaiting placement, watch your email and texts for your setup link. If you manage a facility, your Pulse Staffing contact can get you set up.
-              </p>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
-              >
-                <div className="field">
-                  <span className="field-label">Email</span>
-                  <input required type="email" placeholder="you@email.com" />
-                </div>
-                <div className="field">
-                  <span className="field-label">Password</span>
-                  <input required type="password" placeholder="********" />
-                </div>
-                <button type="submit" className="btn btn-solid reg-submit">Log In</button>
-              </form>
-            )}
+            <form onSubmit={handleSubmit}>
+              <div className="field">
+                <span className="field-label">Email</span>
+                <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@email.com" />
+              </div>
+              <div className="field">
+                <span className="field-label">Password</span>
+                <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" />
+              </div>
+              <button type="submit" className="btn btn-solid reg-submit" disabled={checking}>
+                {checking ? "Checking…" : "Log In"}
+              </button>
+              {error && <div className="reg-error">{error}</div>}
+            </form>
 
-            <div style={{ marginTop: 26, paddingTop: 22, borderTop: "1px solid var(--white-20)", display: "flex", flexDirection: "column", gap: 10 }}>
+            <div className="login-demo-hint">
+              <span className="field-label">Facility Demo Access</span>
+              <p>Email <b>{DEMO_EMAIL}</b><br />Password <b>{DEMO_PASSWORD}</b></p>
+            </div>
+
+            <div style={{ marginTop: 22, paddingTop: 22, borderTop: "1px solid var(--white-20)", display: "flex", flexDirection: "column", gap: 10 }}>
               <a href="/join" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>Not registered yet? Become a Weekend Warrior &rarr;</a>
               <a href="/#book" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>Looking for weekend coverage for your facility? Book a demo &rarr;</a>
             </div>

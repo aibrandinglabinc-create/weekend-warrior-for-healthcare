@@ -13,9 +13,9 @@ const FACILITY_LINKS: NavLink[] = [
 
 const WORKER_LINKS: NavLink[] = [
   { label: "Why The Pod", href: "#why" },
-  { label: "How It Works", href: "#how" },
+  { label: "How It Works", href: "#steps" },
   { label: "The Difference", href: "#difference" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQ", href: "#join-faq" },
 ];
 
 export default function Nav({ variant }: { variant: "facility" | "worker" }) {

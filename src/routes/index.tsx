@@ -234,7 +234,7 @@ function Index() {
       </div>
       <div className="reveal d1">
         <div className="section-label"><span className="n">03</span><span className="rule"></span><span className="cat">The Pod Model</span></div>
-        <h2 className="big" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}>The old way, and <span className="ital-teal">the Warrior way.</span></h2>
+        <h2 className="big" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}>The old way, vs. <span className="ital-teal">the Warrior way.</span></h2>
         <div className="compare-wrap">
           <table className="compare">
             <thead>
@@ -445,7 +445,7 @@ function Index() {
       heading: "For Warriors",
       links: [
         { label: "Register", href: "/join" },
-        { label: "How It Works", href: "/join#how" },
+        { label: "How It Works", href: "/join#steps" },
         { label: "Warrior Login", href: "/login" },
       ],
     },
