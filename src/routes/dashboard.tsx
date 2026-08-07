@@ -126,9 +126,9 @@ const REPORTS: { name: string; desc: string; view: MoreView }[] = [
 const COVERAGE_MONTHS = [
   { month: "May 2026", pct: 100, filled: 12, total: 12 },
   { month: "April 2026", pct: 100, filled: 24, total: 24 },
-  { month: "March 2026", pct: 96, filled: 25, total: 26 },
+  { month: "March 2026", pct: 100, filled: 26, total: 26 },
   { month: "February 2026", pct: 100, filled: 24, total: 24 },
-  { month: "January 2026", pct: 92, filled: 24, total: 26 },
+  { month: "January 2026", pct: 100, filled: 26, total: 26 },
 ];
 
 const RETENTION_ROWS = [
@@ -562,16 +562,16 @@ function Dashboard() {
               </div>
               <div className="dash-tiles" style={{ marginBottom: 20 }}>
                 <div className="dash-tile">
-                  <div className="dash-tile-n">98%</div>
-                  <div className="dash-tile-l">Average Fill Rate</div>
+                  <div className="dash-tile-n">100%</div>
+                  <div className="dash-tile-l">Fill Rate, Every Month</div>
                 </div>
                 <div className="dash-tile">
-                  <div className="dash-tile-n">109</div>
+                  <div className="dash-tile-n">112</div>
                   <div className="dash-tile-l">Shifts Filled</div>
                 </div>
                 <div className="dash-tile">
                   <div className="dash-tile-n">3</div>
-                  <div className="dash-tile-l">Open, Backfilled</div>
+                  <div className="dash-tile-l">Call-Outs Backfilled By Us</div>
                 </div>
               </div>
               {COVERAGE_MONTHS.map((m) => (
