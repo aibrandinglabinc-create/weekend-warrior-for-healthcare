@@ -87,7 +87,8 @@ const MESSAGES = [
   { from: "Weekend Warrior System", time: "Last week", preview: "Your 90 day retention report is ready to view." },
 ];
 
-type MoreView = "menu" | "profile" | "billing" | "reports" | "notifications" | "support";
+type MoreView = "menu" | "profile" | "billing" | "reports" | "notifications" | "support"
+  | "report-coverage" | "report-retention" | "report-history";
 
 const INVOICES = [
   { month: "May 2026", amount: "$18,400", status: "Paid" },
@@ -95,10 +96,36 @@ const INVOICES = [
   { month: "March 2026", amount: "$18,400", status: "Paid" },
 ];
 
-const REPORTS = [
-  { name: "Weekend Coverage Summary", desc: "Fill rate and shift history, month by month" },
-  { name: "90 Day Retention Report", desc: "Pod continuity and clinician retention" },
-  { name: "Shift History Export", desc: "Every shift, clinician, and status as a CSV" },
+const REPORTS: { name: string; desc: string; view: MoreView }[] = [
+  { name: "Weekend Coverage Summary", desc: "Fill rate and shift history, month by month", view: "report-coverage" },
+  { name: "90 Day Retention Report", desc: "Pod continuity and clinician retention", view: "report-retention" },
+  { name: "Shift History Export", desc: "Every shift, clinician, and status as a CSV", view: "report-history" },
+];
+
+const COVERAGE_MONTHS = [
+  { month: "May 2026", pct: 100, filled: 12, total: 12 },
+  { month: "April 2026", pct: 100, filled: 24, total: 24 },
+  { month: "March 2026", pct: 96, filled: 25, total: 26 },
+  { month: "February 2026", pct: 100, filled: 24, total: 24 },
+  { month: "January 2026", pct: 92, filled: 24, total: 26 },
+];
+
+const RETENTION_ROWS = [
+  { name: "Maria Alvarez", role: "RN", tenure: "9 months", weekends: 38 },
+  { name: "James Okafor", role: "RN", tenure: "7 months", weekends: 30 },
+  { name: "Priya Nair", role: "LPN", tenure: "6 months", weekends: 26 },
+  { name: "Dana Wicklund", role: "CNA", tenure: "5 months", weekends: 21 },
+  { name: "Trevor Boone", role: "CNA", tenure: "2 weeks", weekends: 2 },
+  { name: "Sofia Reyes", role: "Phlebotomist", tenure: "4 months", weekends: 17 },
+];
+
+const HISTORY_ROWS = [
+  { date: "May 17", name: "Maria Alvarez", role: "RN", shift: "6:00 AM – 6:00 PM", status: "Completed" },
+  { date: "May 17", name: "James Okafor", role: "RN", shift: "6:00 PM – 6:00 AM", status: "Completed" },
+  { date: "May 17", name: "Priya Nair", role: "LPN", shift: "6:00 AM – 6:00 PM", status: "Completed" },
+  { date: "May 18", name: "Dana Wicklund", role: "CNA", shift: "6:00 AM – 6:00 PM", status: "Completed" },
+  { date: "May 18", name: "Sofia Reyes", role: "Phlebotomist", shift: "6:00 AM – 6:00 PM", status: "Completed" },
+  { date: "May 19", name: "Trevor Boone", role: "CNA", shift: "6:00 PM – 6:00 AM", status: "Completed" },
 ];
 
 function Dashboard() {
@@ -373,14 +400,101 @@ function Dashboard() {
                 <h4>Reports</h4>
               </div>
               {REPORTS.map((r) => (
-                <div className="dash-shift" key={r.name}>
+                <div className="dash-shift" key={r.name} onClick={() => setMoreView(r.view)} style={{ cursor: "pointer" }}>
                   <span className="dash-meta">
                     <span className="dash-d">{r.name}</span>
                     <span className="dash-t">{r.desc}</span>
                   </span>
-                  <span className="dash-pill" style={{ cursor: "pointer" }}>View</span>
+                  <span className="dash-pill">View</span>
                 </div>
               ))}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "report-coverage" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("reports")}>&larr; Reports</button>
+              <div className="dash-rowh">
+                <h4>Weekend Coverage Summary</h4>
+                <span>2026</span>
+              </div>
+              <div className="dash-tiles" style={{ marginBottom: 20 }}>
+                <div className="dash-tile">
+                  <div className="dash-tile-n">98%</div>
+                  <div className="dash-tile-l">Average Fill Rate</div>
+                </div>
+                <div className="dash-tile">
+                  <div className="dash-tile-n">109</div>
+                  <div className="dash-tile-l">Shifts Filled</div>
+                </div>
+                <div className="dash-tile">
+                  <div className="dash-tile-n">3</div>
+                  <div className="dash-tile-l">Open, Backfilled</div>
+                </div>
+              </div>
+              {COVERAGE_MONTHS.map((m) => (
+                <div className="dash-report-bar" key={m.month}>
+                  <div className="dash-report-bar-top">
+                    <span>{m.month}</span>
+                    <b>{m.pct}% &middot; {m.filled} of {m.total} shifts</b>
+                  </div>
+                  <div className="dash-report-track"><div className="dash-report-fill" style={{ width: `${m.pct}%` }} /></div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "report-retention" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("reports")}>&larr; Reports</button>
+              <div className="dash-rowh">
+                <h4>90 Day Retention Report</h4>
+              </div>
+              <div className="dash-tiles" style={{ marginBottom: 20 }}>
+                <div className="dash-tile">
+                  <div className="dash-tile-n">98%</div>
+                  <div className="dash-tile-l">90-Day Retention</div>
+                </div>
+                <div className="dash-tile">
+                  <div className="dash-tile-n">6</div>
+                  <div className="dash-tile-l">Active Warriors</div>
+                </div>
+                <div className="dash-tile">
+                  <div className="dash-tile-n">5.5</div>
+                  <div className="dash-tile-l">Avg Months on Pod</div>
+                </div>
+              </div>
+              {RETENTION_ROWS.map((r) => (
+                <div className="dash-shift" key={r.name}>
+                  <span className="dash-av"><img src={PHOTO_BY_NAME[r.name]} alt="" /></span>
+                  <span className="dash-meta">
+                    <span className="dash-d">{r.name}</span>
+                    <span className="dash-t">{r.role} &middot; {r.tenure} on this pod</span>
+                  </span>
+                  <span className="dash-t" style={{ flex: "none" }}>{r.weekends} weekends</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "report-history" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("reports")}>&larr; Reports</button>
+              <div className="dash-rowh">
+                <h4>Shift History</h4>
+                <span>Last 2 Weekends</span>
+              </div>
+              {HISTORY_ROWS.map((h, i) => (
+                <div className="dash-shift" key={i}>
+                  <span className="dash-av"><img src={PHOTO_BY_NAME[h.name]} alt="" /></span>
+                  <span className="dash-meta">
+                    <span className="dash-d">{h.name}</span>
+                    <span className="dash-t">{h.date} &middot; {h.shift} &middot; {h.role}</span>
+                  </span>
+                  <span className="dash-pill">{h.status}</span>
+                </div>
+              ))}
+              <button className="btn btn-solid" style={{ width: "100%", justifyContent: "center", marginTop: 14 }}>Download CSV</button>
             </div>
           )}
 
@@ -421,8 +535,7 @@ function Dashboard() {
               <p style={{ fontSize: 13.5, color: "#6A7A8C", lineHeight: 1.65, marginBottom: 18 }}>
                 Your facility has a dedicated Pulse Staffing partner. Coverage questions, pod changes, and billing all go to one person, not a queue.
               </p>
-              <div className="dash-info-row"><span>Your Partner</span><b>Erika Taylor</b></div>
-              <div className="dash-info-row"><span>Phone</span><b>(555) 640-2210</b></div>
+              <div className="dash-info-row"><span>Phone</span><b>(346) 251-0261</b></div>
               <div className="dash-info-row"><span>Email</span><b>support@pulsestaffing.com</b></div>
               <div className="dash-info-row"><span>Hours</span><b>7 days a week, 6:00 AM to 10:00 PM CT</b></div>
               <a href="mailto:support@pulsestaffing.com" className="btn btn-solid" style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>Email Support</a>

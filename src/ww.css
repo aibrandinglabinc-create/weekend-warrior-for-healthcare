@@ -594,6 +594,13 @@
       transition:left .25s;box-shadow:0 2px 6px rgba(13,17,23,0.25);}
   .dash-toggle.on{background:var(--teal);}
   .dash-toggle.on span{left:23px;}
+  .dash-report-bar{padding:11px 2px;border-bottom:1px solid #EDF2F3;}
+  .dash-report-bar:last-child{border-bottom:none;}
+  .dash-report-bar-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px;font-size:13px;margin-bottom:7px;}
+  .dash-report-bar-top span{color:#0D2340;font-weight:600;}
+  .dash-report-bar-top b{color:#6A7A8C;font-weight:500;font-size:12px;}
+  .dash-report-track{height:7px;border-radius:4px;background:#E4EDEF;overflow:hidden;}
+  .dash-report-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--teal-light),var(--teal-dark));}
 
   /* Desktop widening: must come after the base dash rules so it wins the cascade */
   @media(min-width:761px){
