@@ -572,9 +572,7 @@
 
   /* Desktop widening: must come after the base dash rules so it wins the cascade */
   @media(min-width:761px){
-    .dash-appbar,.dash-greet,.dash-body,.dash-tabs{max-width:1020px;}
-    .dash-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:start;}
-    .dash-grid-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;}
+    .dash-appbar,.dash-greet,.dash-body,.dash-tabs{max-width:760px;}
   }
 
   .reg-error{background:rgba(220,70,70,0.12);border:1px solid rgba(220,70,70,0.4);color:#ffb8b8;
