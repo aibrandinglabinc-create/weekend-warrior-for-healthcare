@@ -87,11 +87,43 @@ const MESSAGES = [
   { from: "Weekend Warrior System", time: "Last week", preview: "Your 90 day retention report is ready to view." },
 ];
 
+type MoreView = "menu" | "profile" | "billing" | "reports" | "notifications" | "support";
+
+const INVOICES = [
+  { month: "May 2026", amount: "$18,400", status: "Paid" },
+  { month: "April 2026", amount: "$18,400", status: "Paid" },
+  { month: "March 2026", amount: "$18,400", status: "Paid" },
+];
+
+const REPORTS = [
+  { name: "Weekend Coverage Summary", desc: "Fill rate and shift history, month by month" },
+  { name: "90 Day Retention Report", desc: "Pod continuity and clinician retention" },
+  { name: "Shift History Export", desc: "Every shift, clinician, and status as a CSV" },
+];
+
 function Dashboard() {
   const ARC = 307.9;
   const pct = 100;
   const offset = ARC - (ARC * pct) / 100;
-  const [tab, setTab] = useState<"dashboard" | "shifts" | "team" | "messages" | "more">("dashboard");
+  const [tab, setTabRaw] = useState<"dashboard" | "shifts" | "team" | "messages" | "more">("dashboard");
+  const [moreView, setMoreView] = useState<MoreView>("menu");
+  const setTab = (t: typeof tab) => { setTabRaw(t); setMoreView("menu"); };
+
+  const [editingProfile, setEditingProfile] = useState(false);
+  const [profile, setProfile] = useState({
+    name: "Chrissy Morgan",
+    title: "Director of Nursing",
+    email: "c.morgan@sunrisemanor.com",
+    phone: "(555) 204-8831",
+  });
+  const [profileDraft, setProfileDraft] = useState(profile);
+
+  const [notifs, setNotifs] = useState({
+    fill: true,
+    confirmations: true,
+    podChanges: true,
+    weekly: false,
+  });
 
   return (
     <>
@@ -258,17 +290,142 @@ function Dashboard() {
             </div>
           )}
 
-          {tab === "more" && (
+          {tab === "more" && moreView === "menu" && (
             <div className="dash-panel" style={{ paddingBottom: 8 }}>
               <div className="dash-rowh">
                 <h4>More</h4>
               </div>
-              <div className="dash-menu-row"><span>Facility Profile</span><span className="chev"><IconChevron /></span></div>
-              <div className="dash-menu-row"><span>Billing &amp; Invoices</span><span className="chev"><IconChevron /></span></div>
-              <div className="dash-menu-row"><span>Reports</span><span className="chev"><IconChevron /></span></div>
-              <div className="dash-menu-row"><span>Notification Settings</span><span className="chev"><IconChevron /></span></div>
-              <div className="dash-menu-row"><span>Support</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row" onClick={() => setMoreView("profile")}><span>Facility Profile</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row" onClick={() => setMoreView("billing")}><span>Billing &amp; Invoices</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row" onClick={() => setMoreView("reports")}><span>Reports</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row" onClick={() => setMoreView("notifications")}><span>Notification Settings</span><span className="chev"><IconChevron /></span></div>
+              <div className="dash-menu-row" onClick={() => setMoreView("support")}><span>Support</span><span className="chev"><IconChevron /></span></div>
               <Link to="/" className="dash-menu-row" style={{ color: "#C0392B" }}><span>Log Out</span><span className="chev"><IconChevron /></span></Link>
+            </div>
+          )}
+
+          {tab === "more" && moreView === "profile" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => { setMoreView("menu"); setEditingProfile(false); }}>&larr; More</button>
+              <div className="dash-rowh">
+                <h4>Facility Profile</h4>
+                {!editingProfile && (
+                  <span onClick={() => { setProfileDraft(profile); setEditingProfile(true); }} style={{ cursor: "pointer" }}>Edit</span>
+                )}
+              </div>
+
+              <div className="dash-day-label">Facility</div>
+              <div className="dash-info-row"><span>Name</span><b>Sunrise Manor Care Center</b></div>
+              <div className="dash-info-row"><span>Type</span><b>Skilled Nursing Facility</b></div>
+              <div className="dash-info-row"><span>Beds</span><b>120</b></div>
+              <div className="dash-info-row"><span>Location</span><b>Dallas, TX 75201</b></div>
+
+              <div className="dash-day-label" style={{ marginTop: 22 }}>Administrator</div>
+              {editingProfile ? (
+                <>
+                  <div className="dash-edit-field"><span>Name</span><input value={profileDraft.name} onChange={(e) => setProfileDraft({ ...profileDraft, name: e.target.value })} /></div>
+                  <div className="dash-edit-field"><span>Title</span><input value={profileDraft.title} onChange={(e) => setProfileDraft({ ...profileDraft, title: e.target.value })} /></div>
+                  <div className="dash-edit-field"><span>Email</span><input type="email" value={profileDraft.email} onChange={(e) => setProfileDraft({ ...profileDraft, email: e.target.value })} /></div>
+                  <div className="dash-edit-field"><span>Phone</span><input type="tel" value={profileDraft.phone} onChange={(e) => setProfileDraft({ ...profileDraft, phone: e.target.value })} /></div>
+                  <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
+                    <button className="btn btn-solid" style={{ flex: 1, justifyContent: "center" }} onClick={() => { setProfile(profileDraft); setEditingProfile(false); }}>Save</button>
+                    <button className="dash-back" style={{ margin: 0 }} onClick={() => setEditingProfile(false)}>Cancel</button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="dash-info-row"><span>Name</span><b>{profile.name}</b></div>
+                  <div className="dash-info-row"><span>Title</span><b>{profile.title}</b></div>
+                  <div className="dash-info-row"><span>Email</span><b>{profile.email}</b></div>
+                  <div className="dash-info-row"><span>Phone</span><b>{profile.phone}</b></div>
+                </>
+              )}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "billing" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("menu")}>&larr; More</button>
+              <div className="dash-rowh">
+                <h4>Billing &amp; Invoices</h4>
+              </div>
+              <div className="dash-info-row"><span>Plan</span><b>Weekend Warrior Subscription</b></div>
+              <div className="dash-info-row"><span>Billing Cycle</span><b>Monthly, on the 1st</b></div>
+              <div className="dash-info-row"><span>Payment Method</span><b>ACH &middot; Account ending 4471</b></div>
+
+              <div className="dash-day-label" style={{ marginTop: 22 }}>Recent Invoices</div>
+              {INVOICES.map((inv) => (
+                <div className="dash-shift" key={inv.month}>
+                  <span className="dash-meta">
+                    <span className="dash-d">{inv.month}</span>
+                    <span className="dash-t">{inv.amount}</span>
+                  </span>
+                  <span className="dash-pill">{inv.status}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "reports" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("menu")}>&larr; More</button>
+              <div className="dash-rowh">
+                <h4>Reports</h4>
+              </div>
+              {REPORTS.map((r) => (
+                <div className="dash-shift" key={r.name}>
+                  <span className="dash-meta">
+                    <span className="dash-d">{r.name}</span>
+                    <span className="dash-t">{r.desc}</span>
+                  </span>
+                  <span className="dash-pill" style={{ cursor: "pointer" }}>View</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "notifications" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("menu")}>&larr; More</button>
+              <div className="dash-rowh">
+                <h4>Notification Settings</h4>
+              </div>
+              {([
+                { key: "fill", label: "Fill rate alerts", desc: "Alert me if a weekend drops below full coverage" },
+                { key: "confirmations", label: "Shift confirmations", desc: "Notify me as each shift is confirmed" },
+                { key: "podChanges", label: "Pod changes", desc: "Notify me when a Weekend Warrior joins or leaves my pod" },
+                { key: "weekly", label: "Weekly summary", desc: "Email me a coverage recap every Monday" },
+              ] as const).map((n) => (
+                <div className="dash-toggle-row" key={n.key}>
+                  <div>
+                    <div className="dash-d">{n.label}</div>
+                    <div className="dash-t">{n.desc}</div>
+                  </div>
+                  <button
+                    className={`dash-toggle${notifs[n.key] ? " on" : ""}`}
+                    role="switch"
+                    aria-checked={notifs[n.key]}
+                    onClick={() => setNotifs({ ...notifs, [n.key]: !notifs[n.key] })}
+                  ><span /></button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "more" && moreView === "support" && (
+            <div className="dash-panel" style={{ paddingBottom: 22 }}>
+              <button className="dash-back" onClick={() => setMoreView("menu")}>&larr; More</button>
+              <div className="dash-rowh">
+                <h4>Support</h4>
+              </div>
+              <p style={{ fontSize: 13.5, color: "#6A7A8C", lineHeight: 1.65, marginBottom: 18 }}>
+                Your facility has a dedicated Pulse Staffing partner. Coverage questions, pod changes, and billing all go to one person, not a queue.
+              </p>
+              <div className="dash-info-row"><span>Your Partner</span><b>Erika Taylor</b></div>
+              <div className="dash-info-row"><span>Phone</span><b>(555) 640-2210</b></div>
+              <div className="dash-info-row"><span>Email</span><b>support@pulsestaffing.com</b></div>
+              <div className="dash-info-row"><span>Hours</span><b>7 days a week, 6:00 AM to 10:00 PM CT</b></div>
+              <a href="mailto:support@pulsestaffing.com" className="btn btn-solid" style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>Email Support</a>
             </div>
           )}
         </div>
