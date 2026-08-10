@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import joinHeroImg from "@/assets/join-hero-pod.jpg";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 import { useReveal } from "@/hooks/useReveal";
 
 type ClinicianType = "RN" | "LPN" | "CNA" | "Phlebotomist";
@@ -193,6 +194,7 @@ function Join() {
   return (
     <>
       <Nav variant="worker" />
+      <ChatWidget />
 
       {/* ============ HERO ============ */}
       <section className="hero band-dark join" id="top">

@@ -5,6 +5,7 @@ import podImg from "@/assets/pod-don-arrival.jpg";
 import dashboardImg from "@/assets/dashboard-mockup-phone.webp";
 import stethoscopeImg from "@/assets/stethoscope-cutout.png";
 import Nav from "@/components/Nav";
+import ChatWidget from "@/components/ChatWidget";
 import Footer from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
@@ -123,6 +124,7 @@ function Index() {
 
 {/* ============ NAV ============ */}
 <Nav variant="facility" />
+<ChatWidget />
 
 {/* ============ HERO ============ */}
 <section className="hero band-dark" id="top">
