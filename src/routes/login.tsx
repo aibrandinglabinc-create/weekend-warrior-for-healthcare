@@ -72,7 +72,7 @@ function LoginPage() {
 
             <div style={{ marginTop: 22, paddingTop: 22, borderTop: "1px solid var(--white-20)", display: "flex", flexDirection: "column", gap: 10 }}>
               <a href="/join" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>Not registered yet? Become a Weekend Warrior &rarr;</a>
-              <a href="/#book" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>Looking for weekend coverage for your facility? Book a demo &rarr;</a>
+              <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>Looking for weekend coverage for your facility? Book a demo &rarr;</a>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@ function LoginPage() {
             links: [
               { label: "Weekend Warrior", href: "/" },
               { label: "Pricing", href: "/#pricing" },
-              { label: "Book a Demo", href: "/#book" },
+              { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
             ],
           },
         ]}

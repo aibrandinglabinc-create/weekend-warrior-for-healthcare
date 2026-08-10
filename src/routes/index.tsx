@@ -140,7 +140,7 @@ function Index() {
       <p className="lead reveal d2">The same credentialed nursing pod in your facility every weekend, on one subscription. Your weekday team keeps their weekends. You keep your Friday nights.</p>
       <p className="tagline-mono reveal d2">Strategy. Not Staffing.</p>
       <div className="hero-cta reveal d3">
-        <a href="#book" className="btn btn-solid btn-lg">Book a Demo</a>
+        <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
         <a href="#how" className="btn btn-ghost btn-lg">See How It Works</a>
       </div>
     </div>
@@ -256,7 +256,7 @@ function Index() {
       </div>
     </div>
     <div className="mid-cta reveal">
-      <a href="#book" className="btn btn-solid btn-lg">Book a Demo</a>
+      <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
     </div>
   </div>
 </section>
@@ -296,7 +296,7 @@ function Index() {
       </div>
     </div>
     <div className="mid-cta reveal">
-      <a href="#book" className="btn btn-solid btn-lg">Book a Demo</a>
+      <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
     </div>
   </div>
 </section>
@@ -346,7 +346,7 @@ function Index() {
         <div className="prow"><span className="ck">■</span><span>Coverage locked weeks ahead, with the command center dashboard included</span></div>
         <div className="prow"><span className="ck">■</span><span>One monthly invoice. No hourly spikes, no re-booking, no agency markup</span></div>
         <p className="price-note">Every facility is sized differently, so your exact monthly rate is built from your six-gate profile on the demo call. Book a 15-minute demo and we will show you the number against what your weekend costs today.</p>
-        <div style={{ marginTop: 24 }}><a href="#book" className="btn btn-solid btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)" }}>Book a 15-Minute Demo</a></div>
+        <div style={{ marginTop: 24 }}><a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)" }}>Book a 15-Minute Demo</a></div>
       </div>
     </div>
   </div>
@@ -436,13 +436,13 @@ function Index() {
     {
       heading: "Get Started",
       links: [
-        { label: "Book a Demo", href: "#book" },
+        { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
         { label: "Client Login", href: "/login" },
       ],
     },
     {
       heading: "Contact",
-      links: [{ label: "Talk to Pulse Staffing", href: "#book" }],
+      links: [{ label: "Talk to Pulse Staffing", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" }],
     },
     {
       heading: "For Warriors",

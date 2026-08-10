@@ -532,7 +532,7 @@ function Join() {
             links: [
               { label: "Weekend Warrior", href: "/" },
               { label: "Pricing", href: "/#pricing" },
-              { label: "Book a Demo", href: "/#book" },
+              { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
             ],
           },
         ]}
