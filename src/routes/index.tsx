@@ -163,7 +163,7 @@ function Index() {
       <div className="kpi">
         <div className="num" data-count="1" data-suf=" pod">1 pod</div>
         <div className="lbl">The same faces, every weekend</div>
-        <div className="src">The pod model</div>
+        <div className="src">The model</div>
       </div>
     </div>
   </div>
