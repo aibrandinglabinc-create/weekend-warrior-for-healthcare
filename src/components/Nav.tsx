@@ -49,7 +49,7 @@ export default function Nav({ variant }: { variant: "facility" | "worker" }) {
           <>
             <Link to="/join" className="btn">Register</Link>
             <Link to="/login" className="btn btn-ghost">Login</Link>
-            <a href="#book" className="btn btn-solid">Book a Demo</a>
+            <a href="/#book" className="btn btn-solid">Book a Demo</a>
           </>
         ) : (
           <>

@@ -6,6 +6,7 @@ import dashboardImg from "@/assets/dashboard-mockup-phone.webp";
 import stethoscopeImg from "@/assets/stethoscope-cutout.png";
 import Nav from "@/components/Nav";
 import ChatWidget from "@/components/ChatWidget";
+import BookingEmbed from "@/components/BookingEmbed";
 import Footer from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
@@ -413,8 +414,8 @@ function Index() {
   <div className="wrap">
     <div className="tag reveal">Strategy. Not Staffing.</div>
     <h2 className="reveal d1">Your weekend shouldn't cost you your best nurses.</h2>
-    <p className="sub reveal d2">Fifteen minutes. We read your weekend, size your pod, and show you the number against what coverage costs you today. No obligation, no pressure.</p>
-    <div className="reveal d3"><a href="#book" className="btn btn-white btn-lg">Book a 15-Minute Demo</a></div>
+    <p className="sub reveal d2">Fifteen minutes. We read your weekend, size your pod, and show you the number against what coverage costs you today. No obligation, no pressure. Pick your time below.</p>
+    <div className="reveal d3"><BookingEmbed /></div>
   </div>
 </section>
 

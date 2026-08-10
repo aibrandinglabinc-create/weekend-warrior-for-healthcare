@@ -615,6 +615,10 @@
   .dash-week-opt:hover{background:rgba(0,181,184,0.1);}
   .dash-week-opt.on{color:var(--teal-dark);font-weight:700;background:rgba(0,181,184,0.08);}
 
+  /* ---------- Booking calendar embed ---------- */
+  .booking-card{max-width:920px;margin:44px auto 0;background:var(--white);border-radius:4px;overflow:hidden;
+      box-shadow:0 30px 70px rgba(7,23,48,0.35);text-align:left;}
+
   /* ---------- Logo placements ---------- */
   .login-logo{width:150px;height:auto;display:block;margin:0 auto 18px;}
   .dash-logo{width:38px;height:auto;position:absolute;left:50%;transform:translateX(-50%);}
