@@ -398,7 +398,7 @@ function Index() {
       <div className="wb-copy">
         <span className="eyebrow">Looking For Weekend Work</span>
         <h2>Become a Weekend Warrior.</h2>
-        <div className="role-strip"><span>RN</span><span className="rdot">&middot;</span><span>LPN</span><span className="rdot">&middot;</span><span>CNA</span><span className="rdot">&middot;</span><span>Phlebotomist</span></div>
+        <div className="role-strip"><span>RN</span><span className="rdot">&middot;</span><span>CNA</span></div>
         <p style={{ marginTop: 16 }}>Same facility, same team, every weekend. Credential once instead of at every agency, and work beside people who already know how you work. Two minutes to register.</p>
       </div>
       <a href="/join" className="btn btn-solid btn-lg">Register</a>
