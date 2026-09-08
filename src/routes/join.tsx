@@ -234,7 +234,7 @@ function Join() {
                         {ROLE_CHIPS.map((c) => (
                           <div
                             key={c.value}
-                            className={`chip${c.value === "CNA" ? " wide" : ""}${clinicianType === c.value ? " selected" : ""}`}
+                            className={`chip${clinicianType === c.value ? " selected" : ""}`}
                             role="radio"
                             aria-checked={clinicianType === c.value}
                             tabIndex={0}
