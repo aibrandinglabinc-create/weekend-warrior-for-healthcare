@@ -58,10 +58,10 @@ const UPCOMING = [
 const ROSTER = [
   { name: "Maria Alvarez", role: "RN", on: true, photo: avatarMaria },
   { name: "James Okafor", role: "RN", on: true, photo: avatarJames },
-  { name: "Priya Nair", role: "LPN", on: true, photo: avatarPriya },
+  { name: "Priya Nair", role: "RN", on: true, photo: avatarPriya },
   { name: "Dana Wicklund", role: "CNA", on: true, photo: avatarDana },
   { name: "Trevor Boone", role: "CNA", on: true, photo: avatarTrevor },
-  { name: "Sofia Reyes", role: "Phlebotomist", on: false, photo: avatarSofia },
+  { name: "Sofia Reyes", role: "CNA", on: false, photo: avatarSofia },
 ];
 
 const PHOTO_BY_NAME: Record<string, string> = Object.fromEntries(ROSTER.map((r) => [r.name, r.photo]));
@@ -72,12 +72,12 @@ const SCHEDULE = [
     { time: "6:00 PM – 6:00 AM", name: "James Okafor", role: "RN" },
   ]},
   { day: "Saturday", shifts: [
-    { time: "6:00 AM – 6:00 PM", name: "Priya Nair", role: "LPN" },
+    { time: "6:00 AM – 6:00 PM", name: "Priya Nair", role: "RN" },
     { time: "6:00 PM – 6:00 AM", name: "Dana Wicklund", role: "CNA" },
   ]},
   { day: "Sunday", shifts: [
     { time: "6:00 AM – 6:00 PM", name: "Trevor Boone", role: "CNA" },
-    { time: "6:00 PM – 6:00 AM", name: "Weekend Warrior Float", role: "Phlebotomist", float: true },
+    { time: "6:00 PM – 6:00 AM", name: "Weekend Warrior Float", role: "CNA", float: true },
   ]},
 ];
 
@@ -86,13 +86,13 @@ const MESSAGES = [
     from: "Pulse Staffing",
     time: "9:14 AM",
     preview: "Your weekend pod is fully confirmed for May 24 through 26. No action needed.",
-    body: "Good morning Chrissy. Your full pod is confirmed for this weekend, May 24 through 26. All twelve shifts are covered, Friday through Sunday, days and nights. Sofia Reyes is off this weekend and her phlebotomist shifts are covered by a confirmed Weekend Warrior float. Nothing is needed from your team. Have a great weekend.",
+    body: "Good morning Chrissy. Your full pod is confirmed for this weekend, May 24 through 26. All twelve shifts are covered, Friday through Sunday, days and nights. Sofia Reyes is off this weekend and her CNA shifts are covered by a confirmed Weekend Warrior float. Nothing is needed from your team. Have a great weekend.",
   },
   {
     from: "Weekend Warrior System",
     time: "Yesterday",
-    preview: "Priya Nair's LPN license renewal was verified and is on file.",
-    body: "Priya Nair uploaded her renewed LPN license and it has been verified against the Texas Board of Nursing registry. The new expiration date is on file and her credential status is current. No action is needed from your facility.",
+    preview: "Priya Nair's RN license renewal was verified and is on file.",
+    body: "Priya Nair uploaded her renewed RN license and it has been verified against the Texas Board of Nursing registry. The new expiration date is on file and her credential status is current. No action is needed from your facility.",
   },
   {
     from: "Pulse Staffing",
@@ -134,10 +134,10 @@ const COVERAGE_MONTHS = [
 const RETENTION_ROWS = [
   { name: "Maria Alvarez", role: "RN", tenure: "9 months", weekends: 38 },
   { name: "James Okafor", role: "RN", tenure: "7 months", weekends: 30 },
-  { name: "Priya Nair", role: "LPN", tenure: "6 months", weekends: 26 },
+  { name: "Priya Nair", role: "RN", tenure: "6 months", weekends: 26 },
   { name: "Dana Wicklund", role: "CNA", tenure: "5 months", weekends: 21 },
   { name: "Trevor Boone", role: "CNA", tenure: "2 weeks", weekends: 2 },
-  { name: "Sofia Reyes", role: "Phlebotomist", tenure: "4 months", weekends: 17 },
+  { name: "Sofia Reyes", role: "CNA", tenure: "4 months", weekends: 17 },
 ];
 
 const WEEKS = [
@@ -156,9 +156,9 @@ const WEEKENDS = [
 const HISTORY_ROWS = [
   { date: "May 17", name: "Maria Alvarez", role: "RN", shift: "6:00 AM – 6:00 PM", status: "Completed" },
   { date: "May 17", name: "James Okafor", role: "RN", shift: "6:00 PM – 6:00 AM", status: "Completed" },
-  { date: "May 17", name: "Priya Nair", role: "LPN", shift: "6:00 AM – 6:00 PM", status: "Completed" },
+  { date: "May 17", name: "Priya Nair", role: "RN", shift: "6:00 AM – 6:00 PM", status: "Completed" },
   { date: "May 18", name: "Dana Wicklund", role: "CNA", shift: "6:00 AM – 6:00 PM", status: "Completed" },
-  { date: "May 18", name: "Sofia Reyes", role: "Phlebotomist", shift: "6:00 AM – 6:00 PM", status: "Completed" },
+  { date: "May 18", name: "Sofia Reyes", role: "CNA", shift: "6:00 AM – 6:00 PM", status: "Completed" },
   { date: "May 19", name: "Trevor Boone", role: "CNA", shift: "6:00 PM – 6:00 AM", status: "Completed" },
 ];
 
