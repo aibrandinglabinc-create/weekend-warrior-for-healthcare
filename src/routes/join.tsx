@@ -6,13 +6,11 @@ import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { useReveal } from "@/hooks/useReveal";
 
-type ClinicianType = "RN" | "LPN" | "CNA" | "Phlebotomist";
+type ClinicianType = "RN" | "CNA";
 
 const ROLE_CHIPS: { value: ClinicianType; label: string }[] = [
   { value: "RN", label: "RN" },
-  { value: "LPN", label: "LPN" },
   { value: "CNA", label: "CNA" },
-  { value: "Phlebotomist", label: "Phlebotomist" },
 ];
 
 const DAY_CHIPS = [
@@ -31,9 +29,7 @@ function roleParamToChip(raw: string | undefined): ClinicianType | null {
   if (!raw) return null;
   const v = raw.toLowerCase();
   if (v === "rn") return "RN";
-  if (v === "lpn") return "LPN";
   if (v === "cna") return "CNA";
-  if (v === "phlebotomist" || v === "phleb") return "Phlebotomist";
   return null;
 }
 
@@ -48,7 +44,7 @@ export const Route = createFileRoute("/join")({
       {
         name: "description",
         content:
-          "Register as an RN, LPN, CNA, or phlebotomist and join a Weekend Warrior pod. Same facility, same team, every weekend. Two minutes to register.",
+          "Register as an RN or CNA and join a Weekend Warrior pod. Same facility, same team, every weekend. Two minutes to register.",
       },
       { property: "og:title", content: "Become a Weekend Warrior" },
       {
@@ -199,7 +195,7 @@ function Join() {
       {/* ============ HERO ============ */}
       <section className="hero band-dark join" id="top">
         <div className="hero-fallback"></div>
-        <img className="hero-bg" src={joinHeroImg} alt="A pod of RNs, LPNs, CNAs, and phlebotomists checking in together for a weekend shift" />
+        <img className="hero-bg" src={joinHeroImg} alt="A pod of RNs and CNAs checking in together for a weekend shift" />
         <div className="hero-overlay"></div>
         <div className="hero-glow"></div>
         <div className="wrap">
@@ -208,7 +204,7 @@ function Join() {
               <div className="glow-tag reveal">Now Building Weekend Pods</div>
               <h1 className="display reveal d1">Become a<br /><span className="ital-teal">Weekend Warrior.</span></h1>
               <div className="role-strip lg reveal d1">
-                <span>RN</span><span className="rdot">&middot;</span><span>LPN</span><span className="rdot">&middot;</span><span>CNA</span><span className="rdot">&middot;</span><span>Phlebotomist</span>
+                <span>RN</span><span className="rdot">&middot;</span><span>CNA</span>
               </div>
               <div className="role-rule reveal d1"></div>
               <p className="lead reveal d2">Same facility. Same team. Every weekend. You are not a body filling a hole on an app. You are part of a pod that goes back to the same floor, works beside the same people, and gets to know the same residents. Credential once, not at every agency.</p>
@@ -235,10 +231,10 @@ function Join() {
                   {step === 0 && (
                     <div className="field">
                       <div className="chip-grid">
-                        {ROLE_CHIPS.slice(0, 3).map((c) => (
+                        {ROLE_CHIPS.map((c) => (
                           <div
                             key={c.value}
-                            className={`chip${clinicianType === c.value ? " selected" : ""}`}
+                            className={`chip${c.value === "CNA" ? " wide" : ""}${clinicianType === c.value ? " selected" : ""}`}
                             role="radio"
                             aria-checked={clinicianType === c.value}
                             tabIndex={0}
@@ -248,16 +244,6 @@ function Join() {
                             {c.label}
                           </div>
                         ))}
-                        <div
-                          className={`chip wide${clinicianType === "Phlebotomist" ? " selected" : ""}`}
-                          role="radio"
-                          aria-checked={clinicianType === "Phlebotomist"}
-                          tabIndex={0}
-                          onClick={() => selectRole("Phlebotomist")}
-                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectRole("Phlebotomist"); } }}
-                        >
-                          Phlebotomist
-                        </div>
                       </div>
                       {touched && !clinicianType && (
                         <p className="reg-inline-error">Please select your role.</p>
@@ -397,7 +383,7 @@ function Join() {
             <div className="step">
               <div className="sn">02</div>
               <h3>A team, not strangers</h3>
-              <p>RNs, LPNs, CNAs, and phlebotomists placed together on purpose. The same people beside you every weekend, so the load is shared by someone who already knows how you work.</p>
+              <p>RNs and CNAs placed together on purpose. The same people beside you every weekend, so the load is shared by someone who already knows how you work.</p>
             </div>
             <div className="step">
               <div className="sn">03</div>
@@ -476,7 +462,7 @@ function Join() {
           <div className="faq">
             <div className="faq-item">
               <button className="faq-q" onClick={toggleFaq}>Do I have to be an RN?</button>
-              <div className="faq-a"><p>No. Pods are built around what each facility actually needs. Some floors call for more RNs, others need CNAs or a phlebotomist in the mix, and the combination changes from one facility to the next. Pick your role at the top of the form and we match you to a pod that needs it.</p></div>
+              <div className="faq-a"><p>No. Pods are built around what each facility actually needs. Some floors call for more RNs, others need more CNAs, and the combination changes from one facility to the next. Pick your role at the top of the form and we match you to a pod that needs it.</p></div>
             </div>
             <div className="faq-item">
               <button className="faq-q" onClick={toggleFaq}>Is this full time?</button>
@@ -510,14 +496,14 @@ function Join() {
         <div className="wrap">
           <div className="tag reveal">Strategy. Not Staffing.</div>
           <h2 className="reveal d1">Same floor. Same team. Every weekend.</h2>
-          <p className="sub reveal d2">RN, LPN, CNA, or phlebotomist. Two minutes to register, and you are on the list for the next pod we build near you.</p>
+          <p className="sub reveal d2">RN or CNA. Two minutes to register, and you are on the list for the next pod we build near you.</p>
           <div className="reveal d3"><a href="#register" className="btn btn-white btn-lg">Register</a></div>
         </div>
       </section>
 
       {/* ============ FOOTER ============ */}
       <Footer
-        bottomLine="Weekend Warrior by Pulse Staffing. Equal opportunity. RN, LPN, CNA, and phlebotomist roles."
+        bottomLine="Weekend Warrior by Pulse Staffing. Equal opportunity. RN and CNA roles."
         columns={[
           {
             heading: "For Warriors",
