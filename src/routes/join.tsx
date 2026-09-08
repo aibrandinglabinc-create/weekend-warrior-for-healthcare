@@ -230,7 +230,7 @@ function Join() {
 
                   {step === 0 && (
                     <div className="field">
-                      <div className="chip-grid">
+                      <div className="chip-grid roles">
                         {ROLE_CHIPS.map((c) => (
                           <div
                             key={c.value}
