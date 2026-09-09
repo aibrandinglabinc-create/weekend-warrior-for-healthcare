@@ -432,7 +432,8 @@
   .hg-intro{grid-area:intro;}
   .hg-form{grid-area:form;}
   .hg-pills{grid-area:pills;margin-top:8px;}
-  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"intro" "form" "pills";}}
+  .facilities-start{margin-top:110px;}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"intro" "form" "pills";}.facilities-start{margin-top:0;}}
 
   /* ---------- Registration card ---------- */
   .reg-card{position:relative;max-width:440px;background:linear-gradient(150deg,rgba(28,37,49,0.94),rgba(28,37,49,0.82));
