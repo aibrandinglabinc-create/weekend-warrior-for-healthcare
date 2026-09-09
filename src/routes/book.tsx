@@ -107,6 +107,7 @@ function BookPod() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [authority, setAuthority] = useState<string | null>(null);
+  const [paidTiers, setPaidTiers] = useState<string[]>([]);
 
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -280,11 +281,29 @@ function BookPod() {
                 {selectedTiers.length > 0 && (
                   <div className="pay-block">
                     <span className="field-label">Ready to start now</span>
-                    {selectedTiers.map((s) => (
-                      <a key={s.label} className="btn btn-solid reg-submit" href={s.tier.link} target="_blank" rel="noopener">
-                        Pay for {s.label} {s.tier.price}
-                      </a>
-                    ))}
+                    {selectedTiers.every((s) => paidTiers.includes(s.label)) ? (
+                      <p className="pay-done">Payments received. Your pod curation is in progress.</p>
+                    ) : (
+                      selectedTiers
+                        .filter((s) => !paidTiers.includes(s.label))
+                        .slice(0, 1)
+                        .map((s) => (
+                          <a
+                            key={s.label}
+                            className="btn btn-solid reg-submit"
+                            href={s.tier.link}
+                            target="_blank"
+                            rel="noopener"
+                            onClick={() => {
+                              if (!paidTiers.includes(s.label)) {
+                                setPaidTiers((prev) => [...prev, s.label]);
+                              }
+                            }}
+                          >
+                            Pay for {s.label} {s.tier.price}
+                          </a>
+                        ))
+                    )}
                   </div>
                 )}
               </div>
