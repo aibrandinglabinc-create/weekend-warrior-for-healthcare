@@ -81,7 +81,7 @@ const STEP_LABELS = [
   "Best number to reach you?",
   "What's your email?",
   "Where are you licensed?",
-  "Which weekends can you work?",
+  "Which weekend days can you work?",
   "Which shifts work for you?",
 ];
 
