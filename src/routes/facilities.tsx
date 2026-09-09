@@ -83,9 +83,21 @@ function toggleFaq(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
+const FACILITY_STEPS = [
+  "Start with your building.",
+  "Size your RN pod.",
+  "Size your CNA pod.",
+  "Which days and shifts?",
+  "When do you want to start?",
+  "Who do we call?",
+  "How close are you to deciding?",
+];
+
 function Facilities() {
   useReveal();
 
+  const [step, setStep] = useState(0);
+  const [touched, setTouched] = useState(false);
   const [facilityName, setFacilityName] = useState("");
   const [facilityType, setFacilityType] = useState<string | null>(null);
   const [bedCount, setBedCount] = useState("");
@@ -107,7 +119,6 @@ function Facilities() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [podError, setPodError] = useState<string | null>(null);
-  const [typeError, setTypeError] = useState<string | null>(null);
 
   function toggleArrayValue(list: string[], setList: (v: string[]) => void, value: string) {
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
