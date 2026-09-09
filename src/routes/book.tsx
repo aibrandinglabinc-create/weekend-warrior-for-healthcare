@@ -484,7 +484,7 @@ function BookPod() {
 
                 {step === FACILITY_STEPS.length - 1 && (
                   <p className="field-fine">
-                    Booking your pod does not create an account and does not commit you to anything. We build a pod against what you book here, then walk you through it on a fifteen minute call with your number. Your account is created only after you decide to move forward.
+                    Booking your pod does not create an account and does not commit you to anything. Your pod is curated against the specifications you book here, and we confirm the details with you directly. Your account is created only after you decide to move forward.
                   </p>
                 )}
               </form>

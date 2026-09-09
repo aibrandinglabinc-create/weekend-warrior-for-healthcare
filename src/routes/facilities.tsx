@@ -118,7 +118,7 @@ function Facilities() {
           <div className="section-label reveal">
             <span className="n">01</span><span className="rule"></span><span className="cat">What Happens Next</span>
           </div>
-          <h2 className="big reveal">You book it. <span className="ital-teal">We build it.</span></h2>
+          <h2 className="big reveal">You book it. <span className="ital-teal">We curate it.</span></h2>
           <p className="sub reveal d1">Most staffing calls start with a stranger asking you to describe your building. This one does not. Your pod is curated against the specifications you book.</p>
           <div className="steps reveal d2">
             <div className="step">
