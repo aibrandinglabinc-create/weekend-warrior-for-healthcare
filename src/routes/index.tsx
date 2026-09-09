@@ -436,6 +436,7 @@ function Index() {
     {
       heading: "Get Started",
       links: [
+        { label: "Book Your Pod", href: "/facilities" },
         { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
         { label: "Client Login", href: "/login" },
       ],

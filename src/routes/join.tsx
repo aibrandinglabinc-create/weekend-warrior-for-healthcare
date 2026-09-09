@@ -516,8 +516,8 @@ function Join() {
           {
             heading: "For Facilities",
             links: [
+              { label: "Book Your Pod", href: "/facilities" },
               { label: "Weekend Warrior", href: "/" },
-              { label: "Pricing", href: "/#pricing" },
               { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
             ],
           },

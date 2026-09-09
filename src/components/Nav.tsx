@@ -19,7 +19,13 @@ const WORKER_LINKS: NavLink[] = [
   { label: "FAQ", href: "#join-faq" },
 ];
 
-export default function Nav({ variant }: { variant: "facility" | "worker" }) {
+const FACILITIES_LINKS: NavLink[] = [
+  { label: "What Happens Next", href: "#next" },
+  { label: "The Model", href: "#model" },
+  { label: "FAQ", href: "#facility-faq" },
+];
+
+export default function Nav({ variant }: { variant: "facility" | "worker" | "facilities" }) {
   useEffect(() => {
     const nav = document.getElementById("nav");
     const onScroll = () => nav?.classList.toggle("scrolled", window.scrollY > 40);
@@ -28,7 +34,8 @@ export default function Nav({ variant }: { variant: "facility" | "worker" }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = variant === "facility" ? FACILITY_LINKS : WORKER_LINKS;
+  const links =
+    variant === "facility" ? FACILITY_LINKS : variant === "worker" ? WORKER_LINKS : FACILITIES_LINKS;
 
   return (
     <nav id="nav">
@@ -45,17 +52,25 @@ export default function Nav({ variant }: { variant: "facility" | "worker" }) {
         ))}
       </div>
       <div className="nav-cta">
-        {variant === "facility" ? (
+        {variant === "facility" && (
           <>
-            <Link to="/join" className="btn">Register</Link>
+            <Link to="/join" className="btn">Warrior Registration</Link>
             <Link to="/login" className="btn btn-ghost">Login</Link>
-            <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid">Book a Demo</a>
+            <Link to="/facilities" className="btn btn-solid">Book Your Pod</Link>
           </>
-        ) : (
+        )}
+        {variant === "worker" && (
           <>
             <a href="#register" className="btn btn-solid">Register</a>
             <Link to="/login" className="btn btn-ghost">Login</Link>
-            <Link to="/" className="btn btn-ghost">For Facilities</Link>
+            <Link to="/facilities" className="btn btn-ghost">Book Your Pod</Link>
+          </>
+        )}
+        {variant === "facilities" && (
+          <>
+            <a href="#book" className="btn btn-solid">Book Your Pod</a>
+            <Link to="/login" className="btn btn-ghost">Login</Link>
+            <Link to="/join" className="btn btn-ghost">For Warriors</Link>
           </>
         )}
       </div>
