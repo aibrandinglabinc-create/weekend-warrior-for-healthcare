@@ -10,8 +10,6 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 
-const DEMO_LINK = "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo";
-
 type PodTier = {
   value: string;
   label: string;
