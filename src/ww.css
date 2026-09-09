@@ -430,10 +430,10 @@
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;
       grid-template-areas:"intro form" "pills form";align-items:start;}
   .hg-intro{grid-area:intro;}
-  .hg-form{grid-area:form;}
+  .hg-form{grid-area:form;margin-top:140px;}
   .hg-pills{grid-area:pills;margin-top:8px;}
   .facilities-start{margin-top:110px;}
-  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"intro" "form" "pills";}.facilities-start{margin-top:0;}}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"intro" "form" "pills";}.hg-form{margin-top:0;}.facilities-start{margin-top:0;}}
 
   /* ---------- Registration card ---------- */
   .reg-card{position:relative;max-width:440px;background:linear-gradient(150deg,rgba(28,37,49,0.94),rgba(28,37,49,0.82));
