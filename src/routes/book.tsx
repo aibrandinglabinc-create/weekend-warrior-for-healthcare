@@ -446,7 +446,7 @@ function BookPod() {
                       rows={4}
                       value={floorNotes}
                       onChange={(e) => setFloorNotes(e.target.value)}
-                      placeholder="Acuity, required certifications, language needs, same gender care requirements, anything about the floor we should know."
+                      placeholder="Optional. Acuity, required certifications, language needs, same gender care requirements, anything about the floor we should know."
                     />
                   </div>
                 )}
