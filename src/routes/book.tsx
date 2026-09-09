@@ -184,7 +184,7 @@ function BookPod() {
       case 9:
         return startDate !== "";
       case 10:
-        return floorNotes.trim() !== "";
+        return true;
       case 11:
         return firstName.trim() !== "";
       case 12:
