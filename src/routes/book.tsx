@@ -289,11 +289,6 @@ function BookPod() {
                     ))}
                   </div>
                 )}
-                <div style={{ marginTop: 20, textAlign: "center" }}>
-                  <a href={DEMO_LINK} target="_blank" rel="noopener" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>
-                    Want to skip the wait? Book the call now &rarr;
-                  </a>
-                </div>
               </div>
             ) : (
               <form className="reg-card" noValidate onSubmit={handleSubmit}>
