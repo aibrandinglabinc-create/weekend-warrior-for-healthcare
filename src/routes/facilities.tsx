@@ -20,7 +20,7 @@ const RN_TIERS: PodTier[] = [
   { value: "1-2", label: "1-2", price: "$798", link: "https://link.clover.com/urlshortener/FLPQnH" },
   { value: "3-5", label: "3-5", price: "$998", link: "https://link.clover.com/urlshortener/wtnWQ7" },
   { value: "6-10", label: "6-10", price: "$1198", link: "https://link.clover.com/urlshortener/rRXyG8" },
-  { value: "7 or more", label: "11 or more", price: "Scoped on the call" },
+  { value: "7 or more", label: "11 or more", price: "Custom" },
 ];
 
 const CNA_TIERS: PodTier[] = [
@@ -28,7 +28,7 @@ const CNA_TIERS: PodTier[] = [
   { value: "1-2", label: "1-2", price: "$498", link: "https://link.clover.com/urlshortener/pVzcCf" },
   { value: "3-5", label: "3-5", price: "$798", link: "https://link.clover.com/urlshortener/YVNLps" },
   { value: "6-10", label: "6-10", price: "$997", link: "https://link.clover.com/urlshortener/ZD7Qsw" },
-  { value: "7 or more", label: "11 or more", price: "Scoped on the call" },
+  { value: "7 or more", label: "11 or more", price: "Custom" },
 ];
 
 const FACILITY_TYPES = [
