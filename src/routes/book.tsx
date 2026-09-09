@@ -265,7 +265,7 @@ function BookPod() {
             {status === "success" ? (
               <div className="reg-card">
                 <div className="reg-confirm">
-                  <h3>We Are Building Your Pod.</h3>
+                  <h3>We Are Curating Your Pod.</h3>
                   <p>Check your email for a confirmation. We are matching your requirement against credentialed Warriors in your area now. Within two business days you will hear from us to schedule a fifteen minute call where you meet the pod we built and get your number.</p>
                 </div>
                 {selectedTiers.length > 0 && (
