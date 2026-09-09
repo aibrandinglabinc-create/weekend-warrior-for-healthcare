@@ -356,7 +356,7 @@ function Join() {
 
                   {step === TOTAL_STEPS - 1 && (
                     <p className="field-fine">
-                      Registering does not create an account. We review every registration, and if you match an open pod we email you a link to set up your login and upload your documents. By registering you agree to receive email and text from Weekend Warrior. Reply STOP to opt out.
+                      Registering does not create an account. You are added to the matching list, and when you match an open pod you will get an email with a link to set up your login and upload your documents. By registering you agree to receive email and text from Weekend Warrior. Reply STOP to opt out.
                     </p>
                   )}
                 </form>
