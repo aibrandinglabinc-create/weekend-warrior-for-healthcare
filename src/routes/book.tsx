@@ -54,8 +54,7 @@ const FACILITY_STEPS = [
   { question: "How many beds?", error: "Please enter a bed count." },
   { question: "What city is it in?", error: "Please enter the city." },
   { question: "What is the zip code?", error: "Please enter the zip code." },
-  { question: "RN Pod", sub: "Size your RN pod. Select None if you only need CNAs.", error: "Select an RN pod size or choose None." },
-  { question: "CNA Pod", sub: "Size your CNA pod. Select None if you only need RNs.", error: "Select a CNA pod size or choose None." },
+  { question: "Choose Your Pod Size", sub: "Select the RN pod and CNA pod you need. Either can be set to None.", error: "Select your pod sizes." },
   { question: "Which weekend days need coverage?", error: "Pick at least one day." },
   { question: "Which shifts?", error: "Pick at least one shift." },
   { question: "When do you want coverage to start?", error: "Pick a desired start date." },
@@ -176,26 +175,24 @@ function BookPod() {
       case 5:
         return true;
       case 6:
-        return true;
-      case 7:
         return days.length > 0;
-      case 8:
+      case 7:
         return shift.length > 0;
-      case 9:
+      case 8:
         return startDate !== "";
-      case 10:
+      case 9:
         return true;
-      case 11:
+      case 10:
         return firstName.trim() !== "";
-      case 12:
+      case 11:
         return lastName.trim() !== "";
-      case 13:
+      case 12:
         return title.trim() !== "";
-      case 14:
+      case 13:
         return email.trim() !== "";
-      case 15:
+      case 14:
         return phone.trim() !== "";
-      case 16:
+      case 15:
         return !!authority;
       default:
         return true;
@@ -354,18 +351,19 @@ function BookPod() {
                 )}
 
                 {step === 5 && (
-                  <div className="field">
-                    {podGrid(RN_TIERS, rnPod, setRnPod)}
+                  <div className="field combined-pod-field">
+                    <div className="pod-choice-group">
+                      <span className="pod-choice-title">RN Pod</span>
+                      {podGrid(RN_TIERS, rnPod, setRnPod)}
+                    </div>
+                    <div className="pod-choice-group">
+                      <span className="pod-choice-title">CNA Pod</span>
+                      {podGrid(CNA_TIERS, cnaPod, setCnaPod)}
+                    </div>
                   </div>
                 )}
 
                 {step === 6 && (
-                  <div className="field">
-                    {podGrid(CNA_TIERS, cnaPod, setCnaPod)}
-                  </div>
-                )}
-
-                {step === 7 && (
                   <div className="field">
                     <div className="chip-row">
                       {DAY_CHIPS.map((d) => (
@@ -385,7 +383,7 @@ function BookPod() {
                   </div>
                 )}
 
-                {step === 8 && (
+                {step === 7 && (
                   <div className="field">
                     <div className="chip-row">
                       {SHIFT_CHIPS.map((s) => (
@@ -405,7 +403,7 @@ function BookPod() {
                   </div>
                 )}
 
-                {step === 9 && (
+                {step === 8 && (
                   <div className="field">
                     <Popover>
                       <PopoverTrigger asChild>
@@ -439,7 +437,7 @@ function BookPod() {
                   </div>
                 )}
 
-                {step === 10 && (
+                {step === 9 && (
                   <div className="field">
                     <textarea
                       autoFocus
@@ -451,37 +449,37 @@ function BookPod() {
                   </div>
                 )}
 
-                {step === 11 && (
+                {step === 10 && (
                   <div className="field">
                     <input autoFocus value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First name" />
                   </div>
                 )}
 
-                {step === 12 && (
+                {step === 11 && (
                   <div className="field">
                     <input autoFocus value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last name" />
                   </div>
                 )}
 
-                {step === 13 && (
+                {step === 12 && (
                   <div className="field">
                     <input autoFocus value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Director of Nursing" />
                   </div>
                 )}
 
-                {step === 14 && (
+                {step === 13 && (
                   <div className="field">
                     <input autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@facility.com" />
                   </div>
                 )}
 
-                {step === 15 && (
+                {step === 14 && (
                   <div className="field">
                     <input autoFocus type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 555-5555" />
                   </div>
                 )}
 
-                {step === 16 && (
+                {step === 15 && (
                   <div className="field">
                     <div className="chip-grid">
                       {AUTHORITY.map((a) => (

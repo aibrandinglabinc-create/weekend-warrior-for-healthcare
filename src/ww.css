@@ -683,6 +683,10 @@
   .chip.pod-chip .pod-price{font-size:9px;letter-spacing:.4px;color:var(--white-50);text-transform:none;}
   .chip.pod-chip.selected .pod-price{color:var(--teal-light);}
   .chip.pod-chip.selected::after{display:none;}
+  .combined-pod-field{display:flex;flex-direction:column;gap:22px;}
+  .pod-choice-group{display:flex;flex-direction:column;gap:9px;}
+  .pod-choice-title{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.8px;
+      text-transform:uppercase;color:var(--white);}
 
   .pay-block{margin-top:24px;padding-top:20px;border-top:1px solid var(--white-20);
       display:flex;flex-direction:column;gap:10px;}
