@@ -119,7 +119,7 @@ function Facilities() {
             <span className="n">01</span><span className="rule"></span><span className="cat">What Happens Next</span>
           </div>
           <h2 className="big reveal">You book it. <span className="ital-teal">We build it.</span></h2>
-          <p className="sub reveal d1">Most staffing calls start with a stranger asking you to describe your building. This one does not. By the time we talk, your pod already exists.</p>
+          <p className="sub reveal d1">Most staffing calls start with a stranger asking you to describe your building. This one does not. Your pod is curated against the specifications you book.</p>
           <div className="steps reveal d2">
             <div className="step">
               <div className="sn">01</div>
@@ -128,13 +128,13 @@ function Facilities() {
             </div>
             <div className="step">
               <div className="sn">02</div>
-              <h3>We build your pod</h3>
-              <p>We assemble a team against your requirement from Warriors who are already credentialed and cleared, in your area, available on those weekends.</p>
+              <h3>We curate your pod</h3>
+              <p>Your pod is curated against your specifications from Warriors who are already credentialed and cleared, in your area, available on those weekends.</p>
             </div>
             <div className="step">
               <div className="sn">03</div>
-              <h3>We walk you through it</h3>
-              <p>A fifteen minute call. You meet the pod we built, you get your number, and you decide. No obligation on either side.</p>
+              <h3>You get your number</h3>
+              <p>One subscription price built to your facility. You decide. No obligation on either side.</p>
             </div>
           </div>
         </div>
