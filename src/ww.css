@@ -675,7 +675,8 @@
   .pod-row:last-of-type{margin-bottom:0;}
   .pod-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;}
   @media(max-width:520px){.pod-grid{grid-template-columns:repeat(3,1fr);}}
-  .chip.pod-chip{flex-direction:column;gap:4px;padding:11px 4px;font-size:11px;letter-spacing:.8px;}
+  .chip.pod-chip{flex-direction:column;gap:4px;padding:11px 4px;font-size:11px;letter-spacing:.8px;
+      min-height:64px;justify-content:center;text-align:center;}
   .chip.pod-chip .pod-size{font-weight:700;}
   .chip.pod-chip .pod-price{font-size:9px;letter-spacing:.4px;color:var(--white-50);text-transform:none;}
   .chip.pod-chip.selected .pod-price{color:var(--teal-light);}
