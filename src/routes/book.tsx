@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
@@ -401,7 +407,35 @@ function BookPod() {
 
                 {step === 9 && (
                   <div className="field">
-                    <input autoFocus type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full justify-start text-left font-normal bg-transparent border-white/20 hover:bg-white/5 hover:text-white",
+                            !startDate && "text-white/50"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {startDate ? format(new Date(startDate), "PPP") : <span>Pick a weekend date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={startDate ? new Date(startDate) : undefined}
+                          onSelect={(date) => {
+                            if (date) setStartDate(format(date, "yyyy-MM-dd"));
+                          }}
+                          disabled={(date) => {
+                            const day = date.getDay();
+                            return day !== 5 && day !== 6 && day !== 0;
+                          }}
+                          initialFocus
+                          className="p-3 pointer-events-auto"
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
                 )}
 
