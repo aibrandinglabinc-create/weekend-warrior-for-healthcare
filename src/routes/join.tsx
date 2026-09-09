@@ -214,8 +214,8 @@ function Join() {
               {status === "success" ? (
                 <div className="reg-card">
                   <div className="reg-confirm">
-                    <h3>You Are On The List.</h3>
-                    <p>Check your text messages and email for a confirmation. We review registrations against the pods we are building right now. If there is an open seat for your role near you, we will email you a link to set up your login and upload your documents.</p>
+                    <h3>You're registered!</h3>
+                    <p>We will let you know as soon as you are matched with an open pod. Matching is automated, so there is no human bottleneck slowing it down.</p>
                   </div>
                 </div>
               ) : (
