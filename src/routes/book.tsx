@@ -43,21 +43,23 @@ const SHIFT_CHIPS = ["Days", "Evenings", "Nights"];
 const AUTHORITY = ["I sign", "I recommend", "Gathering information"];
 
 const FACILITY_STEPS = [
-  "Start with your building.",
-  "Size your pods.",
-  "Which days and shifts?",
-  "When do you want to start?",
-  "Who do we call?",
-  "How close are you to deciding?",
-];
-
-const STEP_ERRORS = [
-  "Please complete your facility name, type, bed count, city, and zip.",
-  "Select at least one pod so we know what to build.",
-  "Pick the days and shifts you need covered.",
-  "Pick a desired start date.",
-  "Please complete your name, title, email, and phone.",
-  "Let us know where you are in the decision.",
+  { question: "What is your facility's name?", error: "Please enter your facility name." },
+  { question: "What type of facility is it?", error: "Please select a facility type." },
+  { question: "How many beds?", error: "Please enter a bed count." },
+  { question: "What city is it in?", error: "Please enter the city." },
+  { question: "What is the zip code?", error: "Please enter the zip code." },
+  { question: "Size your RN pod.", error: "Select an RN pod size or choose None." },
+  { question: "Size your CNA pod.", error: "Select a CNA pod size or choose None." },
+  { question: "Which weekend days need coverage?", error: "Pick at least one day." },
+  { question: "Which shifts?", error: "Pick at least one shift." },
+  { question: "When do you want coverage to start?", error: "Pick a desired start date." },
+  { question: "Anything else about the floor?", error: "Add floor notes or type N/A." },
+  { question: "What is your first name?", error: "Please enter your first name." },
+  { question: "What is your last name?", error: "Please enter your last name." },
+  { question: "What is your title?", error: "Please enter your title." },
+  { question: "What is your work email?", error: "Please enter your work email." },
+  { question: "What is your direct phone number?", error: "Please enter your direct phone number." },
+  { question: "How close are you to deciding?", error: "Please select your decision authority." },
 ];
 
 export const Route = createFileRoute("/book")({
@@ -156,28 +158,38 @@ function BookPod() {
   function stepValid(s: number): boolean {
     switch (s) {
       case 0:
-        return (
-          facilityName.trim() !== "" &&
-          !!facilityType &&
-          bedCount.trim() !== "" &&
-          city.trim() !== "" &&
-          zip.trim() !== ""
-        );
+        return facilityName.trim() !== "";
       case 1:
-        return rnPod !== "None" || cnaPod !== "None";
+        return !!facilityType;
       case 2:
-        return days.length > 0 && shift.length > 0;
+        return bedCount.trim() !== "";
       case 3:
-        return startDate !== "";
+        return city.trim() !== "";
       case 4:
-        return (
-          firstName.trim() !== "" &&
-          lastName.trim() !== "" &&
-          title.trim() !== "" &&
-          email.trim() !== "" &&
-          phone.trim() !== ""
-        );
+        return zip.trim() !== "";
       case 5:
+        return true;
+      case 6:
+        return true;
+      case 7:
+        return days.length > 0;
+      case 8:
+        return shift.length > 0;
+      case 9:
+        return startDate !== "";
+      case 10:
+        return floorNotes.trim() !== "";
+      case 11:
+        return firstName.trim() !== "";
+      case 12:
+        return lastName.trim() !== "";
+      case 13:
+        return title.trim() !== "";
+      case 14:
+        return email.trim() !== "";
+      case 15:
+        return phone.trim() !== "";
+      case 16:
         return !!authority;
       default:
         return true;
@@ -186,7 +198,7 @@ function BookPod() {
 
   function goNext() {
     if (!stepValid(step)) {
-      setErrorMsg(STEP_ERRORS[step] || "Please complete this step.");
+      setErrorMsg(FACILITY_STEPS[step].error);
       return;
     }
     setErrorMsg(null);
@@ -206,7 +218,7 @@ function BookPod() {
       return;
     }
     if (!stepValid(step)) {
-      setErrorMsg(STEP_ERRORS[step]);
+      setErrorMsg(FACILITY_STEPS[step].error);
       return;
     }
     submitBooking();
@@ -223,33 +235,29 @@ function BookPod() {
     },
   ].filter(Boolean) as { label: string; tier: PodTier }[];
 
-  function podRow(
-    heading: string,
+  function podGrid(
     tiers: PodTier[],
     selected: string,
     setSelected: (v: string) => void,
   ) {
     return (
-      <div className="pod-row">
-        <span className="field-label">{heading}</span>
-        <div className="pod-grid">
-          {tiers.map((t) => (
-            <div
-              key={t.value}
-              className={`chip pod-chip${selected === t.value ? " selected" : ""}`}
-              role="radio"
-              aria-checked={selected === t.value}
-              tabIndex={0}
-              onClick={() => { setSelected(t.value); setErrorMsg(null); }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelected(t.value); setErrorMsg(null); }
-              }}
-            >
-              <span className="pod-size">{t.label}</span>
-              {t.price && <span className="pod-price">{t.price}</span>}
-            </div>
-          ))}
-        </div>
+      <div className="pod-grid single-q-pod-grid">
+        {tiers.map((t) => (
+          <div
+            key={t.value}
+            className={`chip pod-chip${selected === t.value ? " selected" : ""}`}
+            role="radio"
+            aria-checked={selected === t.value}
+            tabIndex={0}
+            onClick={() => { setSelected(t.value); setErrorMsg(null); }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelected(t.value); setErrorMsg(null); }
+            }}
+          >
+            <span className="pod-size">{t.label}</span>
+            {t.price && <span className="pod-price">{t.price}</span>}
+          </div>
+        ))}
       </div>
     );
   }
@@ -291,155 +299,155 @@ function BookPod() {
                   <span>Step {step + 1} of {FACILITY_STEPS.length}</span>
                   <div className="reg-progress-track"><div className="reg-progress-fill" style={{ width: `${((step + 1) / FACILITY_STEPS.length) * 100}%` }} /></div>
                 </div>
-                <h2 className="card-h">{FACILITY_STEPS[step]}</h2>
-                {step === 0 && <p className="card-sub">Five minutes. No commitment on this form.</p>}
+                <h2 className="card-h">Start Building Your Pod.</h2>
+                <p className="card-sub">{FACILITY_STEPS[step].question}</p>
 
                 {step === 0 && (
-                  <>
-                    <div className="field">
-                      <span className="field-label">Facility Name</span>
-                      <input autoFocus value={facilityName} onChange={(e) => setFacilityName(e.target.value)} placeholder="Cedar Ridge Care Center" />
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Facility Type</span>
-                      <div className="chip-grid">
-                        {FACILITY_TYPES.map((t) => (
-                          <div
-                            key={t}
-                            className={`chip${facilityType === t ? " selected" : ""}`}
-                            role="radio"
-                            aria-checked={facilityType === t}
-                            tabIndex={0}
-                            onClick={() => setFacilityType(t)}
-                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFacilityType(t); } }}
-                          >
-                            {t}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Bed Count</span>
-                      <input inputMode="numeric" value={bedCount} onChange={(e) => setBedCount(e.target.value.replace(/[^0-9]/g, ""))} placeholder="120" />
-                    </div>
-
-                    <div className="field-row">
-                      <div>
-                        <span className="field-label">City</span>
-                        <input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Dallas" />
-                      </div>
-                      <div>
-                        <span className="field-label">Zip Code</span>
-                        <input inputMode="numeric" maxLength={5} value={zip} onChange={(e) => setZip(e.target.value.replace(/[^0-9]/g, ""))} placeholder="75201" />
-                      </div>
-                    </div>
-                  </>
+                  <div className="field">
+                    <input autoFocus value={facilityName} onChange={(e) => setFacilityName(e.target.value)} placeholder="Cedar Ridge Care Center" />
+                  </div>
                 )}
 
                 {step === 1 && (
-                  <div className="pod-block">
-                    <p className="pod-helper">Most buildings need more CNAs than RNs. Size them separately.</p>
-                    {podRow("RN Pod Size", RN_TIERS, rnPod, setRnPod)}
-                    {podRow("CNA Pod Size", CNA_TIERS, cnaPod, setCnaPod)}
+                  <div className="field">
+                    <div className="chip-grid">
+                      {FACILITY_TYPES.map((t) => (
+                        <div
+                          key={t}
+                          className={`chip${facilityType === t ? " selected" : ""}`}
+                          role="radio"
+                          aria-checked={facilityType === t}
+                          tabIndex={0}
+                          onClick={() => setFacilityType(t)}
+                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFacilityType(t); } }}
+                        >
+                          {t}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
                 {step === 2 && (
-                  <>
-                    <div className="field">
-                      <span className="field-label">Days You Need Covered</span>
-                      <div className="chip-row">
-                        {DAY_CHIPS.map((d) => (
-                          <div
-                            key={d}
-                            className={`chip${days.includes(d) ? " selected" : ""}`}
-                            role="checkbox"
-                            aria-checked={days.includes(d)}
-                            tabIndex={0}
-                            onClick={() => toggleArrayValue(days, setDays, d)}
-                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(days, setDays, d); } }}
-                          >
-                            {d.slice(0, 3)}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Shifts</span>
-                      <div className="chip-row">
-                        {SHIFT_CHIPS.map((s) => (
-                          <div
-                            key={s}
-                            className={`chip${shift.includes(s) ? " selected" : ""}`}
-                            role="checkbox"
-                            aria-checked={shift.includes(s)}
-                            tabIndex={0}
-                            onClick={() => toggleArrayValue(shift, setShift, s)}
-                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(shift, setShift, s); } }}
-                          >
-                            {s}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
+                  <div className="field">
+                    <input autoFocus inputMode="numeric" value={bedCount} onChange={(e) => setBedCount(e.target.value.replace(/[^0-9]/g, ""))} placeholder="120" />
+                  </div>
                 )}
 
                 {step === 3 && (
-                  <>
-                    <div className="field">
-                      <span className="field-label">Desired Start Date</span>
-                      <input autoFocus type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Floor Notes</span>
-                      <textarea
-                        rows={3}
-                        value={floorNotes}
-                        onChange={(e) => setFloorNotes(e.target.value)}
-                        placeholder="Acuity, required certifications, language needs, same gender care requirements, anything about the floor we should know."
-                      />
-                    </div>
-                  </>
+                  <div className="field">
+                    <input autoFocus value={city} onChange={(e) => setCity(e.target.value)} placeholder="Dallas" />
+                  </div>
                 )}
 
                 {step === 4 && (
-                  <>
-                    <div className="field-row">
-                      <div>
-                        <span className="field-label">First Name</span>
-                        <input autoFocus value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First name" />
-                      </div>
-                      <div>
-                        <span className="field-label">Last Name</span>
-                        <input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last name" />
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Title</span>
-                      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Director of Nursing" />
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Work Email</span>
-                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@facility.com" />
-                    </div>
-
-                    <div className="field">
-                      <span className="field-label">Direct Phone</span>
-                      <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 555-5555" />
-                    </div>
-                  </>
+                  <div className="field">
+                    <input autoFocus inputMode="numeric" maxLength={5} value={zip} onChange={(e) => setZip(e.target.value.replace(/[^0-9]/g, ""))} placeholder="75201" />
+                  </div>
                 )}
 
                 {step === 5 && (
                   <div className="field">
-                    <span className="field-label">Decision Authority</span>
+                    {podGrid(RN_TIERS, rnPod, setRnPod)}
+                  </div>
+                )}
+
+                {step === 6 && (
+                  <div className="field">
+                    {podGrid(CNA_TIERS, cnaPod, setCnaPod)}
+                  </div>
+                )}
+
+                {step === 7 && (
+                  <div className="field">
+                    <div className="chip-row">
+                      {DAY_CHIPS.map((d) => (
+                        <div
+                          key={d}
+                          className={`chip${days.includes(d) ? " selected" : ""}`}
+                          role="checkbox"
+                          aria-checked={days.includes(d)}
+                          tabIndex={0}
+                          onClick={() => toggleArrayValue(days, setDays, d)}
+                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(days, setDays, d); } }}
+                        >
+                          {d.slice(0, 3)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {step === 8 && (
+                  <div className="field">
+                    <div className="chip-row">
+                      {SHIFT_CHIPS.map((s) => (
+                        <div
+                          key={s}
+                          className={`chip${shift.includes(s) ? " selected" : ""}`}
+                          role="checkbox"
+                          aria-checked={shift.includes(s)}
+                          tabIndex={0}
+                          onClick={() => toggleArrayValue(shift, setShift, s)}
+                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArrayValue(shift, setShift, s); } }}
+                        >
+                          {s}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {step === 9 && (
+                  <div className="field">
+                    <input autoFocus type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                  </div>
+                )}
+
+                {step === 10 && (
+                  <div className="field">
+                    <textarea
+                      autoFocus
+                      rows={4}
+                      value={floorNotes}
+                      onChange={(e) => setFloorNotes(e.target.value)}
+                      placeholder="Acuity, required certifications, language needs, same gender care requirements, anything about the floor we should know."
+                    />
+                  </div>
+                )}
+
+                {step === 11 && (
+                  <div className="field">
+                    <input autoFocus value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First name" />
+                  </div>
+                )}
+
+                {step === 12 && (
+                  <div className="field">
+                    <input autoFocus value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last name" />
+                  </div>
+                )}
+
+                {step === 13 && (
+                  <div className="field">
+                    <input autoFocus value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Director of Nursing" />
+                  </div>
+                )}
+
+                {step === 14 && (
+                  <div className="field">
+                    <input autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@facility.com" />
+                  </div>
+                )}
+
+                {step === 15 && (
+                  <div className="field">
+                    <input autoFocus type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 555-5555" />
+                  </div>
+                )}
+
+                {step === 16 && (
+                  <div className="field">
                     <div className="chip-grid">
                       {AUTHORITY.map((a) => (
                         <div
