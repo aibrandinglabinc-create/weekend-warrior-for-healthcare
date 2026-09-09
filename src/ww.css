@@ -657,3 +657,30 @@
   .steps.four{grid-template-columns:repeat(4,1fr);}
   @media(max-width:960px){.steps.four{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:560px){.steps.four{grid-template-columns:1fr;}}
+
+  /* ---------- Pod booking (facilities) ---------- */
+  .field textarea{width:100%;background:rgba(255,255,255,0.045);border:1px solid var(--white-20);
+      color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;padding:12px 13px;
+      line-height:1.6;resize:vertical;}
+  .field textarea:focus{outline:none;border-color:var(--teal);}
+  .field textarea::placeholder{color:var(--white-50);}
+  .field input[type="date"]{color-scheme:dark;}
+
+  .pod-block{margin:22px 0 18px;padding:18px 16px;border:1px solid rgba(0,181,184,0.28);
+      background:rgba(0,181,184,0.06);}
+  .pod-block-h{display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2.4px;
+      text-transform:uppercase;color:var(--teal-light);}
+  .pod-helper{font-size:11.5px;color:var(--white-50);margin:8px 0 16px;line-height:1.6;}
+  .pod-row{margin-bottom:14px;}
+  .pod-row:last-of-type{margin-bottom:0;}
+  .pod-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;}
+  @media(max-width:520px){.pod-grid{grid-template-columns:repeat(3,1fr);}}
+  .chip.pod-chip{flex-direction:column;gap:4px;padding:11px 4px;font-size:11px;letter-spacing:.8px;
+      min-height:64px;justify-content:center;text-align:center;}
+  .chip.pod-chip .pod-size{font-weight:700;}
+  .chip.pod-chip .pod-price{font-size:9px;letter-spacing:.4px;color:var(--white-50);text-transform:none;}
+  .chip.pod-chip.selected .pod-price{color:var(--teal-light);}
+  .chip.pod-chip.selected::after{display:none;}
+
+  .pay-block{margin-top:24px;padding-top:20px;border-top:1px solid var(--white-20);
+      display:flex;flex-direction:column;gap:10px;}
