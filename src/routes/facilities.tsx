@@ -167,39 +167,80 @@ function Facilities() {
     }
   }
 
+  function stepValid(s: number): boolean {
+    switch (s) {
+      case 0:
+        return (
+          facilityName.trim() !== "" &&
+          !!facilityType &&
+          bedCount.trim() !== "" &&
+          city.trim() !== "" &&
+          zip.trim() !== ""
+        );
+      case 1:
+        return true;
+      case 2:
+        return rnPod !== "None" || cnaPod !== "None";
+      case 3:
+        return days.length > 0 && shift.length > 0;
+      case 4:
+        return startDate !== "";
+      case 5:
+        return (
+          firstName.trim() !== "" &&
+          lastName.trim() !== "" &&
+          title.trim() !== "" &&
+          email.trim() !== "" &&
+          phone.trim() !== ""
+        );
+      case 6:
+        return !!authority;
+      default:
+        return true;
+    }
+  }
+
+  const STEP_ERRORS = [
+    "Please complete your facility name, type, bed count, city, and zip.",
+    "",
+    "Select at least one pod so we know what to build.",
+    "Pick the days and shifts you need covered.",
+    "Pick a desired start date.",
+    "Please complete your name, title, email, and phone.",
+    "Let us know where you are in the decision.",
+  ];
+
+  function goNext() {
+    if (!stepValid(step)) {
+      setTouched(true);
+      if (step === 2) setPodError(STEP_ERRORS[2]);
+      else setErrorMsg(STEP_ERRORS[step] || "Please complete this step.");
+      return;
+    }
+    setTouched(false);
+    setErrorMsg(null);
+    setPodError(null);
+    setStep((s) => Math.min(s + 1, FACILITY_STEPS.length - 1));
+  }
+
+  function goBack() {
+    setTouched(false);
+    setErrorMsg(null);
+    setPodError(null);
+    setStep((s) => Math.max(s - 1, 0));
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    let blocked = false;
-    if (!facilityType) {
-      setTypeError("Please select your facility type.");
-      blocked = true;
-    } else {
-      setTypeError(null);
+    if (step < FACILITY_STEPS.length - 1) {
+      goNext();
+      return;
     }
-    if (rnPod === "None" && cnaPod === "None") {
-      setPodError("Select at least one pod so we know what to build.");
-      blocked = true;
-    } else {
-      setPodError(null);
+    if (!stepValid(step)) {
+      setTouched(true);
+      setErrorMsg(STEP_ERRORS[step]);
+      return;
     }
-    const missingRequired =
-      !facilityName.trim() ||
-      !bedCount.trim() ||
-      !city.trim() ||
-      !zip.trim() ||
-      !startDate ||
-      !firstName.trim() ||
-      !lastName.trim() ||
-      !title.trim() ||
-      !email.trim() ||
-      !phone.trim();
-    if (!authority || missingRequired) {
-      blocked = true;
-      setErrorMsg("Please complete the required fields above.");
-    } else {
-      setErrorMsg(null);
-    }
-    if (blocked) return;
     submitBooking();
   }
 
