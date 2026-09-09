@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, nextFriday } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
-
-const DEMO_LINK = "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo";
 
 type PodTier = {
   value: string;
@@ -101,7 +99,7 @@ function BookPod() {
   const [cnaPod, setCnaPod] = useState("None");
   const [days, setDays] = useState<string[]>([]);
   const [shift, setShift] = useState<string[]>([]);
-  const [startDate, setStartDate] = useState("");
+  const [startDate, setStartDate] = useState(format(nextFriday(new Date()), "yyyy-MM-dd"));
   const [floorNotes, setFloorNotes] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -289,11 +287,6 @@ function BookPod() {
                     ))}
                   </div>
                 )}
-                <div style={{ marginTop: 20, textAlign: "center" }}>
-                  <a href={DEMO_LINK} target="_blank" rel="noopener" style={{ fontSize: 12.5, color: "var(--teal-light)" }}>
-                    Want to skip the wait? Book the call now &rarr;
-                  </a>
-                </div>
               </div>
             ) : (
               <form className="reg-card" noValidate onSubmit={handleSubmit}>
@@ -548,7 +541,7 @@ function BookPod() {
             links: [
               { label: "Book Your Pod", href: "/facilities" },
               { label: "Weekend Warrior", href: "/" },
-              { label: "Book a Demo", href: DEMO_LINK },
+              { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
             ],
           },
           {
