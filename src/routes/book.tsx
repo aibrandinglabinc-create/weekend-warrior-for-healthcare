@@ -265,8 +265,8 @@ function BookPod() {
             {status === "success" ? (
               <div className="reg-card">
                 <div className="reg-confirm">
-                  <h3>We Are Building Your Pod.</h3>
-                  <p>Check your email for a confirmation. We are matching your requirement against credentialed Warriors in your area now. Within two business days you will hear from us to schedule a fifteen minute call where you meet the pod we built and get your number.</p>
+                  <h3>We Are Curating Your Pod.</h3>
+                  <p>Check your email for a confirmation. Your pod is being curated against the specifications you booked, from credentialed Warriors in your area. Within two business days you will hear from us with your number.</p>
                 </div>
                 {selectedTiers.length > 0 && (
                   <div className="pay-block">
@@ -484,7 +484,7 @@ function BookPod() {
 
                 {step === FACILITY_STEPS.length - 1 && (
                   <p className="field-fine">
-                    Booking your pod does not create an account and does not commit you to anything. We build a pod against what you book here, then walk you through it on a fifteen minute call with your number. Your account is created only after you decide to move forward.
+                    Booking your pod does not create an account and does not commit you to anything. Your pod is curated against the specifications you book here, and we confirm the details with you directly. Your account is created only after you decide to move forward.
                   </p>
                 )}
               </form>

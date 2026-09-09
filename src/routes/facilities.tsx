@@ -86,7 +86,7 @@ function Facilities() {
                 <p className="card-sub">Six short questions about your building, your pods, and your weekend. About five minutes, and no commitment.</p>
                 <Link to="/book" className="btn btn-solid reg-submit">Start Here</Link>
                 <p className="field-fine">
-                  Booking your pod does not create an account and does not commit you to anything. We build a pod against what you book, then walk you through it on a fifteen minute call with your number.
+                  Booking your pod does not create an account and does not commit you to anything. Your pod is curated against the specifications you book, and we confirm the details with you directly.
                 </p>
               </div>
             </div>
@@ -118,8 +118,8 @@ function Facilities() {
           <div className="section-label reveal">
             <span className="n">01</span><span className="rule"></span><span className="cat">What Happens Next</span>
           </div>
-          <h2 className="big reveal">You book it. <span className="ital-teal">We build it.</span></h2>
-          <p className="sub reveal d1">Most staffing calls start with a stranger asking you to describe your building. This one does not. By the time we talk, your pod already exists.</p>
+          <h2 className="big reveal">You book it. <span className="ital-teal">We curate it.</span></h2>
+          <p className="sub reveal d1">Most staffing calls start with a stranger asking you to describe your building. This one does not. Your pod is curated against the specifications you book.</p>
           <div className="steps reveal d2">
             <div className="step">
               <div className="sn">01</div>
@@ -128,13 +128,13 @@ function Facilities() {
             </div>
             <div className="step">
               <div className="sn">02</div>
-              <h3>We build your pod</h3>
-              <p>We assemble a team against your requirement from Warriors who are already credentialed and cleared, in your area, available on those weekends.</p>
+              <h3>We curate your pod</h3>
+              <p>Your pod is curated against your specifications from Warriors who are already credentialed and cleared, in your area, available on those weekends.</p>
             </div>
             <div className="step">
               <div className="sn">03</div>
-              <h3>We walk you through it</h3>
-              <p>A fifteen minute call. You meet the pod we built, you get your number, and you decide. No obligation on either side.</p>
+              <h3>You get your number</h3>
+              <p>One subscription price built to your facility. You decide. No obligation on either side.</p>
             </div>
           </div>
         </div>
@@ -209,7 +209,7 @@ function Facilities() {
         <div className="wrap">
           <div className="tag reveal">Strategy. Not Staffing.</div>
           <h2 className="reveal d1">Give your weekend a team it can keep.</h2>
-          <p className="sub reveal d2">Five minutes to book. We build the pod, you meet it, and you decide.</p>
+          <p className="sub reveal d2">Five minutes to book. We curate the pod against your specifications, and you decide.</p>
           <div className="reveal d3"><Link to="/book" className="btn btn-white btn-lg">Book Your Pod</Link></div>
         </div>
       </section>
