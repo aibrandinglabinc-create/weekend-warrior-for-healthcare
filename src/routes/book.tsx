@@ -107,6 +107,7 @@ function BookPod() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [authority, setAuthority] = useState<string | null>(null);
+  const [paidTiers, setPaidTiers] = useState<string[]>([]);
 
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
