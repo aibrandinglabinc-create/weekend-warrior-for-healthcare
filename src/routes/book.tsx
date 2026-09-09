@@ -541,7 +541,7 @@ function BookPod() {
             links: [
               { label: "Book Your Pod", href: "/facilities" },
               { label: "Weekend Warrior", href: "/" },
-              { label: "Book a Demo", href: DEMO_LINK },
+              { label: "Book a Demo", href: "https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" },
             ],
           },
           {
