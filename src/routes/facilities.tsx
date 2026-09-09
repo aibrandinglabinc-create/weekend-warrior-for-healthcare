@@ -86,7 +86,7 @@ function Facilities() {
                 <p className="card-sub">Six short questions about your building, your pods, and your weekend. About five minutes, and no commitment.</p>
                 <Link to="/book" className="btn btn-solid reg-submit">Start Here</Link>
                 <p className="field-fine">
-                  Booking your pod does not create an account and does not commit you to anything. We build a pod against what you book, then walk you through it on a fifteen minute call with your number.
+                  Booking your pod does not create an account and does not commit you to anything. Your pod is curated against the specifications you book, and we confirm the details with you directly.
                 </p>
               </div>
             </div>
@@ -209,7 +209,7 @@ function Facilities() {
         <div className="wrap">
           <div className="tag reveal">Strategy. Not Staffing.</div>
           <h2 className="reveal d1">Give your weekend a team it can keep.</h2>
-          <p className="sub reveal d2">Five minutes to book. We build the pod, you meet it, and you decide.</p>
+          <p className="sub reveal d2">Five minutes to book. We curate the pod against your specifications, and you decide.</p>
           <div className="reveal d3"><Link to="/book" className="btn btn-white btn-lg">Book Your Pod</Link></div>
         </div>
       </section>
