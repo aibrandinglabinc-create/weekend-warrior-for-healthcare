@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+
 import facilitiesHero from "@/assets/facilities-hero-arrival.jpg";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
