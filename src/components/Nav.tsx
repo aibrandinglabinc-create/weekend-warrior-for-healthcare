@@ -55,24 +55,25 @@ export default function Nav({ variant }: { variant: "facility" | "worker" | "fac
         {variant === "facility" && (
           <>
             <Link to="/join" className="btn">Warrior Registration</Link>
-            <Link to="/login" className="btn btn-ghost">Login</Link>
             <Link to="/facilities" className="btn btn-solid">Book Your Pod</Link>
+            <Link to="/login" className="btn btn-ghost">Login</Link>
           </>
         )}
         {variant === "worker" && (
           <>
             <a href="#register" className="btn btn-solid">Register</a>
-            <Link to="/login" className="btn btn-ghost">Login</Link>
             <Link to="/facilities" className="btn btn-ghost">Book Your Pod</Link>
+            <Link to="/login" className="btn btn-ghost">Login</Link>
           </>
         )}
         {variant === "facilities" && (
           <>
+            <Link to="/join" className="btn btn-ghost">For Warriors</Link>
             <Link to="/book" className="btn btn-solid">Book Your Pod</Link>
             <Link to="/login" className="btn btn-ghost">Login</Link>
-            <Link to="/join" className="btn btn-ghost">For Warriors</Link>
           </>
         )}
+
       </div>
     </nav>
   );
