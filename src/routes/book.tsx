@@ -101,7 +101,7 @@ function BookPod() {
   const [cnaPod, setCnaPod] = useState("None");
   const [days, setDays] = useState<string[]>([]);
   const [shift, setShift] = useState<string[]>([]);
-  const [startDate, setStartDate] = useState("");
+  const [startDate, setStartDate] = useState(format(nextFriday(new Date()), "yyyy-MM-dd"));
   const [floorNotes, setFloorNotes] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
