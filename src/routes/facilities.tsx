@@ -210,7 +210,7 @@ function Facilities() {
           <div className="tag reveal">Strategy. Not Staffing.</div>
           <h2 className="reveal d1">Give your weekend a team it can keep.</h2>
           <p className="sub reveal d2">Five minutes to book. We build the pod, you meet it, and you decide.</p>
-          <div className="reveal d3"><a href="#book" className="btn btn-white btn-lg">Book Your Pod</a></div>
+          <div className="reveal d3"><Link to="/book" className="btn btn-white btn-lg">Book Your Pod</Link></div>
         </div>
       </section>
 
