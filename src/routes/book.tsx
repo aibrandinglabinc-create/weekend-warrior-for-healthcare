@@ -301,6 +301,7 @@ function BookPod() {
                 </div>
                 <h2 className="card-h">Start Building Your Pod.</h2>
                 <p className="card-sub">{FACILITY_STEPS[step].question}</p>
+                {FACILITY_STEPS[step].sub && <p className="card-sub-sub">{FACILITY_STEPS[step].sub}</p>}
 
                 {step === 0 && (
                   <div className="field">
