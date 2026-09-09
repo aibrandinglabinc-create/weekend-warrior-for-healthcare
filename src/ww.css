@@ -684,3 +684,8 @@
 
   .pay-block{margin-top:24px;padding-top:20px;border-top:1px solid var(--white-20);
       display:flex;flex-direction:column;gap:10px;}
+
+/* ---- Standalone booking page ---- */
+.book-page { padding-top: 140px; padding-bottom: 90px; }
+.book-shell { max-width: 620px; margin: 0 auto; }
+.book-shell .reg-card { width: 100%; }

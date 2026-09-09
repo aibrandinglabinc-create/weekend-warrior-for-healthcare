@@ -68,7 +68,7 @@ export default function Nav({ variant }: { variant: "facility" | "worker" | "fac
         )}
         {variant === "facilities" && (
           <>
-            <a href="#book" className="btn btn-solid">Book Your Pod</a>
+            <Link to="/book" className="btn btn-solid">Book Your Pod</Link>
             <Link to="/login" className="btn btn-ghost">Login</Link>
             <Link to="/join" className="btn btn-ghost">For Warriors</Link>
           </>
