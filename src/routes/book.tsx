@@ -184,7 +184,7 @@ function BookPod() {
       case 9:
         return startDate !== "";
       case 10:
-        return floorNotes.trim() !== "";
+        return true;
       case 11:
         return firstName.trim() !== "";
       case 12:
@@ -446,7 +446,7 @@ function BookPod() {
                       rows={4}
                       value={floorNotes}
                       onChange={(e) => setFloorNotes(e.target.value)}
-                      placeholder="Acuity, required certifications, language needs, same gender care requirements, anything about the floor we should know."
+                      placeholder="Optional. Acuity, required certifications, language needs, same gender care requirements, anything about the floor we should know."
                     />
                   </div>
                 )}
