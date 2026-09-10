@@ -128,10 +128,10 @@
       -webkit-background-clip:text;background-clip:text;color:transparent;}
   .sweep-shadow{position:relative;display:inline-block;}
   .sweep-shadow::after{content:attr(data-text);position:absolute;inset:0;
-      background:linear-gradient(90deg,transparent 0%,rgba(45,212,215,0.55) 42%,rgba(255,255,255,0.82) 50%,rgba(45,212,215,0.55) 58%,transparent 100%);
-      background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+      background:linear-gradient(90deg,transparent 0%,rgba(45,212,215,0.65) 36%,rgba(255,255,255,0.95) 50%,rgba(45,212,215,0.65) 64%,transparent 100%);
+      background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
       pointer-events:none;animation:sweepShadow 3.2s ease-in-out infinite;}
-  @keyframes sweepShadow{0%{background-position:180% 0;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{background-position:-180% 0;opacity:0;}}
+  @keyframes sweepShadow{0%{background-position:190% 0;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{background-position:-190% 0;opacity:0;}}
 
   /* Ticking KPI glass strip */
   .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px;position:relative;z-index:4;}
