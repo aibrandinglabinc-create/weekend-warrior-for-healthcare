@@ -74,13 +74,14 @@ function toggleFaq(e: React.MouseEvent<HTMLButtonElement>) {
   }
 }
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 8;
 const STEP_LABELS = [
   "What's your role?",
   "What's your name?",
   "Best number to reach you?",
   "What's your email?",
   "Where are you licensed?",
+  "What's your license number?",
   "Which weekend days can you work?",
   "Which shifts work for you?",
 ];
@@ -98,6 +99,7 @@ function Join() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [licenseState, setLicenseState] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState("");
   const [zip, setZip] = useState("");
   const [days, setDays] = useState<string[]>([]);
   const [shift, setShift] = useState<string[]>([]);
@@ -123,6 +125,7 @@ function Join() {
       case 2: return phone.trim() !== "";
       case 3: return email.trim() !== "";
       case 4: return licenseState.trim().length === 2 && zip.trim() !== "";
+      case 5: return licenseNumber.trim() !== "";
       default: return true;
     }
   }
@@ -163,6 +166,7 @@ function Join() {
           phone,
           email,
           license_state: licenseState,
+          license_number: licenseNumber,
           zip,
           days,
           shift,
@@ -297,6 +301,17 @@ function Join() {
 
                   {step === 5 && (
                     <div className="field">
+                      <span className="field-label">{clinicianType === "CNA" ? "CNA Certificate Number" : "RN License Number"}</span>
+                      <input required autoFocus value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} placeholder={clinicianType === "CNA" ? "Certificate number" : "License number"} />
+                      <p className="field-fine" style={{ marginTop: 10 }}>
+                        We verify every credential against the state registry before matching, so an accurate number moves you through review faster.
+                      </p>
+                      {touched && !stepValid(5) && <p className="reg-inline-error">Please enter your {clinicianType === "CNA" ? "certificate" : "license"} number.</p>}
+                    </div>
+                  )}
+
+                  {step === 6 && (
+                    <div className="field">
                       <div className="chip-row">
                         {DAY_CHIPS.map((c) => (
                           <div
@@ -315,7 +330,7 @@ function Join() {
                     </div>
                   )}
 
-                  {step === 6 && (
+                  {step === 7 && (
                     <div className="field">
                       <div className="chip-row">
                         {SHIFT_CHIPS.map((c) => (
