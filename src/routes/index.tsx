@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import heroImg from "@/assets/hero-pod-corridor.jpg";
 import podImg from "@/assets/pod-don-arrival.jpg";
@@ -6,7 +6,7 @@ import dashboardImg from "@/assets/dashboard-mockup-phone.webp";
 import stethoscopeImg from "@/assets/stethoscope-cutout.png";
 import Nav from "@/components/Nav";
 import ChatWidget from "@/components/ChatWidget";
-import BookingEmbed from "@/components/BookingEmbed";
+
 import Footer from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
