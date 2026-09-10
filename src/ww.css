@@ -116,26 +116,8 @@
   .hero h1{font-size:clamp(42px,5.6vw,78px);margin:20px 0 20px;text-shadow:0 4px 40px rgba(0,0,0,.45);}
   .hero .lead{font-size:clamp(15px,1.5vw,18px);color:var(--white-80);max-width:520px;font-weight:400;}
   .hero-cta{display:flex;gap:16px;align-items:center;margin:34px 0 0;flex-wrap:wrap;}
-  .cta-alternate{position:relative;display:inline-flex;min-width:300px;height:54px;vertical-align:top;overflow:hidden;}
-  .cta-alternate .cta-alt{position:absolute;left:0;right:0;top:0;height:100%;margin:0;opacity:0;pointer-events:none;transition:none;}
-  .cta-alternate .cta-alt-a{animation:ctaAltA 8s ease-in-out infinite;}
-  .cta-alternate .cta-alt-b{animation:ctaAltB 8s ease-in-out infinite;}
-  @keyframes ctaAltA{
-    0%,35%{opacity:1;transform:translateY(0);pointer-events:auto;}
-    40%{opacity:0;transform:translateY(-100%);pointer-events:none;}
-    41%,90%{opacity:0;transform:translateY(100%);pointer-events:none;}
-    100%{opacity:1;transform:translateY(0);pointer-events:auto;}
-  }
-  @keyframes ctaAltB{
-    0%,35%{opacity:0;transform:translateY(100%);pointer-events:none;}
-    40%{opacity:1;transform:translateY(0);pointer-events:auto;}
-    85%{opacity:1;transform:translateY(0);pointer-events:auto;}
-    90%{opacity:0;transform:translateY(-100%);pointer-events:none;}
-    91%,100%{opacity:0;transform:translateY(-100%);pointer-events:none;}
-  }
   @media(max-width:560px){
-    .cta-alternate{min-width:240px;height:50px;}
-    .cta-alternate .btn-lg{padding:14px 22px;font-size:10.5px;}
+    .hero-cta .btn-lg{padding:14px 22px;font-size:10.5px;}
   }
 
   /* Glass utility + gradient accent */
@@ -289,7 +271,7 @@
   @media(max-width:860px){.why-points{grid-template-columns:1fr;}}
 
   /* ---------- Mid-page CTA ---------- */
-  .mid-cta{margin-top:40px;display:flex;align-items:center;justify-content:center;}
+  .mid-cta{margin-top:40px;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;}
   #proof{padding-bottom:90px;}
 
   /* App mockup split */

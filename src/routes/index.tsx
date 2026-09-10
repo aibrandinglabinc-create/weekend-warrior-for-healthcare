@@ -141,10 +141,7 @@ function Index() {
       <p className="tagline-mono reveal d2">Strategy. Not Staffing.</p>
       <div className="hero-cta reveal d3">
         <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
-        <div className="cta-alternate">
-          <Link to="/book" className="btn btn-ghost btn-lg cta-alt cta-alt-a">Book Your Pod</Link>
-          <Link to="/join" className="btn btn-ghost btn-lg cta-alt cta-alt-b">Become a Weekend Warrior</Link>
-        </div>
+        <Link to="/book" className="btn btn-ghost btn-lg">Book Your Pod</Link>
       </div>
     </div>
     <div className="kpi-row reveal d4">
@@ -260,6 +257,7 @@ function Index() {
     </div>
     <div className="mid-cta reveal">
       <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
+      <Link to="/join" className="btn btn-ghost btn-lg">Become a Weekend Warrior</Link>
     </div>
   </div>
 </section>
@@ -300,6 +298,7 @@ function Index() {
     </div>
     <div className="mid-cta reveal">
       <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
+      <Link to="/book" className="btn btn-ghost btn-lg">Book Your Pod</Link>
     </div>
   </div>
 </section>
@@ -349,7 +348,10 @@ function Index() {
         <div className="prow"><span className="ck">■</span><span>Coverage locked weeks ahead, with the command center dashboard included</span></div>
         <div className="prow"><span className="ck">■</span><span>One monthly invoice. No hourly spikes, no re-booking, no agency markup</span></div>
         <p className="price-note">Every facility is sized differently, so your exact monthly rate is built from your six-gate profile on the demo call. Book a 15-minute demo and we will show you the number against what your weekend costs today.</p>
-        <div style={{ marginTop: 24 }}><a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)" }}>Book a 15-Minute Demo</a></div>
+        <div className="mid-cta" style={{ marginTop: 24 }}>
+          <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)" }}>Book a 15-Minute Demo</a>
+          <Link to="/join" className="btn btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)", background: "transparent" }}>Become a Weekend Warrior</Link>
+        </div>
       </div>
     </div>
   </div>
