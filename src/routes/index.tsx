@@ -348,7 +348,10 @@ function Index() {
         <div className="prow"><span className="ck">■</span><span>Coverage locked weeks ahead, with the command center dashboard included</span></div>
         <div className="prow"><span className="ck">■</span><span>One monthly invoice. No hourly spikes, no re-booking, no agency markup</span></div>
         <p className="price-note">Every facility is sized differently, so your exact monthly rate is built from your six-gate profile on the demo call. Book a 15-minute demo and we will show you the number against what your weekend costs today.</p>
-        <div style={{ marginTop: 24 }}><a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)" }}>Book a 15-Minute Demo</a></div>
+        <div className="mid-cta" style={{ marginTop: 24 }}>
+          <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)" }}>Book a 15-Minute Demo</a>
+          <Link to="/join" className="btn btn-lg" style={{ borderColor: "var(--teal-dark)", color: "var(--dark)", background: "transparent" }}>Become a Weekend Warrior</Link>
+        </div>
       </div>
     </div>
   </div>
