@@ -257,6 +257,7 @@ function Index() {
     </div>
     <div className="mid-cta reveal">
       <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
+      <Link to="/join" className="btn btn-ghost btn-lg">Become a Weekend Warrior</Link>
     </div>
   </div>
 </section>
