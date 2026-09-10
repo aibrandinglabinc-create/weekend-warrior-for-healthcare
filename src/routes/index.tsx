@@ -237,7 +237,7 @@ function Index() {
       </div>
       <div className="reveal d1">
         <div className="section-label"><span className="n">03</span><span className="rule"></span><span className="cat">The Pod Model</span></div>
-        <h2 className="big" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}>The old way, vs. <span className="ital-teal">the Warrior way.</span></h2>
+        <h2 className="big" style={{ fontSize: "clamp(28px,3.6vw,44px)" }}>Their way vs. <span className="ital-teal">The Warrior Way.</span></h2>
         <div className="compare-wrap">
           <table className="compare">
             <thead>
@@ -297,8 +297,8 @@ function Index() {
       </div>
     </div>
     <div className="mid-cta reveal">
-      <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
-      <Link to="/book" className="btn btn-ghost btn-lg">Book Your Pod</Link>
+      <Link to="/book" className="btn btn-solid btn-lg">Book Your Pod</Link>
+      <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-ghost btn-lg">Book a Demo</a>
     </div>
   </div>
 </section>
@@ -335,7 +335,7 @@ function Index() {
     <div className="section-label reveal">
       <span className="n">06</span><span className="rule"></span><span className="cat">Pricing</span>
     </div>
-    <h2 className="big reveal">Your weekend <span className="ital-teal">already has a price.</span></h2>
+    <h2 className="big reveal">Priced for your facility.</h2>
     <p className="sub reveal d1">You are paying for the weekend right now, in overtime, in agency premiums, in the cost of replacing the nurses who leave. One point of RN turnover runs the average hospital $289,000 a year. Weekend Warrior turns that scattered spend into one predictable line, sized to your facility.</p>
     <div className="price-card reveal d2">
       <div className="price-top">
