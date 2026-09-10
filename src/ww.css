@@ -271,7 +271,7 @@
   @media(max-width:860px){.why-points{grid-template-columns:1fr;}}
 
   /* ---------- Mid-page CTA ---------- */
-  .mid-cta{margin-top:40px;display:flex;align-items:center;justify-content:center;}
+  .mid-cta{margin-top:40px;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;}
   #proof{padding-bottom:90px;}
 
   /* App mockup split */
