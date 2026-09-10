@@ -414,8 +414,11 @@ function Index() {
   <div className="wrap">
     <div className="tag reveal">Strategy. Not Staffing.</div>
     <h2 className="reveal d1">Your weekend shouldn't cost you your best nurses.</h2>
-    <p className="sub reveal d2">Fifteen minutes. We read your weekend, size your pod, and show you the number against what coverage costs you today. No obligation, no pressure. Pick your time below.</p>
-    <div className="reveal d3"><BookingEmbed /></div>
+    <p className="sub reveal d2">Five minutes. Tell us the shape of the weekend you need covered and we curate the pod against your specifications. No obligation, no pressure.</p>
+    <div className="reveal d3" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+      <Link to="/book" className="btn btn-white btn-lg">Book Your Pod</Link>
+      <Link to="/join" className="btn btn-lg" style={{ border: "1px solid rgba(255,255,255,0.5)", color: "#fff" }}>Become a Weekend Warrior</Link>
+    </div>
   </div>
 </section>
 
