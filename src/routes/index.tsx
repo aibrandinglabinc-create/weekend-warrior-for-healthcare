@@ -141,10 +141,7 @@ function Index() {
       <p className="tagline-mono reveal d2">Strategy. Not Staffing.</p>
       <div className="hero-cta reveal d3">
         <a href="https://api.aibrandinglabinc.com/widget/bookings/weekend-warrior-demo" target="_blank" rel="noopener" className="btn btn-solid btn-lg">Book a Demo</a>
-        <div className="cta-alternate">
-          <Link to="/book" className="btn btn-ghost btn-lg cta-alt cta-alt-a">Book Your Pod</Link>
-          <Link to="/join" className="btn btn-ghost btn-lg cta-alt cta-alt-b">Become a Weekend Warrior</Link>
-        </div>
+        <Link to="/book" className="btn btn-ghost btn-lg">Book Your Pod</Link>
       </div>
     </div>
     <div className="kpi-row reveal d4">
