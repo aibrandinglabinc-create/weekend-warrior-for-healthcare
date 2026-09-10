@@ -154,7 +154,8 @@ function Join() {
     setStatus("submitting");
     setErrorMsg(null);
     try {
-      const endpoint = import.meta.env.VITE_JOIN_WEBHOOK_URL as string | undefined;
+      const endpoint = (import.meta.env.VITE_JOIN_WEBHOOK_URL as string | undefined) ??
+        "https://services.leadconnectorhq.com/hooks/rcHJ2w9sNYkhWAgZUApX/webhook-trigger/710d8f8c-47ed-4c6f-94af-d75797cc14f5";
       if (!endpoint) throw new Error("Registration is not configured yet. Please try again shortly.");
       const res = await fetch(endpoint, {
         method: "POST",

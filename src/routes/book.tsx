@@ -140,7 +140,8 @@ function BookPod() {
       source: "facilities_page",
     };
     try {
-      const endpoint = import.meta.env.VITE_FACILITY_WEBHOOK_URL as string | undefined;
+      const endpoint = (import.meta.env.VITE_FACILITY_WEBHOOK_URL as string | undefined) ??
+        "https://services.leadconnectorhq.com/hooks/rcHJ2w9sNYkhWAgZUApX/webhook-trigger/9ff059b1-d57d-4ed0-9f88-71af3233d7c7";
       if (!endpoint) {
         console.info("Facility booking (no endpoint configured yet)", payload);
         setStatus("success");
