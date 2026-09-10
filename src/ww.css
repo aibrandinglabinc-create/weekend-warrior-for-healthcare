@@ -80,7 +80,9 @@
   .btn-ghost{border-color:rgba(255,255,255,0.18);color:var(--white-80);
       background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));
       backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
-  .btn-ghost:hover{border-color:var(--teal);color:var(--teal-light);background:rgba(0,181,184,0.08);}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-light);background:rgba(0,181,184,0.08);}
+.band-white .btn-ghost{border-color:rgba(13,17,23,0.25);color:var(--ink-70);background:linear-gradient(135deg,rgba(13,17,23,0.06),rgba(13,17,23,0.02));}
+.band-white .btn-ghost:hover{border-color:var(--teal);color:var(--teal-dark);background:rgba(0,181,184,0.08);}
   .btn-lg{padding:16px 34px;font-size:12px;}
   @media(max-width:860px){.nav-links{display:none;}}
   @media(max-width:480px){
