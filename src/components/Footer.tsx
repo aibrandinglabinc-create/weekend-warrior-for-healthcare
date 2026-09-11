@@ -34,6 +34,10 @@ export default function Footer({
         <span>{bottomLine}</span>
         <span className="mono">STRATEGY. NOT STAFFING.</span>
       </div>
+      <div className="foot-credit">
+        <span>Designed and powered by </span>
+        <a href="https://www.aibrandinglabinc.com" target="_blank" rel="noopener noreferrer">AI BRANDING LAB, INC.</a>
+      </div>
     </footer>
   );
 }
