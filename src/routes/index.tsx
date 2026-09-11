@@ -340,7 +340,7 @@ function Index() {
     <div className="price-card reveal d2">
       <div className="price-top">
         <div className="plabel">Weekend Warrior Subscription</div>
-        <div className="ph">One pod. One monthly rate. Priced to your census.</div>
+        <div className="ph">One pod. One monthly rate. Priced to your facility.</div>
       </div>
       <div className="price-body">
         <div className="prow"><span className="ck">■</span><span>A dedicated weekend pod, sized to your facility type, bed count, and weekend shift volume</span></div>
